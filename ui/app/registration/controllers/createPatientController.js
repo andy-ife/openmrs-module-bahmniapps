@@ -245,6 +245,7 @@ angular.module('bahmni.registration')
                             }
                         })
                         .catch(function (error) {
+                            console.error(error);
                             messagingService.showMessage("error", "Biometric enrollment failed.");
                         });
                 }
