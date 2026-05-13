@@ -2,8 +2,8 @@
 
 angular.module('bahmni.registration')
     .controller('SearchPatientController', ['$rootScope', '$scope', '$location', '$window', 'spinner', 'patientService', 'appService',
-        'messagingService', '$translate', '$filter',
-        function ($rootScope, $scope, $location, $window, spinner, patientService, appService, messagingService, $translate, $filter) {
+        'messagingService', '$translate', '$filter', 'biometricService',
+        function ($rootScope, $scope, $location, $window, spinner, patientService, appService, messagingService, $translate, $filter, biometricService) {
             $scope.results = [];
             var searching = false;
             var maxAttributesFromConfig = 5;
@@ -218,6 +218,40 @@ angular.module('bahmni.registration')
                 setCustomAttributesSearchConfig();
                 setProgramAttributesSearchConfig();
                 setSearchResultsConfig();
+
+                $scope.biometricConfig = biometricService.getConfig();
+                $scope.isScanningBiometrics = false;
+            };
+
+            $scope.handleBiometricSearch = function () {
+                $scope.isScanningBiometrics = true;
+                biometricService.scan('1')
+                    .then(function (fingerprint) {
+                        if (fingerprint && fingerprint.template) {
+                            return biometricService.match({ fingerprints: [fingerprint] });
+                        } else {
+                            throw new Error('Scan failed or no template');
+                        }
+                    })
+                    .then(function (matches) {
+                        if (matches && matches.length > 0) {
+                            matches.sort(function (a, b) {
+                                return b.matchScore - a.matchScore;
+                            });
+                            var bestMatch = matches[0];
+                            $scope.searchParameters.registrationNumber = bestMatch.subjectId;
+                            $scope.searchById();
+                        } else {
+                            messagingService.showMessage("error", $translate.instant('REGISTRATION_NO_MATCH_FOUND') || 'No biometric match found');
+                        }
+                    })
+                    .catch(function (error) {
+                        messagingService.showMessage("error", $translate.instant('REGISTRATION_BIOMETRIC_SEARCH_ERROR') || 'Error during biometric search');
+                        console.error(error);
+                    })
+                    .finally(function () {
+                        $scope.isScanningBiometrics = false;
+                    });
             };
 
             var identifyParams = function (querystring) {

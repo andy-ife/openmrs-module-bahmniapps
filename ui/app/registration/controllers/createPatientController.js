@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('bahmni.registration')
-    .controller('CreatePatientController', ['$scope', '$rootScope', '$state', 'patientService', 'patient', 'spinner', 'appService', 'messagingService', 'ngDialog', '$q', '$translate',
-        function ($scope, $rootScope, $state, patientService, patient, spinner, appService, messagingService, ngDialog, $q, $translate) {
+    .controller('CreatePatientController', ['$scope', '$rootScope', '$state', 'patientService', 'patient', 'spinner', 'appService', 'messagingService', 'ngDialog', '$q', '$translate', 'biometricService',
+        function ($scope, $rootScope, $state, patientService, patient, spinner, appService, messagingService, ngDialog, $q, $translate, biometricService) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             $scope.actions = {};
             var errorMessage;
@@ -102,6 +102,47 @@ angular.module('bahmni.registration')
                 expandSectionsWithDefaultValue();
                 $scope.patientLoaded = true;
                 $scope.createPatient = true;
+
+                // Biometrics Initialization
+                $scope.biometricConfig = biometricService.getConfig();
+                $scope.biometricDevices = [];
+                $scope.isScanning = false;
+                $scope.biometricError = null;
+
+                if ($scope.biometricConfig.enabled) {
+                    biometricService.getStatus(); // Warm up or check status
+                    biometricService.getDevices().then(function (devices) {
+                        $scope.biometricDevices = devices || [];
+                    });
+                }
+            };
+
+            $scope.scanBiometrics = function () {
+                $scope.isScanning = true;
+                $scope.biometricError = null;
+                biometricService.scan('1').then(function (result) {
+                    if (result && result.template) {
+                        $scope.patient.scannedFingerprint = result;
+                    } else {
+                        $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_FAILED') || 'Scan failed';
+                    }
+                }).catch(function () {
+                    $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_ERROR') || 'Error communicating with biometric device';
+                }).finally(function () {
+                    $scope.isScanning = false;
+                });
+            };
+
+            $scope.getFingerprintImageSrc = function () {
+                var fp = $scope.patient.scannedFingerprint;
+                if (!fp || !fp.image) return '';
+                var mime = 'image/png';
+                if (fp.image.startsWith('SUkq') || fp.image.startsWith('TU0A')) {
+                    mime = 'image/tif';
+                } else if (fp.image.startsWith('/9j/')) {
+                    mime = 'image/jpeg';
+                }
+                return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
             };
 
             init();
@@ -188,8 +229,30 @@ angular.module('bahmni.registration')
 
             var createPromise = function () {
                 var deferred = $q.defer();
-                createPatient().finally(function () {
-                    return deferred.resolve({});
+                var enrolmentPromise = $q.when({});
+
+                if ($scope.biometricConfig && $scope.biometricConfig.enabled && $scope.patient.scannedFingerprint) {
+                    enrolmentPromise = biometricService.enrol({ fingerprints: [$scope.patient.scannedFingerprint] })
+                        .then(function (subject) {
+                            if (subject && subject.subjectId) {
+                                var biometricIdTypeUuid = $scope.biometricConfig.identifierTypeUuid;
+                                var biometricIdentifier = _.find($scope.patient.extraIdentifiers, function (id) {
+                                    return id.identifierType.uuid === biometricIdTypeUuid;
+                                });
+                                if (biometricIdentifier) {
+                                    biometricIdentifier.registrationNumber = subject.subjectId;
+                                }
+                            }
+                        })
+                        .catch(function (error) {
+                            messagingService.showMessage("error", "Biometric enrollment failed.");
+                        });
+                }
+
+                enrolmentPromise.then(function () {
+                    createPatient().finally(function () {
+                        return deferred.resolve({});
+                    });
                 });
                 return deferred.promise;
             };

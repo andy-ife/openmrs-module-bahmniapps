@@ -9,6 +9,9 @@
                                placeholder="{{ ::'REGISTRATION_LABEL_ENTER_ID' | translate}}">
                         <div class="reg-srch-btn fl">
                             <button tabindex="3" type="submit" ng-disabled="!searchParameters.registrationNumber" >{{ ::'REGISTRATION_LABEL_SEARCH' | translate}}</button>
+                            <button tabindex="4" type="button" ng-if="biometricConfig.enabled" ng-click="handleBiometricSearch()" ng-disabled="isScanningBiometrics" class="scan-biometrics-btn" style="margin-left: 10px;">
+                                {{isScanningBiometrics ? ('REGISTRATION_SCANNING' | translate) : ('REGISTRATION_SCAN_BIOMETRICS' | translate)}}
+                            </button>
                         </div>
                     </div>
 
