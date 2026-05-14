@@ -78,7 +78,7 @@ angular.module('bahmni.registration')
                 var config = getConfig();
                 if (!config.enabled) return $q.when([]);
 
-                return $http.post(config.serverUrl + '/fingerprint/match', request)
+                return $http.post(config.serverUrl + '/match', request)
                     .then(function (response) {
                         if (angular.isArray(response.data)) {
                             return response.data.map(biometricMatch.fromJSON);

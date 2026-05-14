@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 50px;
 
     @media (max-width: 810px) {
         position: absolute;
@@ -20,6 +20,7 @@
         margin-top: 30px;
         margin-bottom: 20px;
         margin-left: 24px;
+        margin-right: 20px;
         width:100%;
     }
 }
