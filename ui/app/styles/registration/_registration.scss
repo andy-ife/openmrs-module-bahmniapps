@@ -191,8 +191,8 @@ body {
     }
 
     form .form-field.patient-name-wrapper {
-        @media screen and (min-width: 769px) and (max-width: 1200px) {
-            max-width: calc(100% - 245px);
+        @media screen and (min-width: 769px) and (max-width: 1300px) {
+            max-width: calc(100% - 450px);
     
             .field-value {
                 display: flex;

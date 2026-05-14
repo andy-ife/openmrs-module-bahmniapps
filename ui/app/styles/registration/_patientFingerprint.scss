@@ -1,0 +1,58 @@
+.fingerprint-container-wrapper {
+    position: absolute;
+    top: 42px;
+    right: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    @media (max-width: 810px) {
+        position: absolute;
+        top: 190px;
+        right: 0px;
+        margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+        position: static;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        margin-left: 24px;
+        width:100%;
+    }
+}
+
+.biometric-error {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+    width: 116px;
+    word-break: break-word;
+}
+.fingerprint-container{
+    display: flex;
+    justify-content: center;
+}
+.fingerprint-image{
+    width: 92px;
+    height: 92px;
+    border: 7px solid $lightestGray;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    justify-content: center;
+    padding: 4px;
+    text-align: center;
+    align-content: center;
+}
+
+.fingerprint-button {
+    width: 116px;
+    white-space: normal;
+    word-wrap: break-word;
+    @media (max-width: 768px) {
+        width: auto;
+    }
+}

@@ -1,4 +1,5 @@
 @import "patientPhoto";
+@import "patientFingerprint";
 
 .edit-patient,.new-patient,.visit-patient{
   position:relative;
@@ -147,7 +148,17 @@ section.form-field-inline{
   }
 }
 
-.age-wrapper{
+.age-wrapper {
+  @media screen and (min-width: 769px) and (max-width: 1300px) {
+    max-width: calc(100% - 450px);
+  }
+
+  @media (max-width: 1300px) {
+    .form-field {
+      width: 100% !important;
+      float: none !important;
+    }
+  }
   .age-field{
     .input-prepend{
       margin: 5px 5px 0px 0px;

@@ -14,21 +14,18 @@
                     </div>
 
                     <!-- Biometric Scanning UI -->
-                    <div class="biometric-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture" style="float: right; margin-right: 20px;">
-                        <div style="border: 1px solid #ccc; padding: 10px; text-align: center; width: 160px; height: 160px;">
-                            <p style="margin: 0; font-weight: bold;">{{::'REGISTRATION_LABEL_BIOMETRICS' | translate}}</p>
-                            <div style="height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <img ng-if="patient.scannedFingerprint" ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
-                                <span ng-if="!patient.scannedFingerprint && !isScanning" style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
-                                <span ng-if="isScanning">{{::'REGISTRATION_SCANNING' | translate}}</span>
-                            </div>
-                            <button type="button" ng-click="scanBiometrics()" ng-disabled="isScanning || biometricDevices.length === 0">
-                                {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) : ('REGISTRATION_SCAN' | translate)}}
-                            </button>
-                        </div>
-                        <div ng-if="biometricError" style="color: red; font-size: 12px; text-align: center; margin-top: 5px; width: 160px;">
+                    <div class="fingerprint-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture">
+                        <div ng-if="biometricError" class="biometric-error">
                             {{biometricError}}
                         </div>
+                        <div class="fingerprint-container">
+                            <img class="fingerprint-image" ng-if="patient.scannedFingerprint && !isScanning" ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
+                            <span class="fingerprint-image" ng-if="!patient.scannedFingerprint && !isScanning" style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
+                            <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' | translate}}</span>  
+                        </div>
+                        <button class="fingerprint-button" type="button" ng-click="scanBiometrics()" ng-disabled="isScanning || biometricDevices.length === 0">
+                                {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) : ('REGISTRATION_SCAN' | translate)}}
+                        </button>                        
                     </div>
                 </section>
                 <section>
