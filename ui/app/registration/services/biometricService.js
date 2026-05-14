@@ -8,7 +8,7 @@ angular.module('bahmni.registration')
                 return {
                     enabled: biometricsConfig.enabled !== undefined ? biometricsConfig.enabled : true,
                     serverUrl: biometricsConfig.serverUrl || 'http://127.0.0.1:8081',
-                    identifierTypeUuid: biometricsConfig.identifierTypeUuid || '' // TODO: Add Biometric Identifier Type UUID here
+                    identifierTypeUuid: biometricsConfig.identifierTypeUuid || '932dfc05-275f-407c-b2b5-fd1a529e92fc' // TODO: Add Biometric Identifier Type UUID here
                 };
             };
 
