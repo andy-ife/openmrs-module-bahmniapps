@@ -36,5 +36,7 @@
     "GENDER_KEY": "Gender:",
     "AGE_KEY": "Age:",
     "DATE_OF_BIRTH_LABEL": "Date of Birth:",
-    "LOGOUT_TRANSLATION_KEY": "Logout"
+    "LOGOUT_TRANSLATION_KEY": "Logout",
+    "REGISTRATION_SCAN_BIOMETRICS": "Search By Fingerprint",
+    "REGISTRATION_SCANNING": "Scanning..."
 }

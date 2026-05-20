@@ -34,5 +34,7 @@
     "INSUFFICIENT_PRIVILEGE_TO_EXPORT": "You do not have sufficient privilege to export data",
     "EXPORT_PATIENT_DATA_WARNING": "Note: Patient Data is confidential and should be handled carefully! It is recommended to export data in Anonymise mode, and ensure that the exported file is handled carefully by authorised parties only.",
     "EXPORT_PATIENT_REQUEST_SUBMITTED": "Request submitted. Click 'Refresh' to check status of export.",
-    "EXPORT_PATIENT_REQUEST_SUBMIT_ERROR": "FHIR export request failed. Please contact administrator."
+    "EXPORT_PATIENT_REQUEST_SUBMIT_ERROR": "FHIR export request failed. Please contact administrator.",
+    "REGISTRATION_SCAN_BIOMETRICS": "Search By Fingerprint",
+    "REGISTRATION_SCANNING": "Scanning..."
 }
