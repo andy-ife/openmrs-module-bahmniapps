@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.registration')
+angular.module('bahmni.common.biometrics')
     .factory('biometricService', ['$http', '$q', 'appService', 'biometricStatus', 'biometricScanner', 'fingerprint', 'biometricSubject', 'biometricMatch',
         function ($http, $q, appService, biometricStatus, biometricScanner, fingerprint, biometricSubject, biometricMatch) {
             var getConfig = function () {

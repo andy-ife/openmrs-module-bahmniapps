@@ -2,8 +2,8 @@
 
 angular.module('bahmni.common.patientSearch')
 .controller('PatientsListController', ['$scope', '$window', 'patientService', '$rootScope', 'appService', 'spinner',
-    '$stateParams', '$bahmniCookieStore', 'printer', 'configurationService', "$timeout",
-    function ($scope, $window, patientService, $rootScope, appService, spinner, $stateParams, $bahmniCookieStore, printer, configurationService, $timeout) {
+    '$stateParams', '$bahmniCookieStore', 'printer', 'configurationService', "$timeout", "biometricService", "messagingService", "$translate",
+    function ($scope, $window, patientService, $rootScope, appService, spinner, $stateParams, $bahmniCookieStore, printer, configurationService, $timeout, biometricService, messagingService, $translate) {
         $scope.preferExtraIdInSearchResults = appService.getAppDescriptor().getConfigValue("preferExtraIdInSearchResults");
         $scope.activeHeaders = [];
         const DEFAULT_FETCH_DELAY = 2000;
@@ -47,6 +47,8 @@ angular.module('bahmni.common.patientSearch')
             configurationService.getConfigurations(['identifierTypesConfig']).then(function (response) {
                 $scope.primaryIdentifier = _.find(response.identifierTypesConfig, {primary: true}).name;
             });
+            $scope.biometricConfig = biometricService.getConfig();
+            $scope.isScanningBiometrics = false;
         };
 
         $scope.searchPatients = function () {
@@ -56,6 +58,37 @@ angular.module('bahmni.common.patientSearch')
                     $scope.forwardPatient($scope.search.activePatients[0]);
                 }
             });
+        };
+
+        $scope.handleBiometricSearch = function () {
+            $scope.isScanningBiometrics = true;
+            biometricService.scan('1')
+                .then(function (fingerprint) {
+                    if (fingerprint && fingerprint.template) {
+                        return biometricService.match({ fingerprints: [fingerprint] });
+                    } else {
+                        throw new Error('Scan failed or no template');
+                    }
+                })
+                .then(function (matches) {
+                    if (matches && matches.length > 0) {
+                        matches.sort(function (a, b) {
+                            return b.matchScore - a.matchScore;
+                        });
+                        var bestMatch = matches[0];
+                        $scope.search.searchParameter = bestMatch.subjectId;
+                        $scope.searchPatients();
+                    } else {
+                        messagingService.showMessage("error", $translate.instant('REGISTRATION_NO_MATCH_FOUND') || 'No biometric match found');
+                    }
+                })
+                .catch(function (error) {
+                    messagingService.showMessage("error", $translate.instant('REGISTRATION_BIOMETRIC_SEARCH_ERROR') || 'Error during biometric search');
+                    console.error(error);
+                })
+                .finally(function () {
+                    $scope.isScanningBiometrics = false;
+                });
         };
 
         $scope.filterPatientsAndSubmit = function () {

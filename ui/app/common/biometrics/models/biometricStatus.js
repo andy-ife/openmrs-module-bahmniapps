@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.registration')
+angular.module('bahmni.common.biometrics')
     .factory('biometricStatus', [function () {
         var create = function (enabled, numberEnrolled, statusMessage) {
             return {

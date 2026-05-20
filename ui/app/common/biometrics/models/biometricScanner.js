@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.registration')
+angular.module('bahmni.common.biometrics')
     .factory('biometricScanner', [function () {
         var create = function (id, displayName, firmwareVersion, brightness, imageDpi, imageHeight, imageWidth) {
             return {

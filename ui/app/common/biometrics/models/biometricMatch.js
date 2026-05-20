@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.registration')
+angular.module('bahmni.common.biometrics')
     .factory('biometricMatch', [function () {
         var create = function (subjectId, matchScore) {
             return {

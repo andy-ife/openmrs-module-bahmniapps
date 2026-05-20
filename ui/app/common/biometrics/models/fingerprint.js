@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.registration')
+angular.module('bahmni.common.biometrics')
     .factory('fingerprint', [function () {
         var create = function (type, format, template, image) {
             return {

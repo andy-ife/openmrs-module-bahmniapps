@@ -40,6 +40,9 @@
                         <i class="fa fa-search"></i>
                         {{'SEARCH_KEY' | translate }}
                     </button>
+                    <button tabindex="4" type="button" ng-if="biometricConfig.enabled" ng-click="handleBiometricSearch()" ng-disabled="isScanningBiometrics" class="scan-biometrics-btn" style="margin-left: 10px;">
+                        {{isScanningBiometrics ? ('REGISTRATION_SCANNING' | translate) : ('REGISTRATION_SCAN_BIOMETRICS' | translate)}}
+                    </button>
                 </div>
             </form>
         </span>
