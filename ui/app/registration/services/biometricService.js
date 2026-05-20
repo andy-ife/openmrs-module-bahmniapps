@@ -91,12 +91,27 @@ angular.module('bahmni.registration')
                     });
             };
 
+            var getSubject = function (subjectId) {
+                var config = getConfig();
+                if (!config.enabled) return $q.when(null);
+
+                return $http.get(config.serverUrl + '/subject/' + encodeURIComponent(subjectId))
+                    .then(function (response) {
+                        return biometricSubject.fromJSON(response.data);
+                    })
+                    .catch(function (error) {
+                        console.error('Failed to get subject:', error);
+                        throw error;
+                    });
+            };
+
             return {
                 getConfig: getConfig,
                 getStatus: getStatus,
                 getDevices: getDevices,
                 scan: scan,
                 enrol: enrol,
-                match: match
+                match: match,
+                getSubject: getSubject
             };
         }]);
