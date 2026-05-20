@@ -197,8 +197,20 @@ angular.module('bahmni.registration')
                 $scope.patient.isNew = true;
                 $scope.patient.registrationDate = dateUtil.now();
                 $scope.patient.newlyAddedRelationships = [{}];
-                $scope.actions.followUpAction(patientProfileData);
                 patientId = patientProfileData.patient.identifiers[0].identifier;
+
+                if ($scope.biometricConfig && $scope.biometricConfig.enabled && $scope.patient.scannedFingerprint) {
+                    biometricService.enrol({ subjectId: patientId, fingerprints: [$scope.patient.scannedFingerprint] })
+                        .catch(function (error) {
+                            console.error(error);
+                            messagingService.showMessage("error", "Biometric enrollment failed.");
+                        })
+                        .finally(function () {
+                            $scope.actions.followUpAction(patientProfileData);
+                        });
+                } else {
+                    $scope.actions.followUpAction(patientProfileData);
+                }
             };
 
             var createPatient = function (jumpAccepted) {
@@ -229,31 +241,8 @@ angular.module('bahmni.registration')
 
             var createPromise = function () {
                 var deferred = $q.defer();
-                var enrolmentPromise = $q.when({});
-
-                if ($scope.biometricConfig && $scope.biometricConfig.enabled && $scope.patient.scannedFingerprint) {
-                    enrolmentPromise = biometricService.enrol({ fingerprints: [$scope.patient.scannedFingerprint] })
-                        .then(function (subject) {
-                            if (subject && subject.subjectId) {
-                                var biometricIdTypeUuid = $scope.biometricConfig.identifierTypeUuid;
-                                var biometricIdentifier = _.find($scope.patient.extraIdentifiers, function (id) {
-                                    return id.identifierType.uuid === biometricIdTypeUuid;
-                                });
-                                if (biometricIdentifier) {
-                                    biometricIdentifier.registrationNumber = subject.subjectId;
-                                }
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                            messagingService.showMessage("error", "Biometric enrollment failed.");
-                        });
-                }
-
-                enrolmentPromise.then(function () {
-                    createPatient().finally(function () {
-                        return deferred.resolve({});
-                    });
+                createPatient().finally(function () {
+                    return deferred.resolve({});
                 });
                 return deferred.promise;
             };
