@@ -2,9 +2,9 @@
 
 angular.module('bahmni.registration')
     .controller('EditPatientController', ['$scope', 'patientService', 'encounterService', '$stateParams', 'openmrsPatientMapper',
-        '$window', '$q', 'spinner', 'appService', 'messagingService', '$rootScope', 'auditLogService',
+        '$window', '$q', 'spinner', 'appService', 'messagingService', '$rootScope', 'auditLogService', 'biometricService', '$translate',
         function ($scope, patientService, encounterService, $stateParams, openmrsPatientMapper, $window, $q, spinner,
-                  appService, messagingService, $rootScope, auditLogService) {
+                  appService, messagingService, $rootScope, auditLogService, biometricService, $translate) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             var uuid = $stateParams.patientUuid;
             $scope.patient = {};
@@ -12,6 +12,18 @@ angular.module('bahmni.registration')
             $scope.addressHierarchyConfigs = appService.getAppDescriptor().getConfigValue("addressHierarchy");
             $scope.disablePhotoCapture = appService.getAppDescriptor().getConfigValue("disablePhotoCapture");
             $scope.today = dateUtil.getDateWithoutTime(dateUtil.now());
+
+            $scope.biometricConfig = biometricService.getConfig();
+            $scope.biometricDevices = [];
+            $scope.isScanning = false;
+            $scope.biometricError = null;
+
+            if ($scope.biometricConfig.enabled) {
+                biometricService.getStatus();
+                biometricService.getDevices().then(function (devices) {
+                    $scope.biometricDevices = devices || [];
+                });
+            }
 
             var setReadOnlyFields = function () {
                 $scope.readOnlyFields = {};
@@ -26,6 +38,18 @@ angular.module('bahmni.registration')
             var successCallBack = function (openmrsPatient) {
                 $scope.openMRSPatient = openmrsPatient["patient"];
                 $scope.patient = openmrsPatientMapper.map(openmrsPatient);
+
+                if ($scope.biometricConfig.enabled && !$scope.disableBiometricCapture && $scope.patient.primaryIdentifier) {
+                    var subjectId = $scope.patient.primaryIdentifier.identifier;
+                    biometricService.getSubject(subjectId).then(function (subject) {
+                        if (subject && subject.fingerprints && subject.fingerprints.length > 0) {
+                            $scope.patient.scannedFingerprint = subject.fingerprints[0];
+                        }
+                    }).catch(function (error) {
+                        console.log("Biometric subject not found or error:", error);
+                    });
+                }
+
                 setReadOnlyFields();
                 expandDataFilledSections();
                 $scope.patientLoaded = true;
@@ -70,6 +94,34 @@ angular.module('bahmni.registration')
                 spinner.forPromise($q.all([getPatientPromise, isDigitized, identifiers]));
             })();
 
+            $scope.scanBiometrics = function () {
+                $scope.isScanning = true;
+                $scope.biometricError = null;
+                biometricService.scan('1').then(function (result) {
+                    if (result && result.template) {
+                        $scope.patient.scannedFingerprint = result;
+                    } else {
+                        $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_FAILED') || 'Scan failed';
+                    }
+                }).catch(function () {
+                    $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_ERROR') || 'Error communicating with biometric device';
+                }).finally(function () {
+                    $scope.isScanning = false;
+                });
+            };
+
+            $scope.getFingerprintImageSrc = function () {
+                var fp = $scope.patient.scannedFingerprint;
+                if (!fp || !fp.image) return '';
+                var mime = 'image/png';
+                if (fp.image.startsWith('SUkq') || fp.image.startsWith('TU0A')) {
+                    mime = 'image/tif';
+                } else if (fp.image.startsWith('/9j/')) {
+                    mime = 'image/jpeg';
+                }
+                return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
+            };
+
             $scope.update = function () {
                 addNewRelationships();
                 var errorMessages = Bahmni.Common.Util.ValidationUtil.validate($scope.patient, $scope.patientConfiguration.attributeTypes);
@@ -83,8 +135,21 @@ angular.module('bahmni.registration')
                 return spinner.forPromise(patientService.update($scope.patient, $scope.openMRSPatient).then(function (result) {
                     var patientProfileData = result.data;
                     if (!patientProfileData.error) {
-                        successCallBack(patientProfileData);
-                        $scope.actions.followUpAction(patientProfileData);
+                        if ($scope.biometricConfig && $scope.biometricConfig.enabled && $scope.patient.scannedFingerprint) {
+                            var subjectId = $scope.patient.primaryIdentifier.identifier;
+                            biometricService.update({ subjectId: subjectId, fingerprints: [$scope.patient.scannedFingerprint] })
+                                .catch(function (error) {
+                                    console.error(error);
+                                    messagingService.showMessage("error", "Biometric update failed.");
+                                })
+                                .finally(function () {
+                                    successCallBack(patientProfileData);
+                                    $scope.actions.followUpAction(patientProfileData);
+                                });
+                        } else {
+                            successCallBack(patientProfileData);
+                            $scope.actions.followUpAction(patientProfileData);
+                        }
                     }
                 }));
             };

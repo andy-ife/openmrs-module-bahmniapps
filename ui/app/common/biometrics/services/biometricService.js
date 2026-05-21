@@ -73,6 +73,20 @@ angular.module('bahmni.common.biometrics')
                     });
             };
 
+            var update = function (subject) {
+                var config = getConfig();
+                if (!config.enabled) return $q.when(null);
+
+                return $http.put(config.serverUrl + '/subject', subject)
+                    .then(function (response) {
+                        return biometricSubject.fromJSON(response.data);
+                    })
+                    .catch(function (error) {
+                        console.error('Failed to update subject:', error);
+                        throw error;
+                    });
+            };
+
             var match = function (request) {
                 var config = getConfig();
                 if (!config.enabled) return $q.when([]);
@@ -110,6 +124,7 @@ angular.module('bahmni.common.biometrics')
                 getDevices: getDevices,
                 scan: scan,
                 enrol: enrol,
+                update: update,
                 match: match,
                 getSubject: getSubject
             };

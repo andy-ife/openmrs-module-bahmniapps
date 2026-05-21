@@ -12,6 +12,20 @@
                         <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
                  </div>
             </div>
+            <!-- Biometric Scanning UI -->
+            <div class="fingerprint-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture">
+                <div ng-if="biometricError" class="biometric-error">
+                    {{biometricError}}
+                </div>
+                <div class="fingerprint-container">
+                    <img class="fingerprint-image" ng-if="patient.scannedFingerprint && !isScanning" ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
+                    <span class="fingerprint-image" ng-if="!patient.scannedFingerprint && !isScanning" style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
+                    <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' | translate}}</span>  
+                </div>
+                <button class="fingerprint-button" type="button" ng-click="scanBiometrics()" ng-disabled="isScanning || biometricDevices.length === 0">
+                        {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) : ('REGISTRATION_SCAN_UPDATE' | translate)}}
+                </button>                        
+            </div>
             <article class="form-field">
                 <div class="field-attribute">
                 <label class="control-label">{{::'REGISTRATION_LABEL_REGISTRATION_DATE' | translate}}</label>

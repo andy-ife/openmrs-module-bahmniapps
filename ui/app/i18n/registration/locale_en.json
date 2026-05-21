@@ -130,5 +130,6 @@
     "REGISTRATION_NO_BIOMETRIC": "No fingerprint enrolled",
     "REGISTRATION_SCAN_AGAIN": "Scan Again",
     "REGISTRATION_SCAN": "Scan Fingerprint",
-    "REGISTRATION_BIOMETRIC_SEARCH_ERROR": "An error occurred"
+    "REGISTRATION_BIOMETRIC_SEARCH_ERROR": "An error occurred",
+    "REGISTRATION_SCAN_UPDATE": "Update Fingerprint"
 }
