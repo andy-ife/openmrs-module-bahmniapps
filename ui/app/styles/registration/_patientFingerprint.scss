@@ -21,7 +21,7 @@
         margin-bottom: 20px;
         margin-left: 24px;
         margin-right: 20px;
-        width:100%;
+        width: 100%;
     }
 }
 
@@ -33,11 +33,13 @@
     width: 116px;
     word-break: break-word;
 }
-.fingerprint-container{
+
+.fingerprint-container {
     display: flex;
     justify-content: center;
 }
-.fingerprint-image{
+
+.fingerprint-image {
     width: 92px;
     height: 92px;
     border: 7px solid $lightestGray;
@@ -49,10 +51,35 @@
     align-content: center;
 }
 
+.fingerprint-image-new-scan {
+    @extend .fingerprint-image;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.fingerprint-image-enrolled {
+    @extend .fingerprint-image;
+    color: green;
+}
+
+.fingerprint-image-none {
+    @extend .fingerprint-image;
+    color: #999;
+}
+
+// For the fingerprint png in images/ folder
+.fingerprint-png {
+    height: 3em;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
 .fingerprint-button {
     width: 116px;
     white-space: normal;
     word-wrap: break-word;
+
     @media (max-width: 768px) {
         width: auto;
     }

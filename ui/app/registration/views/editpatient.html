@@ -21,15 +21,16 @@
                         {{biometricError}}
                     </div>
                     <div class="fingerprint-container">
-                        <img class="fingerprint-image"
+                        <img class="fingerprint-image-new-scan"
                             ng-if="patient.scannedFingerprint && patient.scannedFingerprint.image && !isScanning"
-                            ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
-                        <span class="fingerprint-image"
-                            ng-if="patient.scannedFingerprint && !patient.scannedFingerprint.image && !isScanning"
-                            style="color: green;">✅ {{::'REGISTRATION_YES_BIOMETRIC' | translate}}</span>
-                        <span class="fingerprint-image"
-                            ng-if="!patient.scannedFingerprint && !patient.fingerprint && !isScanning"
-                            style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
+                            ng-src="{{getFingerprintImageSrc()}}" />
+                        <span class="fingerprint-image-enrolled"
+                            ng-if="patient.scannedFingerprint && !patient.scannedFingerprint.image && !isScanning"><img
+                                class="fingerprint-png" src="../images/fingerprint.png" alt="fingerprint">
+                            {{::'REGISTRATION_YES_BIOMETRIC' | translate}}</span>
+                        <span class="fingerprint-image-none"
+                            ng-if="!patient.scannedFingerprint && !patient.fingerprint && !isScanning">{{::'REGISTRATION_NO_BIOMETRIC'
+                            | translate}}</span>
                         <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' |
                             translate}}</span>
                     </div>
