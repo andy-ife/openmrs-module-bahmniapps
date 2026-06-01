@@ -39,7 +39,7 @@ angular.module('bahmni.registration')
                 $scope.openMRSPatient = openmrsPatient["patient"];
                 $scope.patient = openmrsPatientMapper.map(openmrsPatient);
 
-                if ($scope.biometricConfig.enabled && !$scope.disableBiometricCapture && $scope.patient.primaryIdentifier) {
+                if ($scope.biometricConfig.enabled && !$scope.disableBiometricCapture && $scope.patient.primaryIdentifier && $scope.patient.fingerprint) {
                     var subjectId = $scope.patient.primaryIdentifier.identifier;
                     biometricService.getSubject(subjectId).then(function (subject) {
                         if (subject && subject.fingerprints && subject.fingerprints.length > 0) {
