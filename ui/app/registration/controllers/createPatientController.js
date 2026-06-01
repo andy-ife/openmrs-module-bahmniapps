@@ -123,6 +123,7 @@ angular.module('bahmni.registration')
                 biometricService.scan('1').then(function (result) {
                     if (result && result.template) {
                         $scope.patient.scannedFingerprint = result;
+                        $scope.patient.fingerprint = result.template;
                     } else {
                         $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_FAILED') || 'Scan failed';
                     }
@@ -221,7 +222,7 @@ angular.module('bahmni.registration')
                         var data = _.map(response.data, function (data) {
                             return {
                                 sizeOfTheJump: data.sizeOfJump,
-                                identifierName: _.find($rootScope.patientConfiguration.identifierTypes, {uuid: data.identifierType}).name
+                                identifierName: _.find($rootScope.patientConfiguration.identifierTypes, { uuid: data.identifierType }).name
                             };
                         });
                         getConfirmationViaNgDialog({

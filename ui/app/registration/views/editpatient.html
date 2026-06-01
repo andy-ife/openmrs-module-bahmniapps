@@ -1,54 +1,72 @@
 <div class="reg-body-wrapper">
-<div class="edit-patient simple-form-ui">
-    <form name="myForm"  single-submit="update()">
-        <div class="box-container box-container-default">
-            <legend class="registraion_legend first-registraion_legend" ng-class="{'removeLegend': patient.primaryIdentifier == undefined}">
-                <span class="mylegend"><strong>{{patient.primaryIdentifier.identifierType.name}}: <span id="patientIdentifierValue">{{patient.primaryIdentifier.identifier}}</span></strong></span>
-                <span ng-show= "isDigitized" class="right"><strong>{{::'REGISTRATION_LABEL_SCANNED' | translate}}</strong></span>
-            </legend>
-            <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
-                <div class="photo-container">
+    <div class="edit-patient simple-form-ui">
+        <form name="myForm" single-submit="update()">
+            <div class="box-container box-container-default">
+                <legend class="registraion_legend first-registraion_legend"
+                    ng-class="{'removeLegend': patient.primaryIdentifier == undefined}">
+                    <span class="mylegend"><strong>{{patient.primaryIdentifier.identifierType.name}}: <span
+                                id="patientIdentifierValue">{{patient.primaryIdentifier.identifier}}</span></strong></span>
+                    <span ng-show="isDigitized" class="right"><strong>{{::'REGISTRATION_LABEL_SCANNED' |
+                            translate}}</strong></span>
+                </legend>
+                <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
+                    <div class="photo-container">
                         <div ng-model="patient.image" capture-photo class="capture-photo-btn"></div>
                         <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
-                 </div>
-            </div>
-            <!-- Biometric Scanning UI -->
-            <div class="fingerprint-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture">
-                <div ng-if="biometricError" class="biometric-error">
-                    {{biometricError}}
-                </div>
-                <div class="fingerprint-container">
-                    <img class="fingerprint-image" ng-if="patient.scannedFingerprint && !isScanning" ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
-                    <span class="fingerprint-image" ng-if="!patient.scannedFingerprint && !isScanning" style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
-                    <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' | translate}}</span>  
-                </div>
-                <button class="fingerprint-button" type="button" ng-click="scanBiometrics()" ng-disabled="isScanning || biometricDevices.length === 0">
-                        {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) : ('REGISTRATION_SCAN_UPDATE' | translate)}}
-                </button>                        
-            </div>
-            <article class="form-field">
-                <div class="field-attribute">
-                <label class="control-label">{{::'REGISTRATION_LABEL_REGISTRATION_DATE' | translate}}</label>
-                </div>
-
-                <div class="field-value">
-                    <span class="uneditable-input text-only">{{patient.registrationDate | bahmniDate}}</span>
-                </div>
-                <div ng-if="showRelatedIdentifierOption" class="field-value field-value-has-identifier">
-                    <div class="fl">
-                        <div class="field-attribute hasOldIdentifier-field-attribute">
-                            <label for="related-identifier-attribute" class="control-label related-identifier-label">{{::'RELATED_PATIENT_IDENTIFIER_LABEL' | translate}}</label>
-                        </div>
-                        <div class="field-value">
-                            <input class="input-label-inline" type="checkbox" id="related-identifier-attribute" ng-model="patient[relatedIdentifierAttribute.name]"
-                                ng-change="patient[relatedIdentifierAttribute.name].handleUpdate()" ng-disabled="showDisabledAttrOption" ng-style="{'opacity' : showDisabledAttrOption ? '0.4':'unset'}">
-                        </div>
                     </div>
-            </article>
-        </div>
-        <ng-include src="'views/patientcommon.html'"></ng-include>
-        <patient-action></patient-action>
-    </form>
-    <br>
-</div>
+                </div>
+                <!-- Biometric Scanning UI -->
+                <div class="fingerprint-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture">
+                    <div ng-if="biometricError" class="biometric-error">
+                        {{biometricError}}
+                    </div>
+                    <div class="fingerprint-container">
+                        <img class="fingerprint-image"
+                            ng-if="patient.scannedFingerprint && patient.scannedFingerprint.image && !isScanning"
+                            ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
+                        <span class="fingerprint-image"
+                            ng-if="patient.scannedFingerprint && !patient.scannedFingerprint.image && !isScanning"
+                            style="color: green;">✅ {{::'REGISTRATION_YES_BIOMETRIC' | translate}}</span>
+                        <span class="fingerprint-image"
+                            ng-if="!patient.scannedFingerprint && !patient.fingerprint && !isScanning"
+                            style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
+                        <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' |
+                            translate}}</span>
+                    </div>
+                    <button class="fingerprint-button" type="button" ng-click="scanBiometrics()"
+                        ng-disabled="isScanning || biometricDevices.length === 0">
+                        {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) :
+                        ('REGISTRATION_SCAN_UPDATE' | translate)}}
+                    </button>
+                </div>
+                <article class="form-field">
+                    <div class="field-attribute">
+                        <label class="control-label">{{::'REGISTRATION_LABEL_REGISTRATION_DATE' | translate}}</label>
+                    </div>
+
+                    <div class="field-value">
+                        <span class="uneditable-input text-only">{{patient.registrationDate | bahmniDate}}</span>
+                    </div>
+                    <div ng-if="showRelatedIdentifierOption" class="field-value field-value-has-identifier">
+                        <div class="fl">
+                            <div class="field-attribute hasOldIdentifier-field-attribute">
+                                <label for="related-identifier-attribute"
+                                    class="control-label related-identifier-label">{{::'RELATED_PATIENT_IDENTIFIER_LABEL'
+                                    | translate}}</label>
+                            </div>
+                            <div class="field-value">
+                                <input class="input-label-inline" type="checkbox" id="related-identifier-attribute"
+                                    ng-model="patient[relatedIdentifierAttribute.name]"
+                                    ng-change="patient[relatedIdentifierAttribute.name].handleUpdate()"
+                                    ng-disabled="showDisabledAttrOption"
+                                    ng-style="{'opacity' : showDisabledAttrOption ? '0.4':'unset'}">
+                            </div>
+                        </div>
+                </article>
+            </div>
+            <ng-include src="'views/patientcommon.html'"></ng-include>
+            <patient-action></patient-action>
+        </form>
+        <br>
+    </div>
 </div>

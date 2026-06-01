@@ -9,62 +9,86 @@
                     <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
                         <div class="photo-container">
                             <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
-                            <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
+                            <img class="patient-image" ng-src="{{patient.image}}"
+                                fallback-src="../images/blank-user.gif">
                         </div>
                     </div>
 
                     <!-- Biometric Scanning UI -->
-                    <div class="fingerprint-container-wrapper" ng-if="biometricConfig.enabled && !disableBiometricCapture">
+                    <div class="fingerprint-container-wrapper"
+                        ng-if="biometricConfig.enabled && !disableBiometricCapture">
                         <div ng-if="biometricError" class="biometric-error">
                             {{biometricError}}
                         </div>
                         <div class="fingerprint-container">
-                            <img class="fingerprint-image" ng-if="patient.scannedFingerprint && !isScanning" ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
-                            <span class="fingerprint-image" ng-if="!patient.scannedFingerprint && !isScanning" style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
-                            <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' | translate}}</span>  
+                            <img class="fingerprint-image" ng-if="patient.scannedFingerprint && !isScanning"
+                                ng-src="{{getFingerprintImageSrc()}}" style="max-height: 100%; max-width: 100%;" />
+                            <span class="fingerprint-image"
+                                ng-if="patient.scannedFingerprint && !patient.scannedFingerprint.image && !isScanning"
+                                style="color: green;">✅ {{::'REGISTRATION_YES_BIOMETRIC' | translate}}</span>
+                            <span class="fingerprint-image"
+                                ng-if="!patient.scannedFingerprint && !patient.fingerprint && !isScanning"
+                                style="color: #999;">{{::'REGISTRATION_NO_BIOMETRIC' | translate}}</span>
+                            <span class="fingerprint-image" ng-if="isScanning">{{::'REGISTRATION_SCANNING' |
+                                translate}}</span>
                         </div>
-                        <button class="fingerprint-button" type="button" ng-click="scanBiometrics()" ng-disabled="isScanning || biometricDevices.length === 0">
-                                {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) : ('REGISTRATION_SCAN' | translate)}}
-                        </button>                        
+                        <button class="fingerprint-button" type="button" ng-click="scanBiometrics()"
+                            ng-disabled="isScanning || biometricDevices.length === 0">
+                            {{patient.scannedFingerprint ? ('REGISTRATION_SCAN_AGAIN' | translate) :
+                            ('REGISTRATION_SCAN' | translate)}}
+                        </button>
                     </div>
                 </section>
                 <section>
                     <article class="form-field existing-patient">
                         <div class="field-attribute">
-                            <label class="control-label" for="patientID">{{:: getTranslatedPatientIdentifier(patient.primaryIdentifier.identifierType.name) | translate}}
-                                <span ng-show="::patient.primaryIdentifier.identifierType.required && !patient.primaryIdentifier.hasIdentifierSources()" class="asterick">*</span>
+                            <label class="control-label" for="patientID">{{::
+                                getTranslatedPatientIdentifier(patient.primaryIdentifier.identifierType.name) |
+                                translate}}
+                                <span
+                                    ng-show="::patient.primaryIdentifier.identifierType.required && !patient.primaryIdentifier.hasIdentifierSources()"
+                                    class="asterick">*</span>
                             </label>
                         </div>
-                        <div ng-show="::(patient.primaryIdentifier.hasIdentifierSources() && !patient.primaryIdentifier.hasIdentifierSourceWithEmptyPrefix())" class="field-value" id="patientID">
+                        <div ng-show="::(patient.primaryIdentifier.hasIdentifierSources() && !patient.primaryIdentifier.hasIdentifierSourceWithEmptyPrefix())"
+                            class="field-value" id="patientID">
                             <select id="identifierPrefix" ng-model="patient.primaryIdentifier.selectedIdentifierSource"
-                                    ng-options="identifierSource.prefix for identifierSource in ::patient.primaryIdentifier.identifierType.identifierSources" ng-change="patient.primaryIdentifier.generate()"
-                                    required>
+                                ng-options="identifierSource.prefix for identifierSource in ::patient.primaryIdentifier.identifierType.identifierSources"
+                                ng-change="patient.primaryIdentifier.generate()" required>
                             </select>
                         </div>
 
                         <div class="field-value field-value-has-identifier">
-                            <input type="text" id="registrationNumber" ng-model="patient.primaryIdentifier.registrationNumber"
-                                   placeholder="{{:: getTranslatedPatientIdentifier(patient.primaryIdentifier.identifierType.description)}}" non-blank="patient.primaryIdentifier.isIdentifierRequired()" pattern-validate
-                                   ng-change="patient.primaryIdentifier.generate()" focus-on="patient.primaryIdentifier.hasOldIdentifier"
-                                   ng-show="patient.primaryIdentifier.hasOldIdentifier || !patient.primaryIdentifier.hasIdentifierSources()" >
+                            <input type="text" id="registrationNumber"
+                                ng-model="patient.primaryIdentifier.registrationNumber"
+                                placeholder="{{:: getTranslatedPatientIdentifier(patient.primaryIdentifier.identifierType.description)}}"
+                                non-blank="patient.primaryIdentifier.isIdentifierRequired()" pattern-validate
+                                ng-change="patient.primaryIdentifier.generate()"
+                                focus-on="patient.primaryIdentifier.hasOldIdentifier"
+                                ng-show="patient.primaryIdentifier.hasOldIdentifier || !patient.primaryIdentifier.hasIdentifierSources()">
                             <div ng-show="::patient.primaryIdentifier.hasIdentifierSources() && showEnterID" class="fl">
                                 <div class="field-attribute hasOldIdentifier-field-attribute">
-                                    <label for="hasOldIdentifier" class="control-label">{{::'REGISTRATION_LABEL_ENTER_ID' | translate}}</label>
+                                    <label for="hasOldIdentifier"
+                                        class="control-label">{{::'REGISTRATION_LABEL_ENTER_ID' | translate}}</label>
                                 </div>
                                 <div class="field-value">
-                                    <input class="input-label-inline" ng-show="::showEnterID" type="checkbox" id="hasOldIdentifier" ng-model="patient.primaryIdentifier.hasOldIdentifier"
-                                           ng-change="patient.primaryIdentifier.clearRegistrationNumber()">
+                                    <input class="input-label-inline" ng-show="::showEnterID" type="checkbox"
+                                        id="hasOldIdentifier" ng-model="patient.primaryIdentifier.hasOldIdentifier"
+                                        ng-change="patient.primaryIdentifier.clearRegistrationNumber()">
                                 </div>
                             </div>
                         </div>
                         <div ng-show="::relatedIdentifierAttribute.name" class="field-value field-value-has-identifier">
-                            <div class="fl"> 
+                            <div class="fl">
                                 <div class="field-attribute hasOldIdentifier-field-attribute">
-                                    <label for="related-identifier-attribute" class="control-label">{{::'RELATED_PATIENT_IDENTIFIER_LABEL' | translate}}</label>
+                                    <label for="related-identifier-attribute"
+                                        class="control-label">{{::'RELATED_PATIENT_IDENTIFIER_LABEL' |
+                                        translate}}</label>
                                 </div>
                                 <div class="field-value">
-                                    <input type="checkbox" class="input-label-inline" id="related-identifier-attribute" ng-model="patient[relatedIdentifierAttribute.name]"
-                                            ng-change="patient[relatedIdentifierAttribute.name].handleUpdate()">
+                                    <input type="checkbox" class="input-label-inline" id="related-identifier-attribute"
+                                        ng-model="patient[relatedIdentifierAttribute.name]"
+                                        ng-change="patient[relatedIdentifierAttribute.name].handleUpdate()">
                                 </div>
                             </div>
                         </div>

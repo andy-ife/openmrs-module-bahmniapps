@@ -4,7 +4,7 @@ angular.module('bahmni.registration')
     .controller('EditPatientController', ['$scope', 'patientService', 'encounterService', '$stateParams', 'openmrsPatientMapper',
         '$window', '$q', 'spinner', 'appService', 'messagingService', '$rootScope', 'auditLogService', 'biometricService', '$translate',
         function ($scope, patientService, encounterService, $stateParams, openmrsPatientMapper, $window, $q, spinner,
-                  appService, messagingService, $rootScope, auditLogService, biometricService, $translate) {
+            appService, messagingService, $rootScope, auditLogService, biometricService, $translate) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             var uuid = $stateParams.patientUuid;
             $scope.patient = {};
@@ -59,7 +59,7 @@ angular.module('bahmni.registration')
                     const hideOrDisableAttr = $scope.relatedIdentifierAttribute.hideOrDisable;
                     const hideAttrOnValue = $scope.relatedIdentifierAttribute.hideOnValue;
                     $scope.showRelatedIdentifierOption = !(hideOrDisableAttr === "hide" && $scope.patient[$scope.relatedIdentifierAttribute.name] &&
-                                            $scope.patient[$scope.relatedIdentifierAttribute.name].toString() === hideAttrOnValue);
+                        $scope.patient[$scope.relatedIdentifierAttribute.name].toString() === hideAttrOnValue);
                     $scope.showDisabledAttrOption = hideOrDisableAttr === "disable" ? true : false;
                 }
             };
@@ -100,6 +100,7 @@ angular.module('bahmni.registration')
                 biometricService.scan('1').then(function (result) {
                     if (result && result.template) {
                         $scope.patient.scannedFingerprint = result;
+                        $scope.patient.fingerprint = result.template;
                     } else {
                         $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_FAILED') || 'Scan failed';
                     }
