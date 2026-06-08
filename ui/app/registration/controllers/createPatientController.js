@@ -143,7 +143,44 @@ angular.module('bahmni.registration')
                 } else if (fp.image.startsWith('/9j/')) {
                     mime = 'image/jpeg';
                 }
-                return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
+                if(mime !== 'image/png') {
+                    // for non-png images, return the original base64 string with the correct mime type
+                    return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
+                }
+                
+                // decode raw bytes
+                const binaryString = atob(fp.image);
+                const rawBytes = new Uint8Array(binaryString.length);
+                for (let i = 0; i < binaryString.length; i++) {
+                    rawBytes[i] = binaryString.charCodeAt(i);
+                }
+
+                // create off-screen canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = $scope.biometricDevices[0].imageWidth;
+                canvas.height = $scope.biometricDevices[0].imageHeight;
+                const ctx = canvas.getContext('2d');
+
+                // create blank img container
+                const imageData = ctx.createImageData(canvas.width, canvas.height);
+                const pixels = imageData.data;
+
+                // map raw 8-bit bytes to RGBA pixels (grayscale)
+                for (let i = 0; i < rawBytes.length; i++) {
+                    const gray = rawBytes[i];
+                    const pixelIndex = i * 4;
+                    pixels[pixelIndex] = gray; // Red
+                    pixels[pixelIndex + 1] = gray; // Green
+                    pixels[pixelIndex + 2] = gray;
+                    pixels[pixelIndex + 3] = 255; // Alpha
+                }
+
+                // paint the pixels to the inmemory canvas
+                ctx.putImageData(imageData, 0, 0);
+
+                // generate base64 png string from the canvas
+                const dataUrl = canvas.toDataURL(mime);
+                return dataUrl;
             };
 
             init();
