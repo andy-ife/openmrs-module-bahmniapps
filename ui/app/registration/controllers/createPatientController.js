@@ -122,13 +122,25 @@ angular.module('bahmni.registration')
                 $scope.biometricError = null;
                 biometricService.scan('1').then(function (result) {
                     if (result && result.template) {
-                        $scope.patient.scannedFingerprint = result;
-                        $scope.patient.fingerprint = result.template;
+                        biometricService.match({ fingerprints: [result] }).then(function (matchResult) {
+                            if (matchResult.length > 0) {
+                                $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRIC_EXISTS') || 'This fingerprint exists!';
+                                $scope.patient.scannedFingerprint = null;
+                                $scope.patient.fingerprint = null;
+                                return;
+                            }
+                            $scope.patient.scannedFingerprint = result;
+                            $scope.patient.fingerprint = result.template;
+                        });
                     } else {
                         $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_FAILED') || 'Scan failed';
+                        $scope.patient.scannedFingerprint = null;
+                        $scope.patient.fingerprint = null;
                     }
                 }).catch(function () {
                     $scope.biometricError = $translate.instant('REGISTRATION_BIOMETRICS_SCAN_ERROR') || 'Error communicating with biometric device';
+                    $scope.patient.scannedFingerprint = null;
+                    $scope.patient.fingerprint = null;
                 }).finally(function () {
                     $scope.isScanning = false;
                 });
@@ -143,7 +155,7 @@ angular.module('bahmni.registration')
                 } else if (fp.image.startsWith('/9j/')) {
                     mime = 'image/jpeg';
                 }
-                if(mime !== 'image/png') {
+                if (mime !== 'image/png') {
                     // for non-png images, return the original base64 string with the correct mime type
                     return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
                 }
