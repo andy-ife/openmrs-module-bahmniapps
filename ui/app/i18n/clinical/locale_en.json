@@ -391,5 +391,6 @@
     "MEDICATION_PRINT": "Print",
     "DAYS_ADMITTED_MESSAGE": "Days in hospital",
     "REGISTRATION_SCAN_BIOMETRICS": "Search By Fingerprint",
-    "REGISTRATION_SCANNING": "Scanning..."
+    "REGISTRATION_SCANNING": "Scanning...",
+    "REGISTRATION_NO_MATCH_FOUND": "No matching fingerprint found. Please try again."
 }

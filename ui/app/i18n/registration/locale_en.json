@@ -133,5 +133,7 @@
     "REGISTRATION_SCAN": "Scan Fingerprint",
     "REGISTRATION_BIOMETRIC_SEARCH_ERROR": "An error occurred",
     "REGISTRATION_SCAN_UPDATE": "Update Fingerprint",
-    "REGISTRATION_BIOMETRIC_SCAN_FAILED": "Fingerprint scan failed. Please try again." 
+    "REGISTRATION_BIOMETRIC_SCAN_FAILED": "Fingerprint scan failed. Please try ,again.",
+    "REGISTRATION_BIOMETRIC_EXISTS":"This fingerprint is already registered!",
+    "REGISTRATION_NO_MATCH_FOUND": "No matching patient found. Please try again."
 }
