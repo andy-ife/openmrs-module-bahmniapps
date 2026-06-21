@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 angular.module('bahmni.home')
     .controller('ChangePasswordController', ['$scope', '$state', 'sessionService', '$rootScope', 'authenticator', '$window', 'userService', 'messagingService', function ($scope, $state, sessionService, $rootScope, authenticator, $window, userService, messagingService) {
@@ -5,7 +14,7 @@ angular.module('bahmni.home')
         $scope.passwordDoesNotMatch = false;
         $scope.passwordPolicies = [];
         $scope.redirectToHomePage = function () {
-            $state.go('dashboard');
+            $window.location.replace($rootScope.homeURL || Bahmni.Common.Constants.homeUrl);
         };
         var checkPasswordMatches = function () {
             return $scope.loginInfo.newPassword == $scope.loginInfo.confirmPassword;

@@ -1,10 +1,18 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 
 angular.module('bahmni.home')
     .controller('LoginController', ['$rootScope', '$scope', '$window', '$location', 'sessionService', 'initialData', 'spinner', '$q', '$stateParams', '$bahmniCookieStore', 'localeService', '$translate', 'userService', 'auditLogService', '$state',
         function ($rootScope, $scope, $window, $location, sessionService, initialData, spinner, $q, $stateParams, $bahmniCookieStore, localeService, $translate, userService, auditLogService, $state) {
             var redirectUrl = $location.search()['from'];
-            var landingPagePath = "/dashboard";
             var loginPagePath = "/login";
             $scope.locations = initialData.locations;
             $scope.loginInfo = {};
@@ -106,7 +114,7 @@ angular.module('bahmni.home')
             var redirectToLandingPageIfAlreadyAuthenticated = function () {
                 sessionService.get().then(function (data) {
                     if (data.authenticated) {
-                        $location.path(landingPagePath);
+                        $window.location.href = $rootScope.homeURL || Bahmni.Common.Constants.homeUrl;
                     }
                 });
             };
@@ -236,7 +244,7 @@ angular.module('bahmni.home')
                                 if (res) {
                                     $window.location.replace(redirectUrl);
                                 } else {
-                                    $location.url(landingPagePath);
+                                    $window.location.href = $rootScope.homeURL || Bahmni.Common.Constants.homeUrl;
                                 }
                             });
                         } else {

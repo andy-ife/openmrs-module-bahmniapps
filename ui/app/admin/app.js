@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 
 angular.module('admin', ['httpErrorInterceptor', 'bahmni.admin', 'bahmni.common.routeErrorHandler', 'ngSanitize',
@@ -18,7 +27,7 @@ angular.module('admin')
                 templateUrl: 'views/adminDashboard.html',
                 controller: 'AdminDashboardController',
                 data: {
-                    backLinks: [{label: "Home", accessKey: "h", url: "../home/", icon: "fa-home"}],
+                    backLinks: [{label: "Home", accessKey: "h", url: Bahmni.Common.Constants.homeUrl, icon: "fa-home"}],
                     extensionPointId: 'org.bahmni.admin.dashboard'
                 }
             }).state('admin.csv', {
@@ -68,6 +77,7 @@ angular.module('admin')
         }
     ]).run(['$rootScope', '$templateCache', '$window', function ($rootScope, $templateCache, $window) {
         moment.locale($window.localStorage["NG_TRANSLATE_LANG_KEY"] || "en");
+        $rootScope.homeURL = localStorage.getItem('homeUrl') || Bahmni.Common.Constants.homeUrl;
         // Disable caching view template partials
         $rootScope.$on('$viewContentLoaded', $templateCache.removeAll);
     }]);

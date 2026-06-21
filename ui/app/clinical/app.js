@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 
 angular.module('consultation', ['ui.router', 'bahmni.clinical', 'bahmni.common.config', 'bahmni.common.patient',
@@ -28,7 +37,7 @@ angular.module('consultation')
                 id: "patients-link",
                 icon: "fa-users"
             };
-            var homeBackLink = {label: "", url: "../home/index.html", accessKey: "h", icon: "fa-home"};
+            var homeBackLink = {label: "", url: Bahmni.Common.Constants.homeUrl, accessKey: "h", icon: "fa-home"};
 
         // @if DEBUG='production'
             $compileProvider.debugInfoEnabled(false);

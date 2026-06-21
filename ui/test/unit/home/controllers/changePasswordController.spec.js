@@ -1,14 +1,23 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 
 describe('ChangePasswordController', function () {
-  var $aController, rootScopeMock, window, scopeMock, state, mockSessionService, mockAuthenticator, mockUserService, mockMessagingService;
+  var $aController, rootScopeMock, mockWindow, scopeMock, state, mockSessionService, mockAuthenticator, mockUserService, mockMessagingService;
 
   beforeEach(module('bahmni.home'));
 
-  beforeEach(inject(function ($controller, $rootScope, $window, $state) {
+  beforeEach(inject(function ($controller, $rootScope, $state) {
       $aController = $controller;
       rootScopeMock = $rootScope;
-      window = $window;
+      mockWindow = {location: {replace: jasmine.createSpy('replace')}};
       scopeMock = rootScopeMock.$new();
       state = jasmine.createSpyObj('$state',['go']);
       mockAuthenticator = jasmine.createSpyObj('authenticator',['authenticateUser']);
@@ -35,7 +44,7 @@ describe('ChangePasswordController', function () {
       sessionService : mockSessionService,
       $rootScope: rootScopeMock,
       authenticator : mockAuthenticator,
-      $window: window,
+      $window: mockWindow,
       userService : mockUserService,
       messagingService: mockMessagingService
     });
@@ -73,10 +82,10 @@ describe('ChangePasswordController', function () {
     expect(mockSessionService.changePassword).not.toHaveBeenCalled();
   });
 
-  it("should redirect to dashboard", function(){
+  it("should redirect to home page", function(){
     scopeMock.redirectToHomePage();
 
-    expect(state.go).toHaveBeenCalledWith('dashboard');
+    expect(mockWindow.location.replace).toHaveBeenCalledWith(Bahmni.Common.Constants.homeUrl);
   });
 
   describe("change password", function(){

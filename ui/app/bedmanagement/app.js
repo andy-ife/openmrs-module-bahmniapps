@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at https://www.bahmni.org/license/mplv2hd.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 'use strict';
 
 angular.module('ipd', ['bahmni.common.patient', 'bahmni.common.patientSearch', 'bahmni.common.uiHelper', 'bahmni.common.conceptSet', 'authentication', 'bahmni.common.appFramework',
@@ -9,7 +18,7 @@ angular.module('ipd').config(['$stateProvider', '$httpProvider', '$urlRouterProv
     function ($stateProvider, $httpProvider, $urlRouterProvider, $bahmniTranslateProvider, $compileProvider) {
         $urlRouterProvider.otherwise('/home');
 
-        var homeBackLink = {type: "link", name: "Home", value: "../home/", accessKey: "h", icon: "fa-home"};
+        var homeBackLink = {type: "link", name: "Home", value: Bahmni.Common.Constants.homeUrl, accessKey: "h", icon: "fa-home"};
         var admitLink = {type: "state", name: "ADMIT_HOME_KEY", value: "home", accessKey: "a"};
         var bedManagementLink = {type: "state", name: "BED_MANAGEMENT_KEY", value: "bedManagement", accessKey: "b"};
         var navigationLinks = [admitLink, bedManagementLink];
