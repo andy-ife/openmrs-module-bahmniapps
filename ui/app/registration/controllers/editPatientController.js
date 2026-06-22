@@ -142,32 +142,31 @@ angular.module('bahmni.registration')
                     mime = 'image/jpeg';
                 }
 
-                if(mime !== 'image/png') {
+                if (mime !== 'image/png') {
                     // for non-png images, return the original base64 string with the correct mime type
                     return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
                 }
-                
                 // decode raw bytes
-                const binaryString = atob(fp.image);
-                const rawBytes = new Uint8Array(binaryString.length);
-                for (let i = 0; i < binaryString.length; i++) {
+                var binaryString = atob(fp.image);
+                var rawBytes = new Uint8Array(binaryString.length);
+                for (var i = 0; i < binaryString.length; i++) {
                     rawBytes[i] = binaryString.charCodeAt(i);
                 }
 
                 // create off-screen canvas
-                const canvas = document.createElement('canvas');
+                var canvas = document.createElement('canvas');
                 canvas.width = $scope.biometricDevices[0].imageWidth;
                 canvas.height = $scope.biometricDevices[0].imageHeight;
-                const ctx = canvas.getContext('2d');
+                var ctx = canvas.getContext('2d');
 
                 // create blank img container
-                const imageData = ctx.createImageData(canvas.width, canvas.height);
-                const pixels = imageData.data;
+                var imageData = ctx.createImageData(canvas.width, canvas.height);
+                var pixels = imageData.data;
 
                 // map raw 8-bit bytes to RGBA pixels (grayscale)
-                for (let i = 0; i < rawBytes.length; i++) {
-                    const gray = rawBytes[i];
-                    const pixelIndex = i * 4;
+                for (var j = 0; j < rawBytes.length; j++) {
+                    var gray = rawBytes[j];
+                    var pixelIndex = j * 4;
                     pixels[pixelIndex] = gray; // Red
                     pixels[pixelIndex + 1] = gray; // Green
                     pixels[pixelIndex + 2] = gray;
@@ -178,7 +177,7 @@ angular.module('bahmni.registration')
                 ctx.putImageData(imageData, 0, 0);
 
                 // generate base64 png string from the canvas
-                const dataUrl = canvas.toDataURL(mime);
+                var dataUrl = canvas.toDataURL(mime);
                 return dataUrl;
             };
 
