@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "ignoreDeprecations": "6.0",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "checkJs": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "app/components",
+    "app/micro-frontends-dist",
+    ".sass-cache",
+    "app/li8n",
+    "app/images",
+    "app/styles"
+  ]
+}
