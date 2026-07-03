@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <button type="button" class="fp-btn btn" ng-click="launchFingerprintListPopup()"></button>
 <div class="fingerprintListDialog" title="{{ 'SCAN_AND_ENROLL_FINGERPRINTS_TITLE' | translate}}">
     <legend class="registraion_legend first-registraion_legend">
@@ -11,7 +10,7 @@
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
                     <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
                 </span>
-                <fingerprint-box></fingerprint-box>
+                <fingerprint-box ng-click="showScannerDialog(fingerprint)"></fingerprint-box>
             </div>
         </li>
     </ul>
@@ -26,8 +25,9 @@
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
                     <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
                 </span>
-                <fingerprint-box></fingerprint-box>
+                <fingerprint-box ng-click="showScannerDialog(fingerprint)"></fingerprint-box>
             </div>
         </li>
     </ul>
 </div>
+<fingerprint-scanner-dialog></fingerprint-scanner-dialog>
