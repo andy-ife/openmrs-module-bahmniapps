@@ -10,7 +10,11 @@
 'use strict';
 
 angular.module('bahmni.common.photoCapture')
-    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory (appService, $parse, $window, $translate) {
+    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory(appService, $parse, $window, $translate) {
+        /**
+         * @param {angular.IAugmentedJQuery} iElement
+         * @param {angular.IAttributes} iAttrs
+         */
         var link = function (scope, iElement, iAttrs) {
             var captureDialogElement = iElement.find(".photoCaptureDialog"),
                 captureVideo = captureDialogElement.find("video")[0],
@@ -81,7 +85,7 @@ angular.module('bahmni.common.photoCapture')
                 dialogOpen = true;
                 var navigatorUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
                 if (navigator.mediaDevices) {
-                    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+                    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
                         .then(function (localMediaStream) {
                             captureVideo.srcObject = localMediaStream;
                             captureActiveStream = localMediaStream;
@@ -91,7 +95,7 @@ angular.module('bahmni.common.photoCapture')
                         });
                 } else if (navigatorUserMedia) {
                     navigatorUserMedia(
-                        {video: true, audio: false},
+                        { video: true, audio: false },
                         function (localMediaStream) {
                             captureVideo.src = $window.URL.createObjectURL(localMediaStream);
                             captureActiveStream = localMediaStream;

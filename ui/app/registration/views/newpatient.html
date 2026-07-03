@@ -5,11 +5,20 @@
                 <legend class="registraion_legend first-registraion_legend">
                     <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_NEW_PATIENT' | translate}}</strong></span>
                 </legend>
+                
                 <section class="clearfix">
-                    <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
-                        <div class="photo-container">
-                            <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
-                            <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
+                    <div class = "fp-and-photo-container">
+                        <div class="fp-container-wrapper">
+                            <div class = "fp-container">
+                                <div ng-hide="!config.biometricsEnabled" class="fp-btn" fingerprint-btn="" ng-model="patient"></div>
+                                <fingerprint-box></fingerprint-box>
+                            </div>
+                        </div>
+                        <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
+                            <div class="photo-container">
+                                <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
+                                <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
+                            </div>
                         </div>
                     </div>
                 </section>

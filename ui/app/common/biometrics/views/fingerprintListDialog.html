@@ -1,4 +1,33 @@
 <!DOCTYPE html>
-<div>
-    
+<button type="button" class="fp-btn btn" ng-click="launchFingerprintListPopup()"></button>
+<div class="fingerprintListDialog" title="{{ 'SCAN_AND_ENROLL_FINGERPRINTS_TITLE' | translate}}">
+    <legend class="registraion_legend first-registraion_legend">
+            <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_LEFT_HAND' | translate}}</strong></span>
+    </legend>
+    <ul>
+        <li ng-repeat="fingerprint in leftFingerprints">
+            <div class="fp-list-item-container">
+                <span class="fp-list-item-label-container">
+                    <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
+                    <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
+                </span>
+                <fingerprint-box></fingerprint-box>
+            </div>
+        </li>
+    </ul>
+
+    <legend class="registraion_legend first-registraion_legend">
+            <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_RIGHT_HAND' | translate}}</strong></span>
+    </legend>
+    <ul>
+        <li ng-repeat="fingerprint in rightFingerprints">
+            <div class="fp-list-item-container">
+                <span class="fp-list-item-label-container">
+                    <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
+                    <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
+                </span>
+                <fingerprint-box></fingerprint-box>
+            </div>
+        </li>
+    </ul>
 </div>

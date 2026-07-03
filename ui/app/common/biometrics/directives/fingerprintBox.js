@@ -31,15 +31,9 @@ angular.module("bahmni.common.biometrics")
                 fingerprintCount: '='
             },
             template:
-                "<div>" +
                 "  <img class=\"fp-overlay\"ng-hide=\"!scanning\"ng-src= \"{{ overlaySrc }}\"/>" +
                 "  <img ng-src=\"{{ getImgSrc() }}\" " +
-                "       ng-class=\"{" +
-                "         'fp-default': scanning," +
-                "         'fp-error': error," +
-                "         'fp-img': imgSrc," +
-                "         'fp-success': success && !imgSrc" +
-                "       }\" />" +
+                "       class=\"fp-img\" />" +
                 "  <span ng-hide=\"scanning || imgSrc\" " +
                 "        ng-class=\"{" +
                 "          'fp-error-text': error," +
@@ -49,7 +43,6 @@ angular.module("bahmni.common.biometrics")
                 "    <span ng-if=\"!error && success && fingerprintCount != null\">" +
                 "      {{ fingerprintCount }} fingerprints enrolled" +
                 "    </span>" +
-                "  </span>" +
-                "</div>"
+                "  </span>"
         };
     });
