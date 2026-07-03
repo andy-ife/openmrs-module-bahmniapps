@@ -11,7 +11,7 @@
 
 angular.module('bahmni.registration')
     .controller('CreatePatientController', ['$scope', '$rootScope', '$state', 'patientService', 'patient', 'spinner', 'appService', 'messagingService', 'ngDialog', '$q', '$translate',
-        function ($scope, $rootScope, $state, patientService, patient, spinner, appService, messagingService, ngDialog, $q, $translate) {
+        function ($scope, $rootScope, $state, patientService, patient, spinner, appService, messagingService, biometricService, ngDialog, $q, $translate) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             $scope.actions = {};
             var errorMessage;
@@ -171,13 +171,15 @@ angular.module('bahmni.registration')
 
             var createPatient = function (jumpAccepted) {
                 return patientService.create($scope.patient, jumpAccepted).then(function (response) {
-                    copyPatientProfileDataToScope(response);
+                    enrolFingerprints(response).then(function (_) {
+                        copyPatientProfileDataToScope(response);
+                    });
                 }, function (response) {
                     if (response.status === 412) {
                         var data = _.map(response.data, function (data) {
                             return {
                                 sizeOfTheJump: data.sizeOfJump,
-                                identifierName: _.find($rootScope.patientConfiguration.identifierTypes, {uuid: data.identifierType}).name
+                                identifierName: _.find($rootScope.patientConfiguration.identifierTypes, { uuid: data.identifierType }).name
                             };
                         });
                         getConfirmationViaNgDialog({
@@ -202,6 +204,22 @@ angular.module('bahmni.registration')
                 });
                 return deferred.promise;
             };
+
+            // this may change when I update the openmrs data model to support biometrics
+            var enrolFingerprints = function (response) {
+                var patientProfileData = response.data;
+                var subjectId = patientProfileData.patient.identifiers[0].identifier;
+
+                biometricService.enrol({
+                    subjectId: subjectId,
+                    fingerprints: $scope.patient.fingerprints
+                });
+            }
+
+            // this may change when I update the openmrs data model to support biometrics
+            $scope.handleSaveFingerprints = function (fingerprints) {
+                $scope.patient.fingerprints = fingerprints;
+            }
 
             $scope.create = function () {
                 addNewRelationships();

@@ -88,12 +88,15 @@ angular.module('bahmni.common.fingerprintButton')
                     fingerprintListDialogElement.dialog('open');
                 }
 
-                scope.showScannerDialog = function (type) {
+                scope.showScannerDialog = function (fingerprint) {
                     if (fpScanDialogOpen) {
                         return;
                     }
+                    if (fingerprint.template != null && fingerprint.template != undefined) {
+                        return;
+                    }
                     fpScanDialogOpen = true;
-                    var cachedSession = scanSessionCache[type] || {};
+                    var cachedSession = scanSessionCache[fingerprint.type] || {};
 
                     return spinner.forPromise(
                         biometricService.fetchScanSession(cachedSession.uuid))
@@ -104,7 +107,7 @@ angular.module('bahmni.common.fingerprintButton')
                             var openDialogWithSession = function (sessionToPass) {
                                 scope.currentScanSession = sessionToPass;
                                 scope.currentScanType = scanType;
-                                scope.currentType = type
+                                scope.currentType = fingerprint.type
                                 fingerprintScannerDialogElement.dialog('open');
                             };
 
