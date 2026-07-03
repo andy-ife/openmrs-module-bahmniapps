@@ -47,6 +47,14 @@ angular.module('bahmni.common.biometrics')
                     })
             }
 
+            var destroyScanSession = function (uuid) {
+                var config = getConfig();
+                if (!config.enabled) return $q.when(null);
+
+                return $http.delete(config.serverUrl + '/fingerprint/session', { uuid: uuid })
+                    .then(function (response) { })
+            }
+
             var scan = function (type, sessionId, scanType) {
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);

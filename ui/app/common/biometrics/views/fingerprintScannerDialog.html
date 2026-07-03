@@ -1,3 +1,20 @@
-<div >
+<div class="fingerprintScannerDialog" title="{{::getFingerprintTitle() | translate}}">
+    <img class="fp-scan-img" ng-src="getFingerprintScanImg()"/>
+    <p ng-if="!scanning && !success && !error">{{'FP_SCAN_INSTRUCTIONS'}}</p>
+    <fingerprint-box ng-click="scan()" scanning="scanning" error="error" imgSrc="fingerprint.image" success="success"></fingerprint-box>
+    <h3>{{::getScanStatusTitle() | translate}}</h3>
+    <p>{{::getScanStatusSubtitle() | translate}}</p>
 
+    <div class="submit-btn-container" ng-if="success && showSave">
+        <button type="button" class="cancel" ng-click="cancel()">{{'REGISTRATION_LABEL_CANCEL' | translate}}</button>
+        <div class="right">
+            <button class="confirm" ng-click="save()">{{'REGISTRATION_LABEL_SAVE' | translate}}</button>
+        </div>
+    </div>
+    <div class="submit-btn-container" ng-if="error">
+        <button type="button" class="cancel" ng-click="retry()">{{'REGISTRATION_LABEL_RETRY' | translate}}</button>
+        <div class="right">
+            <button class="default" ng-click="restart()">{{'REGISTRATION_LABEL_RESTART' | translate}}</button>
+        </div>
+    </div>
 </div>

@@ -16,7 +16,10 @@ angular.module('bahmni.common.fingerprintButton')
                     };
                 };
 
-                var patientFingerprints = $parse(iAttrs.ngModel).fingerprints;
+                var ngModelValue = $parse(iAttrs.ngModel)(scope) || {};
+                var patientFingerprints = ngModelValue.fingerprints || [];
+                var scanType = $parse(iAttrs.scanType)(scope);
+                var onSave = $parse(iAttrs.onSave)(scope, { fingerprints: scannedFingerprints });
 
                 var allFingerprints = [
                     { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
@@ -31,8 +34,8 @@ angular.module('bahmni.common.fingerprintButton')
                         }
                     });
 
-                var rightFingerprints = allFingerprints.splice(5);
-                var leftFingerprints = allFingerprints.splice(0, 5);
+                scope.rightFingerprints = allFingerprints.splice(5);
+                scope.leftFingerprints = allFingerprints.splice(0, 5);
 
                 var fingerprintListDialogElement = iElement.find(".fingerprintListDialog");
                 var fpListDialogOpen = false;
@@ -45,7 +48,7 @@ angular.module('bahmni.common.fingerprintButton')
                     return fingerprint.template !== null && fingerprint.template !== undefined;
                 };
 
-                var getFingerprintTitle = function (type) {
+                scope.getFingerprintTitle = function (type) {
                     var titles = {
                         1: 'FP_LABEL_RIGHT_THUMB',
                         2: 'FP_LABEL_RIGHT_INDEX',
@@ -61,7 +64,7 @@ angular.module('bahmni.common.fingerprintButton')
                     return titles[type] || 'FP_LABEL_UNKNOWN';
                 };
 
-                var getFingerprintLabelImg = function (type) {
+                scope.getFingerprintLabelImg = function (type) {
                     var images = {
                         1: "fp-label-1.png",
                         2: "fp-label-2.png",
@@ -77,7 +80,7 @@ angular.module('bahmni.common.fingerprintButton')
                     return "../images/biometrics/" + images[type] || '';
                 }
 
-                var launchFingerprintListPopup = function () {
+                scope.launchFingerprintListPopup = function () {
                     if (fpListDialogOpen) {
                         return;
                     }
@@ -85,7 +88,7 @@ angular.module('bahmni.common.fingerprintButton')
                     fingerprintListDialogElement.dialog('open');
                 }
 
-                var showScannerDialog = function (type) {
+                scope.showScannerDialog = function (type) {
                     if (fpScanDialogOpen) {
                         return;
                     }
@@ -99,25 +102,27 @@ angular.module('bahmni.common.fingerprintButton')
                             var hasFingerprints = scanSession && scanSession.fingerprints && scanSession.fingerprints.length > 0;
 
                             var openDialogWithSession = function (sessionToPass) {
-                                fingerprintScannerDialogElement.attr('scanSession', sessionToPass);
+                                scope.currentScanSession = sessionToPass;
+                                scope.currentScanType = scanType;
+                                scope.currentType = type
                                 fingerprintScannerDialogElement.dialog('open');
                             };
 
                             if (hasFingerprints) {
-                                var scope = {};
-                                scope.message = "There are already fingerprints in this session. Do you want to resume or start a new scanning session?";
-                                scope.newSession = function (closeConfirmBox) {
+                                var dialogScope = {};
+                                dialogScope.message = "There are already fingerprints in this session. Do you want to resume or start a new scanning session?";
+                                dialogScope.newSession = function (closeConfirmBox) {
                                     closeConfirmBox();
                                     openDialogWithSession({ uuid: null, fingerprints: [] });
                                 };
-                                scope.resume = function (closeConfirmBox) {
+                                dialogScope.resume = function (closeConfirmBox) {
                                     closeConfirmBox();
                                     openDialogWithSession(scanSession);
                                 };
 
                                 confirmBox({
-                                    scope: scope,
-                                    actions: [{name: 'newSession', display: 'New Session'}, {name: 'resume', display: 'Resume'}],
+                                    scope: dialogScope,
+                                    actions: [{ name: 'newSession', display: 'New Session' }, { name: 'resume', display: 'Resume' }],
                                     className: "ngdialog-theme-default"
                                 });
                             } else {
@@ -125,14 +130,27 @@ angular.module('bahmni.common.fingerprintButton')
                             }
                         }).catch(function (e) {
                             console.log(e);
-                            alert($translate.instant("FETCH_SCAN_SESSION_ERROR"));
+                            messagingService.showMessage("error", "FETCH_SCAN_SESSION_ERROR");
                         });
                 }
 
+                scope.handleSaveFromScanner = function (scannedFingerprints) {
+                    if (iAttrs.onSave) {
+                        $parse(iAttrs.onSave)(scope, { fingerprints: scannedFingerprints });
+                    }
+                    fingerprintScannerDialogElement.dialog('close');
+                    fingerprintListDialogElement.dialog('close');
+                };
+
+                scope.handleCancelFromScanner = function () {
+                    fingerprintScannerDialogElement.dialog('close');
+                    fingerprintListDialogElement.dialog('close');
+                };
+
                 fingerprintListDialogElement.dialog({
-                    autoOpen: false, 
-                    height: "auto", 
-                    width: "auto", 
+                    autoOpen: false,
+                    height: "auto",
+                    width: "auto",
                     modal: true,
                     close: function () {
                         fpListDialogOpen = false;
@@ -140,9 +158,9 @@ angular.module('bahmni.common.fingerprintButton')
                 });
 
                 fingerprintScannerDialogElement.dialog({
-                    autoOpen: false, 
-                    height: "auto", 
-                    width: "auto", 
+                    autoOpen: false,
+                    height: "auto",
+                    width: "auto",
                     modal: true,
                     close: function () {
                         fpScanDialogOpen = false;

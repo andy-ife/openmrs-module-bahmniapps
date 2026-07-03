@@ -10,7 +10,7 @@
                     <div class = "fp-and-photo-container">
                         <div class="fp-container-wrapper">
                             <div class = "fp-container">
-                                <div ng-hide="!config.biometricsEnabled" class="fp-btn" fingerprint-btn="" ng-model="patient"></div>
+                                <div fingerprint-btn="" scanType="registration" ng-model="patient" on-save="handleSaveFingerprint(fingerprints)" ng-hide="!config.biometricsEnabled" class="fp-btn"></div>
                                 <fingerprint-box></fingerprint-box>
                             </div>
                         </div>
