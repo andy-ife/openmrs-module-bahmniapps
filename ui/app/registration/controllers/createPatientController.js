@@ -10,7 +10,7 @@
 'use strict';
 
 angular.module('bahmni.registration')
-    .controller('CreatePatientController', ['$scope', '$rootScope', '$state', 'patientService', 'patient', 'spinner', 'appService', 'messagingService', 'ngDialog', '$q', '$translate',
+    .controller('CreatePatientController', ['$scope', '$rootScope', '$state', 'patientService', 'patient', 'spinner', 'appService', 'messagingService', 'biometricService', 'ngDialog', '$q', '$translate',
         function ($scope, $rootScope, $state, patientService, patient, spinner, appService, messagingService, biometricService, ngDialog, $q, $translate) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             $scope.actions = {};
@@ -205,7 +205,8 @@ angular.module('bahmni.registration')
                 return deferred.promise;
             };
 
-            // this may change when I update the openmrs data model to support biometrics
+            // this may change if we update the openmrs data model to support storing fingerprints
+            // i.e storing fingerprints in openmrs
             var enrolFingerprints = function (response) {
                 var patientProfileData = response.data;
                 var subjectId = patientProfileData.patient.identifiers[0].identifier;
@@ -214,12 +215,13 @@ angular.module('bahmni.registration')
                     subjectId: subjectId,
                     fingerprints: $scope.patient.fingerprints
                 });
-            }
+            };
 
-            // this may change when I update the openmrs data model to support biometrics
+            // this may change if we update the openmrs data model to support storing fingerprints
+            // i.e storing fingerprints in openmrs
             $scope.handleSaveFingerprints = function (fingerprints) {
                 $scope.patient.fingerprints = fingerprints;
-            }
+            };
 
             $scope.create = function () {
                 addNewRelationships();

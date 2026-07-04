@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('bahmni.common.fingerprintButton')
-    .directive('fingerprintBtn',
-        function factory(appService, biometricService, messagingService, spinner, $parse, $translate, confirmBox) {
+    .directive('fingerprintBtn', ['appService', 'biometricService', 'messagingService', 'spinner', '$parse', '$translate', 'confirmBox',
+        function (appService, biometricService, messagingService, spinner, $parse, $translate, confirmBox) {
             /**
          * @param {angular.IAugmentedJQuery} iElement
          * @param {angular.IAttributes} iAttrs
@@ -76,9 +76,9 @@ angular.module('bahmni.common.fingerprintButton')
                         8: "fp-label-8.png",
                         9: "fp-label-9.png",
                         10: "fp-label-10.png"
-                    }
+                    };
                     return "../images/biometrics/" + images[type] || '';
-                }
+                };
 
                 scope.launchFingerprintListPopup = function () {
                     if (fpListDialogOpen) {
@@ -86,7 +86,7 @@ angular.module('bahmni.common.fingerprintButton')
                     }
                     fpListDialogOpen = true;
                     fingerprintListDialogElement.dialog('open');
-                }
+                };
 
                 scope.showScannerDialog = function (fingerprint) {
                     if (fpScanDialogOpen) {
@@ -108,7 +108,7 @@ angular.module('bahmni.common.fingerprintButton')
                         var openDialogWithSession = function (sessionToPass) {
                             scope.currentScanSession = sessionToPass;
                             scope.currentScanType = scanType;
-                            scope.currentType = fingerprint.type
+                            scope.currentType = fingerprint.type;
                             fingerprintScannerDialogElement.dialog('open');
                         };
 
@@ -135,12 +135,14 @@ angular.module('bahmni.common.fingerprintButton')
                     }).catch(function (e) {
                         fpScanDialogOpen = false;
                         console.log(e);
-                        if (e == "Biometric device not found or fingerprint app not running")
-                            messagingService.showMessage("error", "BIOMETRIC_DEVICE_NOT_FOUND")
-                        else
+                        if (e == "Biometric device not found or fingerprint app not running") {
+                            messagingService.showMessage("error", "BIOMETRIC_DEVICE_NOT_FOUND");
+                        }
+                        else {
                             messagingService.showMessage("error", "FETCH_SCAN_SESSION_ERROR");
+                        }
                     });
-                }
+                };
 
                 scope.handleSaveFromScanner = function (scannedFingerprints) {
                     if (iAttrs.onSave) {
@@ -179,12 +181,12 @@ angular.module('bahmni.common.fingerprintButton')
                     fingerprintListDialogElement.dialog("destroy");
                     fingerprintScannerDialogElement.dialog("destroy");
                 });
-            }
+            };
 
             return {
                 templateUrl: '../common/biometrics/views/fingerprintListDialog.html',
                 restrict: 'A',
                 scope: true,
                 link: link
-            }
-        });
+            };
+        }]);

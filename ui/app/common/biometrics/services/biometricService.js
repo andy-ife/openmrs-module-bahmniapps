@@ -1,14 +1,11 @@
 'use strict';
 
-
 angular.module('bahmni.common.biometrics')
     .factory('biometricService', ['$http', '$q', 'appService', 'biometricStatus', 'biometricScanner', 'biometricScanSession', 'fingerprint', 'biometricSubject', 'biometricMatch',
         /**
          * @param {angular.IHttpService} $http
-         * @param {angular.IQService} $q 
-         */
+         * @param {angular.IQService} $q */
         function ($http, $q, appService, biometricStatus, biometricScanner, biometricScanSession, fingerprint, biometricSubject, biometricMatch) {
-
             var getConfig = function () {
                 var biometricsConfig = appService.getAppDescriptor().getConfigValue('biometrics') || {};
                 return {
@@ -22,7 +19,7 @@ angular.module('bahmni.common.biometrics')
                 if (!config.enabled) return $q.when(null);
                 return $http.get(config.serverUrl + '/status').then(function (response) {
                     if (response.status < 200 || response.status > 299) {
-                        throw "Biometric device not found or fingerprint app not running";
+                        throw new Error("Biometric device not found or fingerprint app not running");
                     }
                     return biometricStatus.fromJSON(response.data);
                 });
@@ -47,16 +44,16 @@ angular.module('bahmni.common.biometrics')
                 return $http.get(config.serverUrl + '/fingerprint/session', { uuid: uuid })
                     .then(function (response) {
                         return biometricScanSession.fromJSON(response.data);
-                    })
-            }
+                    });
+            };
 
             var destroyScanSession = function (uuid) {
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);
 
                 return $http.delete(config.serverUrl + '/fingerprint/session', { uuid: uuid })
-                    .then(function (response) { })
-            }
+                    .then(function (response) { });
+            };
 
             var scan = function (type, sessionId, scanType) {
                 var config = getConfig();
@@ -71,7 +68,7 @@ angular.module('bahmni.common.biometrics')
                 var url = config.serverUrl + '/fingerprint/scan';
                 return $http.get(url, {
                     method: "GET",
-                    params: params,
+                    params: params
                 }).then(function (response) {
                     return fingerprint.fromJSON(response.data);
                 });

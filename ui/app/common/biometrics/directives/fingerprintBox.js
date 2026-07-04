@@ -49,7 +49,7 @@ angular.module("bahmni.common.biometrics")
                 // generate base64 png string from the canvas
                 var dataUrl = canvas.toDataURL(mime);
                 return dataUrl;
-            }
+            };
 
             $scope.getImgSrc = function () {
                 if ($scope.error) {
