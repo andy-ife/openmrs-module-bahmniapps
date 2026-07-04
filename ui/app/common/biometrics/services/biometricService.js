@@ -114,6 +114,8 @@ angular.module('bahmni.common.biometrics')
                 return $http.get(config.serverUrl + '/subject/' + encodeURIComponent(subjectId))
                     .then(function (response) {
                         return biometricSubject.fromJSON(response.data);
+                    }).catch(function (e) {
+                        return {};
                     });
             };
 

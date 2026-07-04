@@ -4,20 +4,19 @@ angular.module("bahmni.common.biometrics")
     .directive("fingerprintBox", function () {
         var link = function ($scope) {
             var getFingerprintImgSrc = function () {
-                var fp = { image: $scope.imgSrc }; // did this because I'm too lazy to rename fp and all the fp.image
-                if (!fp || !fp.image) return '';
+                if (!$scope.imgSrc) return '';
                 var mime = 'image/png';
-                if (fp.image.startsWith('SUkq') || fp.image.startsWith('TU0A')) {
+                if ($scope.imgSrc.startsWith('SUkq') || $scope.imgSrc.startsWith('TU0A')) {
                     mime = 'image/tif';
-                } else if (fp.image.startsWith('/9j/')) {
+                } else if ($scope.imgSrc.startsWith('/9j/')) {
                     mime = 'image/jpeg';
                 }
                 if (mime !== 'image/png') {
                     // for non-png images, return the original base64 string with the correct mime type
-                    return 'data:' + mime + ';charset=utf-8;base64,' + fp.image;
+                    return 'data:' + mime + ';charset=utf-8;base64,' + $scope.imgSrc;
                 }
                 // decode raw bytes
-                var binaryString = atob(fp.image);
+                var binaryString = atob($scope.imgSrc);
                 var rawBytes = new Uint8Array(binaryString.length);
                 for (var i = 0; i < binaryString.length; i++) {
                     rawBytes[i] = binaryString.charCodeAt(i);
@@ -53,18 +52,18 @@ angular.module("bahmni.common.biometrics")
 
             $scope.getImgSrc = function () {
                 if ($scope.error) {
-                    return '../images/fp-error.png';
+                    return '../images/biometrics/fp-error.png';
                 }
                 if ($scope.imgSrc) {
                     return getFingerprintImgSrc();
                 }
                 if ($scope.success) {
-                    return '../images/fp-success.png';
+                    return '../images/biometrics/fp-success.png';
                 }
-                return '../images/fp-default.png';
+                return '../images/biometrics/fp-default.png';
             };
 
-            $scope.overlaySrc = '../images/fp-scanning.png';
+            $scope.overlaySrc = '../images/biometrics/fp-scanning.svg';
         };
 
         return {
@@ -79,7 +78,7 @@ angular.module("bahmni.common.biometrics")
             },
             template:
                 "  <img class=\"fp-overlay\"ng-hide=\"!scanning\"ng-src= \"{{ overlaySrc }}\"/>" +
-                "  <img ng-src=\"{{ getImgSrc() }}\" " +
+                "  <img ng-src=\"{{:: getImgSrc() }}\" " +
                 "       class=\"fp-img\" />" +
                 "  <span ng-hide=\"scanning || imgSrc\" " +
                 "        ng-class=\"{" +

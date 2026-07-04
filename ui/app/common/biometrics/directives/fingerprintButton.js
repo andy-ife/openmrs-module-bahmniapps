@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bahmni.common.fingerprintButton')
+angular.module('bahmni.common.biometrics')
     .directive('fingerprintBtn', ['appService', 'biometricService', 'messagingService', 'spinner', '$parse', '$translate', 'confirmBox',
         function (appService, biometricService, messagingService, spinner, $parse, $translate, confirmBox) {
             /**
@@ -8,6 +8,8 @@ angular.module('bahmni.common.fingerprintButton')
          * @param {angular.IAttributes} iAttrs
          */
             var link = function (scope, iElement, iAttrs) {
+                var patientFingerprints = [];
+
                 var getConfig = function () {
                     var biometricsConfig = appService.getAppDescriptor().getConfigValue('biometrics') || {};
                     return {
@@ -16,26 +18,58 @@ angular.module('bahmni.common.fingerprintButton')
                     };
                 };
 
-                var ngModelValue = $parse(iAttrs.ngModel)(scope) || {};
-                var patientFingerprints = ngModelValue.fingerprints || [];
-                var scanType = $parse(iAttrs.scanType)(scope);
-                var onSave = $parse(iAttrs.onSave)(scope, { fingerprints: scannedFingerprints });
+                var getPatientFingerprints = function () {
+                    var patientId = $parse(iAttrs.patientId)(scope);
+                    if (!patientId || angular.isObject(patientId) && angular.equals(patientId, {})) {
+                        return Promise.resolve({ fingerprints: [] });
+                    }
+                    if (getConfig().enabled) {
+                        return biometricService.getSubject(patientId)
+                            .then(function (response) {
+                                return response;
+                            }).catch(function (e) {
+                                return {};
+                            });
+                    } else {
+                        return Promise.resolve();
+                    }
+                };
 
-                var allFingerprints = [
-                    { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
-                    { type: 5 }, { type: 6 }, { type: 7 }, { type: 8 },
-                    { type: 9 }, { type: 10 }].map(function (e) {
-                        for (var i = 0; i < patientFingerprints.length; i++) {
-                            if (e.type === patientFingerprints[i].type) {
-                                e.image = patientFingerprints[i].image;
-                                e.template = patientFingerprints[i].template;
-                                e.format = patientFingerprints[i].format;
+                getPatientFingerprints().then(function (response) {
+                    var fetchedFingerprints = (response && response.fingerprints) ? response.fingerprints : [];
+
+                    var allFingerprints = [
+                        { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
+                        { type: 5 }, { type: 6 }, { type: 7 }, { type: 8 },
+                        { type: 9 }, { type: 10 }].map(function (e) {
+                            if (fetchedFingerprints.length == 0) {
+                                return e;
                             }
-                        }
-                    });
+                            for (var i = 0; i < fetchedFingerprints.length; i++) {
+                                if (e.type === fetchedFingerprints[i].type) {
+                                    return {
+                                        type: e.type,
+                                        image: fetchedFingerprints[i].image,
+                                        template: fetchedFingerprints[i].template,
+                                        format: fetchedFingerprints[i].format
+                                    };
+                                }
+                            }
+                            return e;
+                        });
 
-                scope.rightFingerprints = allFingerprints.splice(0, 5);
-                scope.leftFingerprints = allFingerprints.splice(5);
+                    scope.rightFingerprints = allFingerprints.splice(0, 5);
+                    scope.leftFingerprints = allFingerprints;
+                }).catch(function (e) {
+                    // do nothing
+                });
+
+                var patientId = $parse(iAttrs.patientId)(scope) || {};
+                var scanType = $parse(iAttrs.scanType)(scope);
+
+                scope.currentScanSession = { uuid: '', fingerprints: [] };
+                scope.currentScanType = 'registration';
+                scope.currentType = 1;
 
                 var fingerprintListDialogElement = iElement.find(".fingerprintListDialog");
                 var fpListDialogOpen = false;
@@ -88,7 +122,7 @@ angular.module('bahmni.common.fingerprintButton')
                     fingerprintListDialogElement.dialog('open');
                 };
 
-                scope.showScannerDialog = function (fingerprint) {
+                scope.launchFingerprintScannerPopup = function (fingerprint) {
                     if (fpScanDialogOpen) {
                         return;
                     }
@@ -100,7 +134,7 @@ angular.module('bahmni.common.fingerprintButton')
 
                     return spinner.forPromise(
                         biometricService.getStatus()
-                            .then(function (_) { return biometricService.fetchScanSession(cachedSession.uuid); })
+                            .then(function (_) { return biometricService.getScanSession(cachedSession.uuid); })
                     ).then(function (response) {
                         var scanSession = response.data || response;
                         var hasFingerprints = scanSession && scanSession.fingerprints && scanSession.fingerprints.length > 0;

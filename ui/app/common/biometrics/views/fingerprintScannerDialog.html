@@ -1,5 +1,5 @@
 <div class="fingerprintScannerDialog" title="{{::getFingerprintTitle() | translate}}">
-    <img class="fp-scan-img" ng-src="getFingerprintScanImg()"/>
+    <img class="fp-scan-img" ng-src="{{::getFingerprintHelperImg()}}"/>
     <p ng-if="!scanning && !success && !error">{{'FP_SCAN_INSTRUCTIONS'}}</p>
     <fingerprint-box ng-click="scan()" scanning="scanning" error="error" imgSrc="fingerprint.image" success="success"></fingerprint-box>
     <h3>{{::getScanStatusTitle() | translate}}</h3>
