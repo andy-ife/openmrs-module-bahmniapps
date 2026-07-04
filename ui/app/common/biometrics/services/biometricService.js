@@ -21,6 +21,9 @@ angular.module('bahmni.common.biometrics')
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);
                 return $http.get(config.serverUrl + '/status').then(function (response) {
+                    if (response.status < 200 || response.status > 299) {
+                        throw "Biometric device not found or fingerprint app not running";
+                    }
                     return biometricStatus.fromJSON(response.data);
                 });
             };

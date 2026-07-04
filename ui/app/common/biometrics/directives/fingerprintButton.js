@@ -34,8 +34,8 @@ angular.module('bahmni.common.fingerprintButton')
                         }
                     });
 
-                scope.rightFingerprints = allFingerprints.splice(5);
-                scope.leftFingerprints = allFingerprints.splice(0, 5);
+                scope.rightFingerprints = allFingerprints.splice(0, 5);
+                scope.leftFingerprints = allFingerprints.splice(5);
 
                 var fingerprintListDialogElement = iElement.find(".fingerprintListDialog");
                 var fpListDialogOpen = false;
@@ -99,42 +99,47 @@ angular.module('bahmni.common.fingerprintButton')
                     var cachedSession = scanSessionCache[fingerprint.type] || {};
 
                     return spinner.forPromise(
-                        biometricService.fetchScanSession(cachedSession.uuid))
-                        .then(function (response) {
-                            var scanSession = response.data || response;
-                            var hasFingerprints = scanSession && scanSession.fingerprints && scanSession.fingerprints.length > 0;
+                        biometricService.getStatus()
+                            .then(function (_) { return biometricService.fetchScanSession(cachedSession.uuid); })
+                    ).then(function (response) {
+                        var scanSession = response.data || response;
+                        var hasFingerprints = scanSession && scanSession.fingerprints && scanSession.fingerprints.length > 0;
 
-                            var openDialogWithSession = function (sessionToPass) {
-                                scope.currentScanSession = sessionToPass;
-                                scope.currentScanType = scanType;
-                                scope.currentType = fingerprint.type
-                                fingerprintScannerDialogElement.dialog('open');
+                        var openDialogWithSession = function (sessionToPass) {
+                            scope.currentScanSession = sessionToPass;
+                            scope.currentScanType = scanType;
+                            scope.currentType = fingerprint.type
+                            fingerprintScannerDialogElement.dialog('open');
+                        };
+
+                        if (hasFingerprints) {
+                            var dialogScope = {};
+                            dialogScope.message = "There are already fingerprints in this session. Do you want to resume or start a new scanning session?";
+                            dialogScope.newSession = function (closeConfirmBox) {
+                                closeConfirmBox();
+                                openDialogWithSession({ uuid: null, fingerprints: [] });
+                            };
+                            dialogScope.resume = function (closeConfirmBox) {
+                                closeConfirmBox();
+                                openDialogWithSession(scanSession);
                             };
 
-                            if (hasFingerprints) {
-                                var dialogScope = {};
-                                dialogScope.message = "There are already fingerprints in this session. Do you want to resume or start a new scanning session?";
-                                dialogScope.newSession = function (closeConfirmBox) {
-                                    closeConfirmBox();
-                                    openDialogWithSession({ uuid: null, fingerprints: [] });
-                                };
-                                dialogScope.resume = function (closeConfirmBox) {
-                                    closeConfirmBox();
-                                    openDialogWithSession(scanSession);
-                                };
-
-                                confirmBox({
-                                    scope: dialogScope,
-                                    actions: [{ name: 'newSession', display: 'New Session' }, { name: 'resume', display: 'Resume' }],
-                                    className: "ngdialog-theme-default"
-                                });
-                            } else {
-                                openDialogWithSession({ uuid: null, fingerprints: [] });
-                            }
-                        }).catch(function (e) {
-                            console.log(e);
+                            confirmBox({
+                                scope: dialogScope,
+                                actions: [{ name: 'newSession', display: 'New Session' }, { name: 'resume', display: 'Resume' }],
+                                className: "ngdialog-theme-default"
+                            });
+                        } else {
+                            openDialogWithSession({ uuid: null, fingerprints: [] });
+                        }
+                    }).catch(function (e) {
+                        fpScanDialogOpen = false;
+                        console.log(e);
+                        if (e == "Biometric device not found or fingerprint app not running")
+                            messagingService.showMessage("error", "BIOMETRIC_DEVICE_NOT_FOUND")
+                        else
                             messagingService.showMessage("error", "FETCH_SCAN_SESSION_ERROR");
-                        });
+                    });
                 }
 
                 scope.handleSaveFromScanner = function (scannedFingerprints) {
