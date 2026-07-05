@@ -28,7 +28,6 @@ angular.module('bahmni.common.biometrics')
                         9: "fp-label-9.png",
                         10: "fp-label-10.png"
                     };
-                    console.log(scope.type);
                     return "../images/biometrics/" + images[scope.type] || '';
                 };
 

@@ -57,7 +57,7 @@ angular.module("bahmni.common.biometrics")
                 if ($scope.imgSrc) {
                     return getFingerprintImgSrc();
                 }
-                if ($scope.success) {
+                if ($scope.success || $scope.fingerprintCount) {
                     return '../images/biometrics/fp-success.png';
                 }
                 return '../images/biometrics/fp-default.png';
