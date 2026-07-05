@@ -2,21 +2,21 @@
 
 angular.module("bahmni.common.biometrics")
     .directive("fingerprintBox", function () {
-        var link = function ($scope) {
-            var getFingerprintImgSrc = function () {
-                if (!$scope.imgSrc) return '';
+        var link = function (scope) {
+            var computeFingerprintImgSrc = function (newImgSrc) {
+                if (!newImgSrc) return '';
                 var mime = 'image/png';
-                if ($scope.imgSrc.startsWith('SUkq') || $scope.imgSrc.startsWith('TU0A')) {
+                if (newImgSrc.startsWith('SUkq') || newImgSrc.startsWith('TU0A')) {
                     mime = 'image/tif';
-                } else if ($scope.imgSrc.startsWith('/9j/')) {
+                } else if (newImgSrc.startsWith('/9j/')) {
                     mime = 'image/jpeg';
                 }
                 if (mime !== 'image/png') {
                     // for non-png images, return the original base64 string with the correct mime type
-                    return 'data:' + mime + ';charset=utf-8;base64,' + $scope.imgSrc;
+                    return 'data:' + mime + ';charset=utf-8;base64,' + newImgSrc;
                 }
                 // decode raw bytes
-                var binaryString = atob($scope.imgSrc);
+                var binaryString = atob(newImgSrc);
                 var rawBytes = new Uint8Array(binaryString.length);
                 for (var i = 0; i < binaryString.length; i++) {
                     rawBytes[i] = binaryString.charCodeAt(i);
@@ -24,8 +24,8 @@ angular.module("bahmni.common.biometrics")
 
                 // create off-screen canvas
                 var canvas = document.createElement('canvas');
-                canvas.width = $scope.biometricDevices[0].imageWidth;
-                canvas.height = $scope.biometricDevices[0].imageHeight;
+                canvas.width = scope.imgWidth || 500;
+                canvas.height = scope.imgHeight || 500;
                 var ctx = canvas.getContext('2d');
 
                 // create blank img container
@@ -50,20 +50,32 @@ angular.module("bahmni.common.biometrics")
                 return dataUrl;
             };
 
-            $scope.getImgSrc = function () {
-                if ($scope.error) {
+            // this helps with the heavy image rendering task
+            // angular only executes it when imgSrc changes
+            // instead of repeatedly on every digest cycle
+            scope.computedImgSrc = '';
+            scope.$watch('imgSrc', function (newVal) {
+                if (newVal) {
+                    scope.computedImgSrc = computeFingerprintImgSrc(newVal);
+                } else {
+                    scope.computedImgSrc = '';
+                }
+            });
+
+            scope.getImgSrc = function () {
+                if (scope.error) {
                     return '../images/biometrics/fp-error.png';
                 }
-                if ($scope.imgSrc) {
-                    return getFingerprintImgSrc();
+                if (scope.computedImgSrc) {
+                    return scope.computedImgSrc;
                 }
-                if ($scope.success || $scope.fingerprintCount) {
+                if (scope.success || scope.fingerprintCount) {
                     return '../images/biometrics/fp-success.png';
                 }
                 return '../images/biometrics/fp-default.png';
             };
 
-            $scope.overlaySrc = '../images/biometrics/fp-scanning.svg';
+            scope.overlaySrc = '../images/biometrics/fp-scanning.svg';
         };
 
         return {

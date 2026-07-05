@@ -11,7 +11,7 @@ angular.module('bahmni.common.biometrics')
                 scope.scanning = false;
                 scope.success = false;
                 scope.error = false;
-                scope.fingerprint = {};
+                scope.imgSrc = null;
                 scope.showSave = false;
 
                 scope.getScanHelperImg = function () {
@@ -78,8 +78,7 @@ angular.module('bahmni.common.biometrics')
                         .then(function (result) {
                             scope.success = true;
                             scope.scanning = false;
-
-                            scope.fingerprint = result;
+                            scope.imgSrc = result.image;
                             fingerprints.push(result);
                             scope.scanSession.fingerprints = fingerprints;
 

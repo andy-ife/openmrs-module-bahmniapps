@@ -1,20 +1,20 @@
 <div class="fingerprintScannerDialog">
     <img class="fp-scan-img" ng-src="{{getScanHelperImg()}}"/>
-    <p ng-if="!scanning && !success && !error">{{:: 'FP_SCAN_INSTRUCTIONS' | translate }}</p>
-    <fingerprint-box ng-click="scan()" scanning="scanning" error="error" imgSrc="fingerprint.image" success="success"></fingerprint-box>
+    <p ng-if="!scanning && !success && !error" ng-bind-html="::'FP_SCAN_INSTRUCTIONS' | translate "></p>
+    <fingerprint-box ng-click="scan()" scanning="scanning" error="error" img-src="imgSrc" success="success"></fingerprint-box>
     <h3>{{getScanStatusTitle()}}</h3>
     <p>{{getScanStatusSubtitle()}}</p>
 
     <div class="submit-btn-container" ng-if="success && showSave">
-        <button type="button" class="cancel" ng-click="cancel()">{{'REGISTRATION_LABEL_CANCEL' | translate}}</button>
+        <button type="button" class="cancel" ng-click="cancel()">{{:: 'REGISTRATION_LABEL_CANCEL' | translate}}</button>
         <div class="right">
-            <button class="confirm" ng-click="save()">{{'REGISTRATION_LABEL_SAVE' | translate}}</button>
+            <button class="confirm" ng-click="save()" ng-bind-html="::'REGISTRATION_LABEL_SAVE' | translate"></button>
         </div>
     </div>
     <div class="submit-btn-container" ng-if="error">
-        <button type="button" class="cancel" ng-click="retry()">{{'REGISTRATION_LABEL_RETRY' | translate}}</button>
+        <button type="button" class="cancel" ng-click="retry()">{{:: 'REGISTRATION_LABEL_RETRY' | translate}}</button>
         <div class="right">
-            <button class="default" ng-click="restart()">{{'REGISTRATION_LABEL_RESTART' | translate}}</button>
+            <button class="default" ng-click="restart()">{{:: 'REGISTRATION_LABEL_RESTART' | translate}}</button>
         </div>
     </div>
 </div>

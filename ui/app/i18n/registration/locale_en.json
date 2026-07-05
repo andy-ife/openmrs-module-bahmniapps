@@ -153,7 +153,7 @@
     "FP_SCAN_SUCCESS": "Scan success",
     "FP_SCAN_FAIL": "Scan fail",
     "FP_NUMBER_ENROLLED": " fingerprints enrolled",
-    "FP_SCAN_INSTRUCTIONS": "Place your finger on the scanner as shown.\nFor maximum accuracy, we will capture your finger 2-3 times",
+    "FP_SCAN_INSTRUCTIONS": "Place your finger on the scanner as shown.<br/>For maximum accuracy, we will capture your finger 2-3 times",
     "SCAN_AND_ENROLL_FINGERPRINTS_TITLE": "Scan and enrol fingerprints",
     "REGISTRATION_LABEL_LEFT_HAND": "Left Hand",
     "REGISTRATION_LABEL_RIGHT_HAND": "Right Hand",
