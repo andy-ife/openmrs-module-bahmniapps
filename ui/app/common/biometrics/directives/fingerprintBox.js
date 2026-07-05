@@ -76,19 +76,6 @@ angular.module("bahmni.common.biometrics")
                 success: '=',
                 fingerprintCount: '='
             },
-            template:
-                "  <img class=\"fp-overlay\"ng-hide=\"!scanning\"ng-src= \"{{ overlaySrc }}\"/>" +
-                "  <img ng-src=\"{{:: getImgSrc() }}\" " +
-                "       class=\"fp-img\" />" +
-                "  <span ng-hide=\"scanning || imgSrc\" " +
-                "        ng-class=\"{" +
-                "          'fp-error-text': error," +
-                "          'fp-success-text': success && !imgSrc" +
-                "        }\">" +
-                "    <span ng-if=\"error\">{{ error }}</span>" +
-                "    <span ng-if=\"!error && success && fingerprintCount != null\">" +
-                "      {{ fingerprintCount }} fingerprints enrolled" +
-                "    </span>" +
-                "  </span>"
+            templateUrl: '../common/biometrics/views/fingerprintBox.html'
         };
     });
