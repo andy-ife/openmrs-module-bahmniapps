@@ -10,7 +10,7 @@
 'use strict';
 
 angular.module('bahmni.common.photoCapture')
-    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory (appService, $parse, $window, $translate) {
+    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory(appService, $parse, $window, $translate) {
         /**
          * @param {angular.IAugmentedJQuery} iElement
          * @param {angular.IAttributes} iAttrs
@@ -122,6 +122,7 @@ angular.module('bahmni.common.photoCapture')
 
             captureDialogElement.dialog({
                 autoOpen: false, height: 300, width: 500, modal: true, dialogClass: 'photo-capture-dialog',
+                title: $translate.instant('TAKE_PATIENT_PHOTO_TITTLE'),
                 close: function () {
                     dialogOpen = false;
                     if (captureActiveStream) {
@@ -189,6 +190,7 @@ angular.module('bahmni.common.photoCapture')
 
             uploadDialogElement.dialog({
                 autoOpen: false, height: 350, width: 350, modal: true, dialogClass: 'photo-upload-dialog',
+                title: $translate.instant('UPLOAD_PATIENT_PHOTO_TITTLE'),
                 close: function () {
                     dialogOpen = false;
                 }

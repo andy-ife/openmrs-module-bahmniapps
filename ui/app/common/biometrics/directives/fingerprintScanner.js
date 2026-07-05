@@ -14,23 +14,7 @@ angular.module('bahmni.common.biometrics')
                 scope.fingerprint = {};
                 scope.showSave = false;
 
-                scope.getFingerprintTitle = function () {
-                    var titles = {
-                        1: 'FP_LABEL_RIGHT_THUMB',
-                        2: 'FP_LABEL_RIGHT_INDEX',
-                        3: 'FP_LABEL_RIGHT_MIDDLE',
-                        4: 'FP_LABEL_RIGHT_RING',
-                        5: 'FP_LABEL_RIGHT_LITTLE',
-                        6: 'FP_LABEL_LEFT_THUMB',
-                        7: 'FP_LABEL_LEFT_INDEX',
-                        8: 'FP_LABEL_LEFT_MIDDLE',
-                        9: 'FP_LABEL_LEFT_RING',
-                        10: 'FP_LABEL_LEFT_LITTLE'
-                    };
-                    return titles[scope.type] || 'FP_LABEL_UNKNOWN';
-                };
-
-                scope.getFingerprintHelperImg = function () {
+                scope.getScanHelperImg = function () {
                     // TODO: Update these images
                     var images = {
                         1: "fp-label-1.png",
@@ -44,19 +28,20 @@ angular.module('bahmni.common.biometrics')
                         9: "fp-label-9.png",
                         10: "fp-label-10.png"
                     };
+                    console.log(scope.type);
                     return "../images/biometrics/" + images[scope.type] || '';
                 };
 
                 scope.getScanStatusTitle = function () {
-                    if (scope.scanning) return "FP_SCAN_SCANNING";
+                    if (scope.scanning) return $translate.instant("FP_SCAN_SCANNING");
                     if (scope.success) {
                         var fingerprints = scope.scanSession.fingerprints || [];
                         var maxCount = scope.scanSession.maxCount;
                         if (fingerprints.length < maxCount) {
-                            return "FP_SCANS_LEFT: " + (maxCount - fingerprints.length);
+                            return $translate.instant("FP_SCANS_LEFT") + ": " + (maxCount - fingerprints.length);
                         }
                         else {
-                            return "FP_SCAN_FINISHED";
+                            return $translate.instant("FP_SCAN_FINISHED");
                         }
                     }
                     if (scope.error) return "";
@@ -64,19 +49,19 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.getScanStatusSubtitle = function () {
-                    if (scope.scanning) return "FP_SCAN_SCANNING_SUBTITLE";
+                    if (scope.scanning) return $translate.instant("FP_SCAN_SCANNING_SUBTITLE");
                     if (scope.success) {
                         var fingerprints = scope.scanSession.fingerprints || [];
                         var maxCount = scope.scanSession.maxCount;
                         if (fingerprints.length < maxCount) {
-                            return "FP_SCANS_LEFT_SUBTITLE";
+                            return $translate.instant("FP_SCANS_LEFT_SUBTITLE");
                         }
                         else {
-                            return "FP_SCAN_FINISHED_SUBTITLE";
+                            return $translate.instant("FP_SCAN_FINISHED_SUBTITLE");
                         }
                     }
                     if (scope.error) return "";
-                    return "FP_SCAN_DEFAULT_SUBTITLE";
+                    return $translate.instant("FP_SCAN_DEFAULT_SUBTITLE");
                 };
 
                 scope.scan = function () {

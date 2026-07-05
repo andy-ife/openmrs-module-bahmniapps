@@ -84,16 +84,16 @@ angular.module('bahmni.common.biometrics')
 
                 scope.getFingerprintTitle = function (type) {
                     var titles = {
-                        1: 'FP_LABEL_RIGHT_THUMB',
-                        2: 'FP_LABEL_RIGHT_INDEX',
-                        3: 'FP_LABEL_RIGHT_MIDDLE',
-                        4: 'FP_LABEL_RIGHT_RING',
-                        5: 'FP_LABEL_RIGHT_LITTLE',
-                        6: 'FP_LABEL_LEFT_THUMB',
-                        7: 'FP_LABEL_LEFT_INDEX',
-                        8: 'FP_LABEL_LEFT_MIDDLE',
-                        9: 'FP_LABEL_LEFT_RING',
-                        10: 'FP_LABEL_LEFT_LITTLE'
+                        1: 'FP_LABEL_THUMB',
+                        2: 'FP_LABEL_INDEX',
+                        3: 'FP_LABEL_MIDDLE',
+                        4: 'FP_LABEL_RING',
+                        5: 'FP_LABEL_LITTLE',
+                        6: 'FP_LABEL_THUMB',
+                        7: 'FP_LABEL_INDEX',
+                        8: 'FP_LABEL_MIDDLE',
+                        9: 'FP_LABEL_RING',
+                        10: 'FP_LABEL_LITTLE'
                     };
                     return titles[type] || 'FP_LABEL_UNKNOWN';
                 };
@@ -143,6 +143,20 @@ angular.module('bahmni.common.biometrics')
                             scope.currentScanSession = sessionToPass;
                             scope.currentScanType = scanType;
                             scope.currentType = fingerprint.type;
+                            var titles = {
+                                1: 'FP_LABEL_RIGHT_THUMB',
+                                2: 'FP_LABEL_RIGHT_INDEX',
+                                3: 'FP_LABEL_RIGHT_MIDDLE',
+                                4: 'FP_LABEL_RIGHT_RING',
+                                5: 'FP_LABEL_RIGHT_LITTLE',
+                                6: 'FP_LABEL_LEFT_THUMB',
+                                7: 'FP_LABEL_LEFT_INDEX',
+                                8: 'FP_LABEL_LEFT_MIDDLE',
+                                9: 'FP_LABEL_LEFT_RING',
+                                10: 'FP_LABEL_LEFT_LITTLE'
+                            };
+                            var scanTitle = titles[fingerprint.type] || 'FP_LABEL_UNKNOWN';
+                            fingerprintScannerDialogElement.dialog('option', 'title', $translate.instant(scanTitle));
                             fingerprintScannerDialogElement.dialog('open');
                         };
 
@@ -196,6 +210,7 @@ angular.module('bahmni.common.biometrics')
                     height: "auto",
                     width: "auto",
                     modal: true,
+                    title: $translate.instant('SCAN_AND_ENROLL_FINGERPRINTS_TITLE'),
                     close: function () {
                         fpListDialogOpen = false;
                     }
