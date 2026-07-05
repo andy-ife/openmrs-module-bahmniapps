@@ -41,7 +41,7 @@ angular.module('bahmni.common.biometrics')
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);
 
-                return $http.get(config.serverUrl + '/fingerprint/session', { uuid: uuid })
+                return $http.get(config.serverUrl + '/fingerprint/session', { params: { uuid: uuid } })
                     .then(function (response) {
                         return biometricScanSession.fromJSON(response.data);
                     });
@@ -51,7 +51,7 @@ angular.module('bahmni.common.biometrics')
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);
 
-                return $http.delete(config.serverUrl + '/fingerprint/session', { uuid: uuid })
+                return $http.delete(config.serverUrl + '/fingerprint/session', { params: { uuid: uuid } })
                     .then(function (response) { });
             };
 
@@ -94,11 +94,11 @@ angular.module('bahmni.common.biometrics')
                     });
             };
 
-            var match = function (request) {
+            var match = function (subject) {
                 var config = getConfig();
                 if (!config.enabled) return $q.when([]);
 
-                return $http.post(config.serverUrl + '/match', request)
+                return $http.post(config.serverUrl + '/match', subject)
                     .then(function (response) {
                         if (angular.isArray(response.data)) {
                             return response.data.map(biometricMatch.fromJSON);
@@ -124,6 +124,7 @@ angular.module('bahmni.common.biometrics')
                 getStatus: getStatus,
                 getDevices: getDevices,
                 getScanSession: getScanSession,
+                destroyScanSession: destroyScanSession,
                 scan: scan,
                 enrol: enrol,
                 update: update,

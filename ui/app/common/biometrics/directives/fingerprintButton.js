@@ -68,7 +68,7 @@ angular.module('bahmni.common.biometrics')
                 var scanType = $parse(iAttrs.scanType)(scope);
 
                 scope.currentScanSession = { uuid: '', fingerprints: [] };
-                scope.currentScanType = 'registration';
+                scope.currentScanType = scanType;
                 scope.currentType = 1;
 
                 var fingerprintListDialogElement = iElement.find(".fingerprintListDialog");
@@ -164,7 +164,7 @@ angular.module('bahmni.common.biometrics')
                                 className: "ngdialog-theme-default"
                             });
                         } else {
-                            openDialogWithSession({ uuid: null, fingerprints: [] });
+                            openDialogWithSession(scanSession);
                         }
                     }).catch(function (e) {
                         fpScanDialogOpen = false;
