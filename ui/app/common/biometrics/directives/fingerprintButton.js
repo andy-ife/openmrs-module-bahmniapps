@@ -76,7 +76,6 @@ angular.module('bahmni.common.biometrics')
 
                 var fingerprintScannerDialogElement = iElement.find("fingerprint-scanner-dialog");
                 var fpScanDialogOpen = false;
-                var scanSessionCache = {};
 
                 var isEnrolled = function (fingerprint) {
                     return fingerprint.template !== null && fingerprint.template !== undefined;
@@ -127,16 +126,17 @@ angular.module('bahmni.common.biometrics')
                         return;
                     }
                     if (fingerprint.template != null && fingerprint.template != undefined) {
+                        // no editing saved prints for now
                         return;
                     }
                     fpScanDialogOpen = true;
-                    var cachedSession = scanSessionCache[fingerprint.type] || {};
+                    var cachedSession = biometricService.getCachedScanSession(fingerprint.type) || {};
 
                     return spinner.forPromise(
                         biometricService.getStatus()
-                            .then(function (_) { return biometricService.getScanSession(cachedSession.uuid); })
-                    ).then(function (response) {
-                        var scanSession = response.data || response;
+                            .then(function (_) { return biometricService.getScanSession(cachedSession.uuid || null); })
+                    ).then(function (result) {
+                        var scanSession = result.data || result;
                         var hasFingerprints = scanSession && scanSession.fingerprints && scanSession.fingerprints.length > 0;
 
                         var openDialogWithSession = function (sessionToPass) {
@@ -161,15 +161,22 @@ angular.module('bahmni.common.biometrics')
                         };
 
                         if (hasFingerprints) {
+                            biometricService.cacheScanSession(fingerprint.type, scanSession);
                             var dialogScope = {};
-                            dialogScope.message = "There are already fingerprints in this session. Do you want to resume or start a new scanning session?";
+                            dialogScope.message = $translate.instant('REGISTRATION_LABEL_SESSION_FOUND');
                             dialogScope.newSession = function (closeConfirmBox) {
                                 closeConfirmBox();
-                                openDialogWithSession({ uuid: null, fingerprints: [] });
+                                // destroy old session
+                                biometricService.destroyScanSession(scanSession.uuid).then(function () {
+                                    // get a new session
+                                    biometricService.getScanSession(null).then(function (result) {
+                                        openDialogWithSession(result.data || result);
+                                    })
+                                });
                             };
                             dialogScope.resume = function (closeConfirmBox) {
                                 closeConfirmBox();
-                                openDialogWithSession(scanSession);
+                                openDialogWithSession(biometricService.secure(scanSession));
                             };
 
                             confirmBox({

@@ -14,6 +14,15 @@ angular.module('bahmni.common.biometrics')
                 scope.imgSrc = null;
                 scope.showSave = false;
 
+                scope.$watch('scanSession', function (newSession) {
+                    if (newSession && newSession.fingerprints && newSession.fingerprints.length > 0) {
+                        scope.success = true;
+                        scope.fingerprint = newSession.fingerprints[newSession.fingerprints.length - 1];
+                        scope.imgSrc = scope.fingerprint.image;
+                        scope.showSave = (newSession.fingerprints.length >= newSession.maxCount);
+                    }
+                });
+
                 scope.getScanHelperImg = function () {
                     // TODO: Update these images
                     var images = {
@@ -71,7 +80,7 @@ angular.module('bahmni.common.biometrics')
                     if (scope.scanning || fingerprints.length >= maxCount) { return; }
 
                     scope.error = scope.success = scope.showSave = false;
-                    scope.fingerprint = null;
+                    scope.imgSrc = null;
                     scope.scanning = true;
 
                     biometricService.scan(scope.type, sessionId, scope.scanType)
@@ -81,6 +90,8 @@ angular.module('bahmni.common.biometrics')
                             scope.imgSrc = result.image;
                             fingerprints.push(result);
                             scope.scanSession.fingerprints = fingerprints;
+
+                            biometricService.cacheScanSession(scope.type, scope.scanSession);
 
                             if (fingerprints.length >= maxCount) {
                                 scope.showSave = true;
@@ -97,8 +108,10 @@ angular.module('bahmni.common.biometrics')
 
                 scope.save = function () {
                     if (scope.onSave) {
-                        var fingerprints = scope.scanSession.fingerprints || [];
-                        scope.onSave({ scannedFingerprints: fingerprints });
+                        biometricService.destroyScanSession(scope.scanSession.uuid).then(function (_) {
+                            var fingerprints = scope.scanSession.fingerprints || [];
+                            scope.onSave({ scannedFingerprints: fingerprints });
+                        });
                     }
                 };
 
@@ -106,7 +119,7 @@ angular.module('bahmni.common.biometrics')
                     var sessionId = scope.scanSession.uuid;
                     biometricService.destroyScanSession(sessionId).then(function (_) {
                         scope.error = scope.success = scope.showSave = scope.scanning = false;
-                        scope.fingerprint = null;
+                        scope.imgSrc = null;
                         if (scope.scanSession.fingerprints) {
                             scope.scanSession.fingerprints.length = 0;
                         }
@@ -127,7 +140,7 @@ angular.module('bahmni.common.biometrics')
                     var sessionId = scope.scanSession.uuid;
                     biometricService.destroyScanSession(sessionId).then(function (_) {
                         scope.error = scope.success = scope.showSave = scope.scanning = false;
-                        scope.fingerprint = null;
+                        scope.imgSrc = null;
                         if (scope.scanSession.fingerprints) {
                             scope.scanSession.fingerprints.length = 0;
                         }
@@ -140,8 +153,15 @@ angular.module('bahmni.common.biometrics')
 
                 scope.retry = function () {
                     scope.error = scope.success = scope.showSave = scope.scanning = false;
-                    scope.fingerprint = null;
+                    scope.imgSrc = null;
                 };
+
+                iElement.on("dialogclose", function () {
+                    scope.$evalAsync(function () {
+                        scope.error = scope.success = scope.showSave = scope.scanning = false;
+                        scope.imgSrc = null;
+                    });
+                });
             };
             return {
                 templateUrl: '../common/biometrics/views/fingerprintScannerDialog.html',
