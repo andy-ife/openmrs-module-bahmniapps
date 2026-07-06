@@ -8,8 +8,10 @@
                         ng-model="searchParameters.registrationNumber" focus-me="true"
                                placeholder="{{ ::'REGISTRATION_LABEL_ENTER_ID' | translate}}">
                         <div class="reg-srch-btn fl">
-                            <button tabindex="3" type="submit" ng-disabled="!searchParameters.registrationNumber" >{{ ::'REGISTRATION_LABEL_SEARCH' | translate}}</button>
-                            <div fingerprint-btn="" tabindex="4" scan-type="'search'" patient-id="null" on-save="handleSearchFingerprints(fingerprints)" class="fp-btn"></div>
+                            <span class="fp-and-search-container">
+                                <button tabindex="3" type="submit" ng-disabled="!searchParameters.registrationNumber" >{{ ::'REGISTRATION_LABEL_SEARCH' | translate}}</button>
+                                <div fingerprint-btn="" tabindex="4" scan-type="'search'" patient-id="null" on-save="handleSearchFingerprints(fingerprints)"></div>
+                            </span>
                         </div>
                     </div>
 

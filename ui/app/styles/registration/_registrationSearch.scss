@@ -21,7 +21,7 @@
     @include clearfix;
     .search-seperator-l{
       border-right:2px dotted $lightGray;
-      width: 30.5%;
+      width: 34.5%;
       margin: 0 1.04167%;
       float: left;
       @media (max-width: 767px) {
@@ -50,7 +50,7 @@
       }
     }
     .search-seperator-r{
-      width: 67%;
+      width: 63%;
       margin: 0;
       float: left;
       @media (max-width: 767px) {

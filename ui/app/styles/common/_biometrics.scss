@@ -49,18 +49,50 @@
 }
 
 /*** fingerprint button ***/
-.fp-btn {
-    .btn {
-        width: 40px;
-        height: 40px;
-        display: block;
-        margin-top: 6px;
-        margin-bottom: 5px;
-        margin-right: 6px;
-        background-position: 5px 5px;
-        background-repeat: no-repeat;
-        background-size: 30px;
-        background-image: image-url("biometrics/fp-btn.svg");
+.fp-reg-btn {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-right: 6px;
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-image: image-url("biometrics/fp-btn.svg");
+}
+
+.fp-search-btn {
+    display: inline-flex;
+    margin: 0;
+    align-items: start;
+
+    .span {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.fp-and-search-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+    margin-left: 10px;
+
+    @media (max-width: 1120px) {
+        margin-left: 0;
+
+    }
+
+    @media (max-width: 768px) {
+        margin: 0 0 0 10px;
     }
 }
 

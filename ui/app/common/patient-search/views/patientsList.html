@@ -36,11 +36,13 @@
                            focus-on="search.startPatientSearch" placeholder="{{'SEARCH_NAME_PLACEHOLDER_KEY' | translate: {primaryIdentifier : primaryIdentifier} }}"/>
                 </div>
                 <div class="reg-srch-btn left">
-                    <button type="submit" ng-disabled="!search.searchParameter">
-                        <i class="fa fa-search"></i>
-                        {{'SEARCH_KEY' | translate }}
-                    </button>
-                    <div fingerprint-btn="" scan-type="'search'" patient-id="null" on-save="handleSearchFingerprints(fingerprints)" class="fp-btn"></div>
+                    <span class="fp-and-search-container">
+                        <button type="submit" ng-disabled="!search.searchParameter">
+                            <i class="fa fa-search"></i>
+                            {{'SEARCH_KEY' | translate }}
+                        </button>
+                        <div fingerprint-btn="" scan-type="'search'" patient-id="null" on-save="handleSearchFingerprints(fingerprints)" class="fp-btn"></div>
+                    </span>
                 </div>
             </form>
         </span>

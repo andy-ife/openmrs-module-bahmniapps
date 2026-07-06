@@ -1,4 +1,10 @@
-<button type="button" class="fp-btn btn" ng-click="launchPopup()"></button>
+<button type="button" ng-class="{'fp-reg-btn': scanType == 'registration', 'fp-search-btn': scanType == 'search'}" ng-click="launchPopup()">
+    <span class="span" ng-if="scanType == 'search'">
+        <img class="img" src="../images/biometrics/fp-btn.svg"/>
+        {{:: 'REGISTRATION_SCAN_LABEL' | translate}}
+    </span>
+</button>
+
 <div class="fingerprintListDialog container-fluid">
     <legend class="registraion_legend first-registraion_legend">
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_LEFT_HAND' | translate}}</strong></span>
