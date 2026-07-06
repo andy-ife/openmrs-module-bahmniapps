@@ -10,14 +10,16 @@
 'use strict';
 
 angular.module('bahmni.registration')
-    .controller('EditPatientController', ['$scope', 'patientService', 'encounterService', '$stateParams', 'openmrsPatientMapper',
+    .controller('EditPatientController', ['$scope', 'patientService', 'encounterService', 'biometricService', '$stateParams', 'openmrsPatientMapper',
         '$window', '$q', 'spinner', 'appService', 'messagingService', '$rootScope', 'auditLogService',
-        function ($scope, patientService, encounterService, $stateParams, openmrsPatientMapper, $window, $q, spinner,
-                  appService, messagingService, $rootScope, auditLogService) {
+        function ($scope, patientService, encounterService, biometricService, $stateParams, openmrsPatientMapper, $window, $q, spinner,
+            appService, messagingService, $rootScope, auditLogService) {
             var dateUtil = Bahmni.Common.Util.DateUtil;
             var uuid = $stateParams.patientUuid;
             $scope.patient = {};
             $scope.actions = {};
+            $scope.patientId = "";
+            $scope.fingerprintCount = 0;
             $scope.addressHierarchyConfigs = appService.getAppDescriptor().getConfigValue("addressHierarchy");
             $scope.disablePhotoCapture = appService.getAppDescriptor().getConfigValue("disablePhotoCapture");
             $scope.today = dateUtil.getDateWithoutTime(dateUtil.now());
@@ -44,9 +46,21 @@ angular.module('bahmni.registration')
                     const hideOrDisableAttr = $scope.relatedIdentifierAttribute.hideOrDisable;
                     const hideAttrOnValue = $scope.relatedIdentifierAttribute.hideOnValue;
                     $scope.showRelatedIdentifierOption = !(hideOrDisableAttr === "hide" && $scope.patient[$scope.relatedIdentifierAttribute.name] &&
-                                            $scope.patient[$scope.relatedIdentifierAttribute.name].toString() === hideAttrOnValue);
+                        $scope.patient[$scope.relatedIdentifierAttribute.name].toString() === hideAttrOnValue);
                     $scope.showDisabledAttrOption = hideOrDisableAttr === "disable" ? true : false;
                 }
+
+                // biometrics
+                biometricService.getStatus().then(function () {
+                    biometricService.getSubject($scope.patient.primaryIdentifier.identifier).then(function (response) {
+                        $scope.fingerprintCount = response.fingerprints.length || 0;
+                        $scope.patientId = response.subjectId || "";
+                    }).catch(function (e) {
+                        // do nothing
+                    });
+                }).catch(function (e) {
+                    // do nothing;
+                });
             };
 
             var expandDataFilledSections = function () {
@@ -96,6 +110,24 @@ angular.module('bahmni.registration')
                         $scope.actions.followUpAction(patientProfileData);
                     }
                 }));
+            };
+
+            // this may change if we update the openmrs data model to support storing fingerprints
+            // i.e storing fingerprints in openmrs
+            var enrolFingerprints = function (response) {
+                var patientProfileData = response.data;
+                var subjectId = patientProfileData.patient.identifiers[0].identifier;
+
+                biometricService.enrol({
+                    subjectId: subjectId,
+                    fingerprints: $scope.patient.fingerprints
+                });
+            };
+
+            // this may change if we update the openmrs data model to support storing fingerprints
+            // i.e storing fingerprints in openmrs
+            $scope.handleSaveFingerprints = function (fingerprints) {
+                $scope.patient.fingerprints = fingerprints;
             };
 
             var addNewRelationships = function () {
