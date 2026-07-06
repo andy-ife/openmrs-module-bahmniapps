@@ -240,7 +240,7 @@ angular.module('bahmni.common.biometrics')
             };
 
             return {
-                templateUrl: '../common/biometrics/views/fingerprintListDialog.html',
+                templateUrl: '../common/biometrics/views/fingerprintButtonDialog.html',
                 restrict: 'A',
                 scope: true,
                 link: link
