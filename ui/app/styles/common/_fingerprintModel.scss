@@ -46,22 +46,54 @@
 }
 
 /*** fingerprint dialogs ***/
-.fingerprintListDialog .fingerprintScannerDialog {
+.fingerprintListDialog,
+.fingerprintScannerDialog {
     .row-clear {
         @include clearfix();
     }
 
     .flex {
         display: flex;
+        gap: 3rem;
+        margin-bottom: 2rem;
 
         @media screen and (max-width: 540px) {
             display: grid;
-
             flex-direction: column;
             align-items: center;
         }
     }
 }
+
+.fp-list-item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+
+    .fp-list-item-label-container {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+    }
+
+    .fp-list-item-text {
+        font-size: 1rem;
+        color: $mediumGray
+    }
+
+    .fp-list-item-img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .fp-box-container {
+        border: 7px solid $lighterGray;
+    }
+}
+
+
 
 
 /*** overriding jquery styling start****/
