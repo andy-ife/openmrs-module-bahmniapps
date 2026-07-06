@@ -16,7 +16,7 @@
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
                     <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
                 </span>
-                <fingerprint-box ng-click="launchFingerprintScannerPopup(fingerprint)"></fingerprint-box>
+                <fingerprint-box success="fingerprint.template" low-image="true" ng-click="launchFingerprintScannerPopup(fingerprint)"></fingerprint-box>
             </div>
         </li>
     </ul>
@@ -31,7 +31,7 @@
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
                     <img class="fp-list-item-img" ng-src="{{:: getFingerprintLabelImg(fingerprint.type)}}"/>
                 </span>
-                <fingerprint-box ng-click="launchFingerprintScannerPopup(fingerprint)"></fingerprint-box>
+                <fingerprint-box success="fingerprint.template" low-image="true" ng-click="launchFingerprintScannerPopup(fingerprint)"></fingerprint-box>
             </div>
         </li>
     </ul>

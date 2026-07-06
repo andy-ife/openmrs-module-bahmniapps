@@ -1,6 +1,6 @@
 <div class="fingerprintScannerDialog container-fluid">
-    <img class="fp-scan-img" ng-src="{{getScanHelperImg()}}"/>
-    <p class = "fp-instruction-text" ng-if="!scanning && !success && !error" ng-bind-html="::'FP_SCAN_INSTRUCTIONS' | translate "></p>
+    <img class="fp-helper-img" ng-src="{{getScanHelperImg()}}"/>
+    <p class = "fp-instruction-text" ng-if="!scanning && !success && !error" ng-bind-html="getScanInstructions()"></p>
     <fingerprint-box ng-click="scan()" scanning="scanning" error="error" img-src="imgSrc" success="success"></fingerprint-box>
     <h3 class="fp-status-text">{{getScanStatusTitle()}}</h3>
     <p class="fp-status-subtext">{{getScanStatusSubtitle()}}</p>
@@ -8,7 +8,7 @@
     <div class="submit-btn-container" ng-if="success && showSave">
         <button type="button" class="cancel" ng-click="cancel()">{{:: 'REGISTRATION_LABEL_CANCEL' | translate}}</button>
         <div class="right">
-            <button class="confirm" ng-click="save()" ng-bind-html="::'REGISTRATION_LABEL_SAVE' | translate"></button>
+            <button class="confirm" ng-click="save()" ng-bind-html="getConfirmBtnText()"></button>
         </div>
     </div>
     <div class="submit-btn-container" ng-if="error">

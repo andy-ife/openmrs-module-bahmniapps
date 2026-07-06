@@ -72,6 +72,9 @@ angular.module("bahmni.common.biometrics")
                 if (scope.success || scope.fingerprintCount) {
                     return '../images/biometrics/fp-success.png';
                 }
+                if (scope.lowImage) {
+                    return '../images/biometrics/fp-default-light.png';
+                }
                 return '../images/biometrics/fp-default.png';
             };
 
@@ -86,7 +89,8 @@ angular.module("bahmni.common.biometrics")
                 error: '=',
                 imgSrc: '=',
                 success: '=',
-                fingerprintCount: '='
+                fingerprintCount: '=',
+                lowImage: '=' // use low contrast img
             },
             templateUrl: '../common/biometrics/views/fingerprintBox.html'
         };

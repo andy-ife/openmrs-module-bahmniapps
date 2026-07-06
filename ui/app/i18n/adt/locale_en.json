@@ -93,13 +93,14 @@
     "FP_SCANS_LEFT": "Scans left",
     "FP_SCAN_FINISHED": "All scans complete",
     "FP_SCAN_SCANNING_SUBTITLE": "Place your finger until it is scanned",
-    "FP_SCANS_LEFT_SUBTITLE": "Tap the fingerprint box to scan again",
+    "FP_SCANS_LEFT_SUBTITLE": "Click the fingerprint box to scan again",
     "FP_SCAN_FINISHED_SUBTITLE": "Save or restart scanning",
-    "FP_SCAN_DEFAULT_SUBTITLE": "Tap the fingerprint box to start scanning",
+    "FP_SCAN_DEFAULT_SUBTITLE": "Click the fingerprint box to start scanning",
     "FP_SCAN_SUCCESS": "Scan success",
     "FP_SCAN_FAIL": "Scan fail",
     "FP_NUMBER_ENROLLED": " fingerprints enrolled",
     "FP_SCAN_INSTRUCTIONS": "Place your finger on the scanner as shown.<br/>For maximum accuracy, we will capture your finger 2-3 times",
+    "FP_SCAN_INSTRUCTIONS_SEARCH": "Place any registered finger on the scanner as shown.<br/>For maximum accuracy, we will capture your finger 2-3 times",
     "SCAN_AND_ENROLL_FINGERPRINTS_TITLE": "Scan and enrol fingerprints",
     "REGISTRATION_LABEL_LEFT_HAND": "LEFT HAND",
     "REGISTRATION_LABEL_RIGHT_HAND": "RIGHT HAND",
@@ -109,5 +110,7 @@
     "REGISTRATION_LABEL_SESSION_FOUND": "There are already fingerprints in this session. Do you want to resume or start a new scanning session?",
     "REGISTRATION_LABEL_SEARCH_FINGERPRINT": "Fingerprint Search",
     "REGISTRATION_NO_MATCH_FOUND": "No biometric match found",
-    "REGISTRATION_SCAN_LABEL": "Scan"
+    "REGISTRATION_SCAN_LABEL": "Scan",
+    "REGISTRATION_LABEL_SEARCH": "Search",
+    "REGISTRATION_LABEL_SAVE": "Save"
 }

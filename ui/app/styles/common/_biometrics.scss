@@ -163,10 +163,11 @@
 .fingerprintScannerDialog {
     align-items: center;
     width: 440px;
+    padding: 10px;
 
-    .fp-scan-img {
-        width: 56px;
-        height: 56px;
+    .fp-helper-img {
+        width: 140px;
+        height: 140px;
         margin-bottom: 2rem;
     }
 

@@ -24,19 +24,18 @@ angular.module('bahmni.common.biometrics')
                 });
 
                 scope.getScanHelperImg = function () {
-                    // TODO: Update these images
                     var images = {
-                        1: "fp-label-1.png",
-                        2: "fp-label-2.png",
-                        3: "fp-label-3.png",
-                        4: "fp-label-4.png",
-                        5: "fp-label-5.png",
-                        6: "fp-label-6.png",
-                        7: "fp-label-7.png",
-                        8: "fp-label-8.png",
-                        9: "fp-label-9.png",
-                        10: "fp-label-10.png",
-                        11: "fp-label-10.png",
+                        1: "fp-helper-1.png",
+                        2: "fp-helper-2.png",
+                        3: "fp-helper-3.png",
+                        4: "fp-helper-4.png",
+                        5: "fp-helper-5.png",
+                        6: "fp-helper-6.png",
+                        7: "fp-helper-7.png",
+                        8: "fp-helper-8.png",
+                        9: "fp-helper-9.png",
+                        10: "fp-helper-10.png",
+                        11: "fp-helper-2.png",
                     };
                     return "../images/biometrics/" + images[scope.type] || '';
                 };
@@ -72,6 +71,22 @@ angular.module('bahmni.common.biometrics')
                     if (scope.error) return "";
                     return $translate.instant("FP_SCAN_DEFAULT_SUBTITLE");
                 };
+
+                scope.getScanInstructions = function () {
+                    if (scope.scanType == 'registration') {
+                        return $translate.instant("FP_SCAN_INSTRUCTIONS");
+                    } else {
+                        return $translate.instant("FP_SCAN_INSTRUCTIONS_SEARCH");
+                    }
+                }
+
+                scope.getConfirmBtnText = function () {
+                    if (scope.scanType == 'registration') {
+                        return $translate.instant("REGISTRATION_LABEL_SAVE");
+                    } else {
+                        return $translate.instant("REGISTRATION_LABEL_SEARCH");
+                    }
+                }
 
                 scope.scan = function () {
                     var fingerprints = scope.scanSession.fingerprints || [];
