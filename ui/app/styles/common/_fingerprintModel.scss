@@ -1,6 +1,8 @@
 /*** figerprint box ***/
 .fp-box-container {
     display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
     justify-content: center;
     align-items: center;
     width: 106px;
@@ -8,25 +10,32 @@
     border: 7px solid $lightestGray;
     justify-content: center;
     text-align: center;
+    position: relative;
 }
 
 .fp-overlay {
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
 }
 
 .fp-img {
     width: 56px;
     height: auto;
+    position: absolute;
+    z-index: 1;
 }
 
 .fp-error-text {
-    color: red;
+    color: $error;
+    text-overflow: ellipsis;
 }
 
 .fp-success-text {
-    color: red;
+    color: $success;
+    text-overflow: ellipsis;
 }
 
 /*** fingerprint button ***/
@@ -48,6 +57,10 @@
 /*** fingerprint dialogs ***/
 .fingerprintListDialog,
 .fingerprintScannerDialog {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 3rem;
+
     .row-clear {
         @include clearfix();
     }
@@ -59,9 +72,14 @@
 
         @media screen and (max-width: 540px) {
             display: grid;
+            grid-template-columns: 2;
             flex-direction: column;
             align-items: center;
         }
+    }
+
+    .fp-box-container:hover {
+        cursor: pointer;
     }
 }
 
@@ -93,7 +111,37 @@
     }
 }
 
+.fingerprintScannerDialog {
+    align-items: center;
+    width: 440px;
 
+    .fp-scan-img {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 2rem;
+    }
+
+    .fp-instruction-text,
+    .fp-status-subtext {
+        color: $mediumGray;
+        size: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .fp-box-container {
+        border: 7px solid $lighterGray;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .fp-status-text {
+        color: $darkGray;
+        size: 1.4rem;
+        text-align: center;
+        margin-bottom: 0.7rem;
+    }
+}
 
 
 /*** overriding jquery styling start****/

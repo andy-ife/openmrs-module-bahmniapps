@@ -1,1 +1,54 @@
-<svg fill="none" height="100%" width="100%" viewBox="0 0 328 208" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="i0" gradientUnits="userSpaceOnUse" spreadMethod="pad" x2="0" y2="30" x1="0" y1="-65"><stop offset="0%" stop-color="#23e5db" /><stop stop-opacity="0.5" offset="50%" stop-color="#23e5db" /><stop stop-opacity="0.496" offset="50.4%" stop-color="#23e5db" /><stop stop-opacity="0" offset="100%" stop-color="#23e5db" /></linearGradient></defs><g id="i1"><g transform="translate(164,0)"><animateTransform repeatCount="indefinite" type="translate" attributeName="transform" dur="2.002s" begin="0s" calcMode="spline" values="164 0; 164 208; 164 0; 164 0" keyTimes="0; 0.5; 1; 1" keySplines="0.333 0 0.333 1; 0.333 0 0.333 1; 0 0 1 1" fill="freeze" /><g transform="scale(1,1) translate(0.059,10.747)"><g id="i2"><g transform="translate(-0.059,-10.747)"><g transform="scale(-1,0)"><animateTransform repeatCount="indefinite" type="scale" attributeName="transform" dur="2.002s" begin="0s" calcMode="spline" values="-1 0; -1 -1.5; -1 0; -1 1.5; -1 0; -1 0" keyTimes="0; 0.166667; 0.5; 0.666667; 1; 1" keySplines="0.333 0 0.667 1; 0.333 0.123 0.667 1; 0.333 0 0.667 0.938; 0.333 0 0.667 1; 0 0 1 1" fill="freeze" /><g transform="translate(0,43.747)"><g id="i3" transform="matrix(1,0,0,1.113,-0.059,-10.747)"><rect height="60" width="328" y="-30" x="-164" stroke-width="2" stroke="#ffffff" fill="url(#i0)" /></g></g></g></g></g></g></g></g><g id="i1"><g transform="translate(164,0)"><animateTransform repeatCount="indefinite" type="translate" attributeName="transform" dur="2.002s" begin="0s" calcMode="spline" values="164 0; 164 208; 164 0; 164 0" keyTimes="0; 0.5; 1; 1" keySplines="0.333 0 0.333 1; 0.333 0 0.333 1; 0 0 1 1" fill="freeze" /><g transform="scale(1,1) translate(0.059,10.747)"><g id="i3" transform="matrix(1,0,0,1.113,-0.059,-10.747)"><rect height="2" width="328" y="-1" x="-164" stroke-width="2" stroke="#ffffff" fill="#23e5db" /></g></g></g></g></svg>
+<svg fill="none" height="100%" width="100%" viewBox="0 0 328 208"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="i0" gradientUnits="userSpaceOnUse" spreadMethod="pad" x2="0" y2="30"
+            x1="0" y1="-65">
+            <stop offset="0%" stop-color="#23e5db" />
+            <stop stop-opacity="0.5" offset="50%" stop-color="#23e5db" />
+            <stop stop-opacity="0.496" offset="50.4%" stop-color="#23e5db" />
+            <stop stop-opacity="0" offset="100%" stop-color="#23e5db" />
+        </linearGradient>
+    </defs>
+    <g id="i1">
+        <g transform="translate(164,0)">
+            <animateTransform repeatCount="indefinite" type="translate" attributeName="transform"
+                dur="2.002s" begin="0s" calcMode="spline" values="164 0; 164 208; 164 0; 164 0"
+                keyTimes="0; 0.5; 1; 1" keySplines="0.333 0 0.333 1; 0.333 0 0.333 1; 0 0 1 1"
+                fill="freeze" />
+            <g transform="scale(1,1) translate(0.059,10.747)">
+                <g id="i2">
+                    <g transform="translate(-0.059,-10.747)">
+                        <g transform="scale(-1,0)">
+                            <animateTransform repeatCount="indefinite" type="scale"
+                                attributeName="transform" dur="2.002s" begin="0s" calcMode="spline"
+                                values="-1 0; -1 -1.5; -1 0; -1 1.5; -1 0; -1 0"
+                                keyTimes="0; 0.166667; 0.5; 0.666667; 1; 1"
+                                keySplines="0.333 0 0.667 1; 0.333 0.123 0.667 1; 0.333 0 0.667 0.938; 0.333 0 0.667 1; 0 0 1 1"
+                                fill="freeze" />
+                            <g transform="translate(0,43.747)">
+                                <g id="i3" transform="matrix(1,0,0,1.113,-0.059,-10.747)">
+                                    <rect height="60" width="328" y="-30" x="-164" stroke-width="2"
+                                        stroke="#eeeeee" fill="url(#i0)" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g id="i1">
+        <g transform="translate(164,0)">
+            <animateTransform repeatCount="indefinite" type="translate" attributeName="transform"
+                dur="2.002s" begin="0s" calcMode="spline" values="164 0; 164 208; 164 0; 164 0"
+                keyTimes="0; 0.5; 1; 1" keySplines="0.333 0 0.333 1; 0.333 0 0.333 1; 0 0 1 1"
+                fill="freeze" />
+            <g transform="scale(1,1) translate(0.059,10.747)">
+                <g id="i3" transform="matrix(1,0,0,1.113,-0.059,-10.747)">
+                    <rect height="2" width="328" y="-1" x="-164" stroke-width="2" stroke="#457FAC"
+                        fill="#23e5db" />
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
