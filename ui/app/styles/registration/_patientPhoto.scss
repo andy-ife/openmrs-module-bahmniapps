@@ -7,16 +7,27 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
+.fp-and-photo-container {
+    display: flex;
+    gap: 2rem;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+
+    @media (max-width : 1248px) {
+        justify-content: center;
+        position: static;
+        margin-bottom: 1rem;
+    }
+}
+
+.fp-container {
+    display: flex;
+    justify-content: center;
+}
+
 .photocontainer-spacing {
     margin-bottom: 57px;
-}
-.photo-container-wrapper {
-    position:absolute;
-    top:50px;
-    right:10px;
-    @media (max-width : 768px){
-        position: static;
-    }
 }
 
 .photo-container {
@@ -34,9 +45,11 @@
         background-position: 2px 3px;
         background-repeat: no-repeat;
     }
+
     .camera-btn.btn {
         background-image: image-url("photo.png");
     }
+
     .upload-btn.btn {
         text-align: center;
         padding: 0;
@@ -51,7 +64,7 @@
 }
 
 .patient-image {
-    border:7px solid $lightestGray;
+    border: 7px solid $lightestGray;
     margin-left: 6px;
     padding-bottom: 3px;
 }
@@ -63,11 +76,13 @@
 #patient-image {
     height: 125px;
     width: 125px;
+
     @media (max-width: 768px) {
         height: 75px;
         width: 75px;
     }
 }
+
 /***** photo dialog css start *****/
 video {
     display: block;
@@ -83,6 +98,7 @@ video {
             background: $lightestGray;
         }
     }
+
     .row-clear {
         @include clearfix();
     }
@@ -101,6 +117,7 @@ video {
     .photo-video-container {
         position: relative;
         width: 229px;
+
         .photoCapture-left-overlay {
             position: absolute;
             height: 169px;
@@ -109,6 +126,7 @@ video {
             top: 6px;
             background: $lightestGray;
         }
+
         .photoCapture-right-overlay {
             position: absolute;
             height: 169px;
@@ -118,6 +136,7 @@ video {
             background: $lightestGray;
         }
     }
+
     .photo-canvas-container {
         width: 180px;
         margin-top: 6px;
@@ -128,9 +147,11 @@ video {
             width: 188px;
         }
     }
+
     .take-photo-btn {
         margin: 10px 54px 5px 54px;
     }
+
     .confirmImage {
         margin: 10px 5px 5px 25px;
 
@@ -142,6 +163,7 @@ video {
 
 .photoUploadDialog {
     text-align: center;
+
     .fileUpload,
     .photo-canvas-container,
     .confirmImage {
@@ -195,4 +217,5 @@ video {
     background: #fff9d8;
     color: #1eb642;
 }
+
 /**** overriding jquery styling end *****/

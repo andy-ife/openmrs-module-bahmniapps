@@ -1,9 +1,9 @@
-<button type="button" class="fp-btn btn" ng-click="launchFingerprintListPopup()">Scan</button>
+<button type="button" class="fp-btn btn" ng-click="launchFingerprintListPopup()"></button>
 <div class="fingerprintListDialog">
     <legend class="registraion_legend first-registraion_legend">
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_LEFT_HAND' | translate}}</strong></span>
     </legend>
-    <ul>
+    <ul class="row-clear flex">
         <li ng-repeat="fingerprint in leftFingerprints">
             <div class="fp-list-item-container">
                 <span class="fp-list-item-label-container">
@@ -18,7 +18,7 @@
     <legend class="registraion_legend first-registraion_legend">
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_RIGHT_HAND' | translate}}</strong></span>
     </legend>
-    <ul>
+    <ul class="row-clear flex">
         <li ng-repeat="fingerprint in rightFingerprints">
             <div class="fp-list-item-container">
                 <span class="fp-list-item-label-container">
@@ -31,6 +31,7 @@
     </ul>
 </div>
 <fingerprint-scanner-dialog
+    class="fingerprintScannerDialog"
     scan-session="currentScanSession"
     type="currentType"
     scan-type="currentScanType"

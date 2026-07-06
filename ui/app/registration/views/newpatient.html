@@ -8,17 +8,13 @@
                 
                 <section class="clearfix">
                     <div class = "fp-and-photo-container">
-                        <div class="fp-container-wrapper">
-                            <div class = "fp-container">
-                                <div fingerprint-btn="" scan-type="'registration'" patient-id="patientId" on-save="handleSaveFingerprints(fingerprints)" class="fp-btn"></div>
-                                <fingerprint-box></fingerprint-box>
-                            </div>
+                        <div class = "fp-container">
+                            <div fingerprint-btn="" scan-type="'registration'" patient-id="patientId" on-save="handleSaveFingerprints(fingerprints)" class="fp-btn"></div>
+                            <fingerprint-box></fingerprint-box>
                         </div>
-                        <div class="photo-container-wrapper" ng-if="!disablePhotoCapture">
-                            <div class="photo-container">
-                                <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
-                                <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
-                            </div>
+                        <div class="photo-container" ng-if="!disablePhotoCapture">
+                            <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
+                            <img class="patient-image" ng-src="{{patient.image}}" fallback-src="../images/blank-user.gif">
                         </div>
                     </div>
                 </section>
