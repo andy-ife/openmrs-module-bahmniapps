@@ -41,11 +41,11 @@ angular.module('bahmni.common.biometrics')
                     });
             };
 
-            var getScanSession = function (uuid) {
+            var getScanSession = function (uuid, scanType) {
                 var config = getConfig();
                 if (!config.enabled) return $q.when(null);
 
-                return $http.get(config.serverUrl + '/fingerprint/session', { params: { uuid: uuid } })
+                return $http.get(config.serverUrl + '/fingerprint/session', { params: { uuid: uuid, scanType: scanType } })
                     .then(function (response) {
                         return biometricScanSession.fromJSON(response.data);
                     });

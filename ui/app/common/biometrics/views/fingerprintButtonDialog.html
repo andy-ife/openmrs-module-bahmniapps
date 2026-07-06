@@ -1,4 +1,4 @@
-<button type="button" class="fp-btn btn" ng-click="launchFingerprintListPopup()"></button>
+<button type="button" class="fp-btn btn" ng-click="launchPopup()"></button>
 <div class="fingerprintListDialog container-fluid">
     <legend class="registraion_legend first-registraion_legend">
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_LEFT_HAND' | translate}}</strong></span>
@@ -30,10 +30,12 @@
         </li>
     </ul>
 </div>
-<fingerprint-scanner-dialog
-    scan-session="currentScanSession"
-    type="currentType"
-    scan-type="currentScanType"
-    on-save="handleSaveFromScanner(scannedFingerprints)"
-    on-cancel="handleCancelFromScanner()">
-</fingerprint-scanner-dialog>
+<div class="fp-scanner-dialog-container">
+    <fingerprint-scanner-dialog
+        scan-session="currentScanSession"
+        type="currentType"
+        scan-type="currentScanType"
+        on-save="handleSaveFromScanner(scannedFingerprints)"
+        on-cancel="handleCancelFromScanner()">
+    </fingerprint-scanner-dialog>
+</div>

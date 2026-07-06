@@ -11,8 +11,8 @@
 
 angular.module('bahmni.registration')
     .controller('SearchPatientController', ['$rootScope', '$scope', '$location', '$window', 'spinner', 'patientService', 'appService',
-        'messagingService', '$translate', '$filter',
-        function ($rootScope, $scope, $location, $window, spinner, patientService, appService, messagingService, $translate, $filter) {
+        'messagingService', 'biometricService', '$translate', '$filter',
+        function ($rootScope, $scope, $location, $window, spinner, patientService, appService, messagingService, biometricService, $translate, $filter) {
             $scope.results = [];
             var searching = false;
             var maxAttributesFromConfig = 5;
@@ -196,13 +196,30 @@ angular.module('bahmni.registration')
                 });
             };
 
+            $scope.handleSearchFingerprints = function (fingerprint) {
+                if (!fingerprint) return;
+                biometricService.match({ fingerprints: [fingerprint] }).then(function (result) {
+                    if (result && result.length > 0) {
+                        result.sort(function (a, b) {
+                            return b.matchScore - a.matchScore;
+                        })
+                        var bestMatch = result[0];
+                        $scope.searchParameters.registrationNumber = bestMatch.subjectId;
+                        $scope.searchById();
+                    }
+                }).catch(function (e) {
+                    console.log(e);
+                    messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND")
+                })
+            };
+
             var setSearchResultsConfig = function () {
                 var resultsConfigNotFound = false;
                 if (_.isEmpty(patientSearchResultConfigs)) {
                     resultsConfigNotFound = true;
-                    patientSearchResultConfigs.address = {"fields": allSearchConfigs.address ? [allSearchConfigs.address.field] : []};
+                    patientSearchResultConfigs.address = { "fields": allSearchConfigs.address ? [allSearchConfigs.address.field] : [] };
                     patientSearchResultConfigs.personAttributes
-                        = {fields: allSearchConfigs.customAttributes ? allSearchConfigs.customAttributes.fields : {}};
+                        = { fields: allSearchConfigs.customAttributes ? allSearchConfigs.customAttributes.fields : {} };
                 } else {
                     if (!patientSearchResultConfigs.address) patientSearchResultConfigs.address = {};
                     if (!patientSearchResultConfigs.personAttributes) patientSearchResultConfigs.personAttributes = {};
@@ -285,12 +302,12 @@ angular.module('bahmni.registration')
                         if (data.pageOfResults.length === 1) {
                             var patient = data.pageOfResults[0];
                             var forwardUrl = appService.getAppDescriptor().getConfigValue("searchByIdForwardUrl") || "/patient/{{patientUuid}}";
-                            $location.url(appService.getAppDescriptor().formatUrl(forwardUrl, {'patientUuid': patient.uuid}));
+                            $location.url(appService.getAppDescriptor().formatUrl(forwardUrl, { 'patientUuid': patient.uuid }));
                         } else if (data.pageOfResults.length > 1) {
                             $scope.results = data.pageOfResults;
                             $scope.noResultsMessage = null;
                         } else {
-                            $scope.patientIdentifier = {'patientIdentifier': patientIdentifier};
+                            $scope.patientIdentifier = { 'patientIdentifier': patientIdentifier };
                             $scope.noResultsMessage = 'REGISTRATION_LABEL_COULD_NOT_FIND_PATIENT';
                         }
                     });
@@ -298,7 +315,7 @@ angular.module('bahmni.registration')
             };
             var isUserPrivilegedForSearch = function () {
                 var applicablePrivs = [Bahmni.Common.Constants.viewPatientsPrivilege, Bahmni.Common.Constants.editPatientsPrivilege,
-                    Bahmni.Common.Constants.addVisitsPrivilege, Bahmni.Common.Constants.deleteVisitsPrivilege];
+                Bahmni.Common.Constants.addVisitsPrivilege, Bahmni.Common.Constants.deleteVisitsPrivilege];
                 var userPrivs = _.map($rootScope.currentUser.privileges, function (privilege) {
                     return privilege.name;
                 });

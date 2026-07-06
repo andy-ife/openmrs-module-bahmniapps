@@ -35,7 +35,8 @@ angular.module('bahmni.common.biometrics')
                         7: "fp-label-7.png",
                         8: "fp-label-8.png",
                         9: "fp-label-9.png",
-                        10: "fp-label-10.png"
+                        10: "fp-label-10.png",
+                        11: "fp-label-10.png",
                     };
                     return "../images/biometrics/" + images[scope.type] || '';
                 };
@@ -145,7 +146,7 @@ angular.module('bahmni.common.biometrics')
                             scope.scanSession.fingerprints.length = 0;
                         }
                         // get a new session
-                        biometricService.getScanSession().then(function (newSession) {
+                        biometricService.getScanSession(null, scope.scanType).then(function (newSession) {
                             scope.scanSession.uuid = newSession.uuid;
                         });
                     });

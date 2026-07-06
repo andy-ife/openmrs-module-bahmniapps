@@ -160,5 +160,7 @@
     "REGISTRATION_LABEL_CANCEL": "Cancel",
     "REGISTRATION_LABEL_RETRY": "Retry",
     "REGISTRATION_LABEL_RESTART": "Restart",
-    "REGISTRATION_LABEL_SESSION_FOUND": "There are already fingerprints in this session. Do you want to resume or start a new scanning session?"
+    "REGISTRATION_LABEL_SESSION_FOUND": "There are already fingerprints in this session. Do you want to resume or start a new scanning session?",
+    "REGISTRATION_LABEL_SEARCH_FINGERPRINT": "Fingerprint Search",
+    "REGISTRATION_NO_MATCH_FOUND": "No biometric match found"
 }
