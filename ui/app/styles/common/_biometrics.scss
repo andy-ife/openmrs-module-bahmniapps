@@ -62,7 +62,8 @@
     background-image: image-url("biometrics/fp-btn.png");
 }
 
-.fp-reg-btn:hover {
+.fp-reg-btn:hover,
+.fp-reg-btn:disabled {
     background-position: 5px 5px;
     background-repeat: no-repeat;
     background-size: 30px;

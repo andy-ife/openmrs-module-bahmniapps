@@ -36,35 +36,42 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.$watch('patientId', function (newVal, oldVal) {
-                    getPatientFingerprints().then(function (response) {
-                        var fetchedFingerprints = (response && response.fingerprints) ? response.fingerprints : [];
+                    biometricService.getStatus().then(function () {
+                        scope.biometricsEnabled = true;
+                        getPatientFingerprints().then(function (response) {
+                            var fetchedFingerprints = (response && response.fingerprints) ? response.fingerprints : [];
 
-                        var allFingerprints = [
-                            { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
-                            { type: 5 }, { type: 6 }, { type: 7 }, { type: 8 },
-                            { type: 9 }, { type: 10 }].map(function (e) {
-                                if (fetchedFingerprints.length == 0) {
-                                    return e;
-                                }
-                                for (var i = 0; i < fetchedFingerprints.length; i++) {
-                                    if (e.type === fetchedFingerprints[i].type) {
-                                        return {
-                                            type: e.type,
-                                            image: fetchedFingerprints[i].image,
-                                            template: fetchedFingerprints[i].template,
-                                            format: fetchedFingerprints[i].format
-                                        };
+                            var allFingerprints = [
+                                { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
+                                { type: 5 }, { type: 6 }, { type: 7 }, { type: 8 },
+                                { type: 9 }, { type: 10 }].map(function (e) {
+                                    if (fetchedFingerprints.length == 0) {
+                                        return e;
                                     }
-                                }
-                                return e;
-                            });
+                                    for (var i = 0; i < fetchedFingerprints.length; i++) {
+                                        if (e.type === fetchedFingerprints[i].type) {
+                                            return {
+                                                type: e.type,
+                                                image: fetchedFingerprints[i].image,
+                                                template: fetchedFingerprints[i].template,
+                                                format: fetchedFingerprints[i].format
+                                            };
+                                        }
+                                    }
+                                    return e;
+                                });
 
-                        scope.$evalAsync(function () {
-                            scope.rightFingerprints = allFingerprints.splice(0, 5);
-                            scope.leftFingerprints = allFingerprints;
+                            scope.$evalAsync(function () {
+                                scope.rightFingerprints = allFingerprints.splice(0, 5);
+                                scope.leftFingerprints = allFingerprints;
+                            });
+                        }).catch(function (e) {
+                            // do nothing
                         });
                     }).catch(function (e) {
-                        // do nothing
+                        console.log(e);
+                        // disable biometrics
+                        scope.biometricsEnabled = false;
                     });
                 });
 
@@ -256,7 +263,7 @@ angular.module('bahmni.common.biometrics')
                 scope: {
                     patientId: "=",
                     scanType: "=",
-                    onSave: "&"
+                    onSave: "&",
                 },
                 link: link
             };

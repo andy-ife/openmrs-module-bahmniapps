@@ -1,4 +1,4 @@
-<button type="button" ng-class="{'fp-reg-btn': scanType == 'registration', 'fp-search-btn': scanType == 'search'}" ng-click="launchPopup()">
+<button type="button" ng-class="{'fp-reg-btn': scanType == 'registration', 'fp-search-btn': scanType == 'search'}" ng-click="launchPopup()" ng-disabled="!biometricsEnabled">
     <span class="span" ng-if="scanType == 'search'">
         <img class="img" src="../images/biometrics/fp-btn.png"/>
         {{:: 'REGISTRATION_SCAN_LABEL' | translate}}
