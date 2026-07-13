@@ -126,7 +126,7 @@ angular.module('bahmni.common.biometrics')
                     if (scope.onSave) {
                         biometricService.destroyScanSession(scope.scanSession.uuid).then(function (_) {
                             var fingerprints = scope.scanSession.fingerprints || [];
-                            scope.onSave({ scannedFingerprints: fingerprints });
+                            scope.onSave({ scannedFingerprints: fingerprints.splice(0, 1) });
                         });
                     }
                 };

@@ -131,6 +131,7 @@ angular.module('bahmni.registration')
             // i.e storing fingerprints in openmrs
             $scope.handleSaveFingerprints = function (fingerprints) {
                 $scope.patient.fingerprints = fingerprints;
+                $scope.fingerprintCount = fingerprints.length;
             };
 
             var addNewRelationships = function () {

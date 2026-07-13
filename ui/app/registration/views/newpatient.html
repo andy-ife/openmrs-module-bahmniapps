@@ -10,7 +10,7 @@
                     <div class = "fp-and-photo-container">
                         <div class = "fp-container">
                             <div fingerprint-btn="" scan-type="'registration'" patient-id="patientId" on-save="handleSaveFingerprints(fingerprints)" class="fp-btn"></div>
-                            <fingerprint-box></fingerprint-box>
+                            <fingerprint-box success="patient.fingerprints.length > 0"></fingerprint-box>
                         </div>
                         <div class="photo-container" ng-if="!disablePhotoCapture">
                             <div ng-model="patient.image" capture-photo="" class="capture-photo-btn"></div>
