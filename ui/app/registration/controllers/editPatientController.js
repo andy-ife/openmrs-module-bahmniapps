@@ -104,17 +104,20 @@ angular.module('bahmni.registration')
                 }
 
                 return spinner.forPromise(patientService.update($scope.patient, $scope.openMRSPatient).then(function (result) {
-                    var patientProfileData = result.data;
-                    if (!patientProfileData.error) {
-                        successCallBack(patientProfileData);
-                        $scope.actions.followUpAction(patientProfileData);
-                    }
+                    enrolFingerprints(result).then(function () {
+                        var patientProfileData = result.data;
+                        if (!patientProfileData.error) {
+                            successCallBack(patientProfileData);
+                            $scope.actions.followUpAction(patientProfileData);
+                        }
+                    });
                 }));
             };
 
             // this may change if we update the openmrs data model to support storing fingerprints
             // i.e storing fingerprints in openmrs
             var enrolFingerprints = function (response) {
+                if (!$scope.patient.fingerprints || $scope.patient.fingerprints.length === 0) { return $q.when({}); }
                 var patientProfileData = response.data;
                 var subjectId = patientProfileData.patient.identifiers[0].identifier;
 

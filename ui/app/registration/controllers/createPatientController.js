@@ -208,6 +208,7 @@ angular.module('bahmni.registration')
             // this may change if we update the openmrs data model to support storing fingerprints
             // i.e storing fingerprints in openmrs
             var enrolFingerprints = function (response) {
+                if (!$scope.patient.fingerprints || $scope.patient.fingerprints.length === 0) { return $q.when({}); }
                 var patientProfileData = response.data;
                 var subjectId = patientProfileData.patient.identifiers[0].identifier;
 
