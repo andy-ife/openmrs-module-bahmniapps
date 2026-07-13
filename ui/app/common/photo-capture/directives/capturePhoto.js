@@ -10,7 +10,7 @@
 'use strict';
 
 angular.module('bahmni.common.photoCapture')
-    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory(appService, $parse, $window, $translate) {
+    .directive('capturePhoto', ['appService', '$parse', '$window', '$translate', function factory (appService, $parse, $window, $translate) {
         /**
          * @param {angular.IAugmentedJQuery} iElement
          * @param {angular.IAttributes} iAttrs

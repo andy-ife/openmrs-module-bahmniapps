@@ -73,15 +73,15 @@ angular.module('bahmni.common.patientSearch')
                     if (result && result.length > 0) {
                         result.sort(function (a, b) {
                             return b.matchScore - a.matchScore;
-                        })
+                        });
                         var bestMatch = result[0];
                         $scope.search.searchParameter = bestMatch.subjectId;
                         $scope.searchPatients();
                     }
                 }).catch(function (e) {
                     console.log(e);
-                    messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND")
-                })
+                    messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND");
+                });
             };
 
             $scope.filterPatientsAndSubmit = function () {

@@ -35,7 +35,7 @@ angular.module('bahmni.common.biometrics')
                         8: "fp-helper-8.png",
                         9: "fp-helper-9.png",
                         10: "fp-helper-10.png",
-                        11: "fp-helper-2.png",
+                        11: "fp-helper-2.png"
                     };
                     return "../images/biometrics/" + images[scope.type] || '';
                 };
@@ -78,7 +78,7 @@ angular.module('bahmni.common.biometrics')
                     } else {
                         return $translate.instant("FP_SCAN_INSTRUCTIONS_SEARCH");
                     }
-                }
+                };
 
                 scope.getConfirmBtnText = function () {
                     if (scope.scanType == 'registration') {
@@ -86,7 +86,7 @@ angular.module('bahmni.common.biometrics')
                     } else {
                         return $translate.instant("REGISTRATION_LABEL_SEARCH");
                     }
-                }
+                };
 
                 scope.scan = function () {
                     var fingerprints = scope.scanSession.fingerprints || [];

@@ -202,15 +202,15 @@ angular.module('bahmni.registration')
                     if (result && result.length > 0) {
                         result.sort(function (a, b) {
                             return b.matchScore - a.matchScore;
-                        })
+                        });
                         var bestMatch = result[0];
                         $scope.searchParameters.registrationNumber = bestMatch.subjectId;
                         $scope.searchById();
                     }
                 }).catch(function (e) {
                     console.log(e);
-                    messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND")
-                })
+                    messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND");
+                });
             };
 
             var setSearchResultsConfig = function () {
@@ -314,8 +314,9 @@ angular.module('bahmni.registration')
                 spinner.forPromise(searchPromise);
             };
             var isUserPrivilegedForSearch = function () {
-                var applicablePrivs = [Bahmni.Common.Constants.viewPatientsPrivilege, Bahmni.Common.Constants.editPatientsPrivilege,
-                Bahmni.Common.Constants.addVisitsPrivilege, Bahmni.Common.Constants.deleteVisitsPrivilege];
+                var applicablePrivs = [
+                    Bahmni.Common.Constants.viewPatientsPrivilege, Bahmni.Common.Constants.editPatientsPrivilege,
+                    Bahmni.Common.Constants.addVisitsPrivilege, Bahmni.Common.Constants.deleteVisitsPrivilege];
                 var userPrivs = _.map($rootScope.currentUser.privileges, function (privilege) {
                     return privilege.name;
                 });

@@ -62,8 +62,7 @@ angular.module('bahmni.common.biometrics')
                         scope.$evalAsync(function () {
                             scope.rightFingerprints = allFingerprints.splice(0, 5);
                             scope.leftFingerprints = allFingerprints;
-                        })
-
+                        });
                     }).catch(function (e) {
                         // do nothing
                     });
@@ -120,7 +119,7 @@ angular.module('bahmni.common.biometrics')
                     } else {
                         scope.launchFingerprintScannerPopup({ type: 11 });
                     }
-                }
+                };
 
                 scope.launchFingerprintListPopup = function () {
                     if (fpListDialogOpen) {
@@ -163,8 +162,7 @@ angular.module('bahmni.common.biometrics')
                                 8: 'FP_LABEL_LEFT_MIDDLE',
                                 9: 'FP_LABEL_LEFT_RING',
                                 10: 'FP_LABEL_LEFT_LITTLE',
-                                11: 'REGISTRATION_LABEL_SEARCH_FINGERPRINT',
-
+                                11: 'REGISTRATION_LABEL_SEARCH_FINGERPRINT'
                             };
                             var scanTitle = titles[fingerprint.type] || 'FP_LABEL_UNKNOWN';
                             fingerprintScannerDialogElement.dialog('option', 'title', $translate.instant(scanTitle));
@@ -182,7 +180,7 @@ angular.module('bahmni.common.biometrics')
                                     // get a new session
                                     biometricService.getScanSession(null, scope.scanType).then(function (result) {
                                         openDialogWithSession(result.data || result);
-                                    })
+                                    });
                                 });
                             };
                             dialogScope.resume = function (closeConfirmBox) {
