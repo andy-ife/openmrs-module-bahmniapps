@@ -121,7 +121,7 @@ angular.module('bahmni.registration')
                 var patientProfileData = response.data;
                 var subjectId = patientProfileData.patient.identifiers[0].identifier;
 
-                biometricService.enrol({
+                return biometricService.enrol({
                     subjectId: subjectId,
                     fingerprints: $scope.patient.fingerprints
                 });
