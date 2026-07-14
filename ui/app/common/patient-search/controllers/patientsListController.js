@@ -67,9 +67,9 @@ angular.module('bahmni.common.patientSearch')
                 });
             };
 
-            $scope.handleSearchByFingerprints = function (fingerprint) {
-                if (!fingerprint) return;
-                biometricService.match({ fingerprints: [fingerprint] }).then(function (result) {
+            $scope.handleSearchByFingerprints = function (fingerprints) {
+                if (!fingerprints || fingerprints.length === 0) return;
+                biometricService.match({ fingerprints: fingerprints }).then(function (result) {
                     if (result && result.length > 0) {
                         result.sort(function (a, b) {
                             return b.matchScore - a.matchScore;
@@ -77,6 +77,8 @@ angular.module('bahmni.common.patientSearch')
                         var bestMatch = result[0];
                         $scope.search.searchParameter = bestMatch.subjectId;
                         $scope.searchPatients();
+                    } else {
+                        messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND");
                     }
                 }).catch(function (e) {
                     console.log(e);

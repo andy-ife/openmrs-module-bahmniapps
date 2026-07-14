@@ -196,9 +196,9 @@ angular.module('bahmni.registration')
                 });
             };
 
-            $scope.handleSearchFingerprints = function (fingerprint) {
-                if (!fingerprint) return;
-                biometricService.match({ fingerprints: [fingerprint] }).then(function (result) {
+            $scope.handleSearchFingerprints = function (fingerprints) {
+                if(!fingerprints || fingerprints.length === 0){ return;}
+                biometricService.match({ fingerprints: fingerprints}).then(function (result) {
                     if (result && result.length > 0) {
                         result.sort(function (a, b) {
                             return b.matchScore - a.matchScore;
@@ -206,6 +206,8 @@ angular.module('bahmni.registration')
                         var bestMatch = result[0];
                         $scope.searchParameters.registrationNumber = bestMatch.subjectId;
                         $scope.searchById();
+                    } else {
+                        messagingService.showMessage("error", "REGISTRATION_NO_MATCH_FOUND");
                     }
                 }).catch(function (e) {
                     console.log(e);

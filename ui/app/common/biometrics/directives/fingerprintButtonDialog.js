@@ -219,6 +219,20 @@ angular.module('bahmni.common.biometrics')
                     if (scope.onSave) {
                         scope.onSave({ fingerprints: scannedFingerprints });
                     }
+                    // update the fingerprint list with the newly scanned fingerprints
+                    var scannedFinger = scannedFingerprints[0];
+                    scope.leftFingerprints = scope.leftFingerprints.map(function(fp){
+                        if(fp.type === scannedFinger.type) {
+                            return scannedFinger;
+                        }
+                        return fp;
+                    });
+                    scope.rightFingerprints = scope.rightFingerprints.map(function(fp){
+                        if(fp.type === scannedFinger.type) {
+                            return scannedFinger;
+                        }
+                        return fp;
+                    });
                     fingerprintScannerDialogElement.dialog('close');
                     fingerprintListDialogElement.dialog('close');
                 };
