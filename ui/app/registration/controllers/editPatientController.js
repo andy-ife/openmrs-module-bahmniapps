@@ -53,8 +53,8 @@ angular.module('bahmni.registration')
                 // biometrics
                 biometricService.getStatus().then(function () {
                     biometricService.getSubject($scope.patient.primaryIdentifier.identifier).then(function (response) {
-                        $scope.fingerprintCount = response.fingerprints.length || 0;
-                        $scope.patientId = response.subjectId || "";
+                        $scope.fingerprintCount = response && response.fingerprints ? response.fingerprints.length :0;
+                        $scope.patientId = $scope.patient.primaryIdentifier.identifier;
                     }).catch(function (e) {
                         // do nothing
                     });
@@ -104,7 +104,7 @@ angular.module('bahmni.registration')
                 }
 
                 return spinner.forPromise(patientService.update($scope.patient, $scope.openMRSPatient).then(function (result) {
-                    enrolFingerprints(result).then(function () {
+                    updateFingerprints(result).then(function () {
                         var patientProfileData = result.data;
                         if (!patientProfileData.error) {
                             successCallBack(patientProfileData);
@@ -116,12 +116,12 @@ angular.module('bahmni.registration')
 
             // this may change if we update the openmrs data model to support storing fingerprints
             // i.e storing fingerprints in openmrs
-            var enrolFingerprints = function (response) {
+            var updateFingerprints = function (response) {
                 if (!$scope.patient.fingerprints || $scope.patient.fingerprints.length === 0) { return $q.when({}); }
                 var patientProfileData = response.data;
                 var subjectId = patientProfileData.patient.identifiers[0].identifier;
 
-                return biometricService.enrol({
+                return biometricService.update({
                     subjectId: subjectId,
                     fingerprints: $scope.patient.fingerprints
                 });

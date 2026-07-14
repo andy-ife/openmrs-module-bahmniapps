@@ -73,7 +73,7 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.getScanInstructions = function () {
-                    if (scope.scanType == 'registration') {
+                    if (scope.scanType === 'registration' || scope.scanType === 'edit') {
                         return $translate.instant("FP_SCAN_INSTRUCTIONS");
                     } else {
                         return $translate.instant("FP_SCAN_INSTRUCTIONS_SEARCH");
@@ -81,7 +81,7 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.getConfirmBtnText = function () {
-                    if (scope.scanType == 'registration') {
+                    if (scope.scanType == 'registration' || scope.scanType == 'edit') {
                         return $translate.instant("REGISTRATION_LABEL_SAVE");
                     } else {
                         return $translate.instant("REGISTRATION_LABEL_SEARCH");
@@ -126,6 +126,7 @@ angular.module('bahmni.common.biometrics')
                     if (scope.onSave) {
                         biometricService.destroyScanSession(scope.scanSession.uuid).then(function (_) {
                             var fingerprints = scope.scanSession.fingerprints || [];
+                            // return only 1 fp for the session
                             scope.onSave({ scannedFingerprints: fingerprints.splice(0, 1) });
                         });
                     }

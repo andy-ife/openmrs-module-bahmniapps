@@ -121,7 +121,7 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.launchPopup = function () {
-                    if (scope.scanType === 'registration') {
+                    if (scope.scanType === 'registration' || scope.scanType === 'edit') {
                         scope.launchFingerprintListPopup();
                     } else {
                         scope.launchFingerprintScannerPopup({ type: 11 });
@@ -145,7 +145,7 @@ angular.module('bahmni.common.biometrics')
                         return;
                     }
                     fpScanDialogOpen = true;
-                    var cachedSession = scope.scanType === "registration" ? biometricService.getCachedScanSession(fingerprint.type) || {} : {};
+                    var cachedSession = scope.scanType === "registration" || scope.scanType === "edit" ? biometricService.getCachedScanSession(fingerprint.type) || {} : {};
 
                     return spinner.forPromise(
                         biometricService.getStatus()
@@ -230,12 +230,23 @@ angular.module('bahmni.common.biometrics')
                         }
                         return fp;
                     });
+
                     fingerprintScannerDialogElement.dialog('close');
-                    if (scope.scanType !== 'registration') {
+                    if (scope.scanType === 'search') {
                         fingerprintListDialogElement.dialog('close');
                     }
+
                     if (scope.onSave) {
-                        scope.onSave({ fingerprints: scannedFingerprints });
+                        var fingerprintsToSave = [];
+                        if (scope.scanType === 'search') {
+                            fingerprintsToSave = scannedFingerprints;
+                        } else {
+                            fingerprintsToSave = scope.leftFingerprints
+                                .concat(scope.rightFingerprints).filter(function (fp) {
+                                    return fp.template !== null && fp.template !== undefined;
+                                });
+                        }
+                        scope.onSave({ fingerprints: fingerprintsToSave });
                     }
                 };
 
