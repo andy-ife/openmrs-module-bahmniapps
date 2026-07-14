@@ -129,6 +129,8 @@ angular.module('bahmni.common.biometrics')
                             scope.onSave({ scannedFingerprints: fingerprints.splice(0, 1) });
                         });
                     }
+                    scope.error = scope.success = scope.showSave = scope.scanning = false;
+                    scope.imgSrc = null;
                 };
 
                 scope.cancel = function () {
