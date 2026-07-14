@@ -53,7 +53,7 @@ angular.module('bahmni.registration')
                 // biometrics
                 biometricService.getStatus().then(function () {
                     biometricService.getSubject($scope.patient.primaryIdentifier.identifier).then(function (response) {
-                        $scope.fingerprintCount = response && response.fingerprints ? response.fingerprints.length :0;
+                        $scope.fingerprintCount = response && response.fingerprints ? response.fingerprints.length : 0;
                         $scope.patientId = $scope.patient.primaryIdentifier.identifier;
                     }).catch(function (e) {
                         // do nothing

@@ -1,0 +1,2 @@
+- Add save button to 10 finger dialog
+- Handle same finger used in multiple scan sessions in ten finger dialog
