@@ -118,7 +118,7 @@ angular.module('bahmni.common.biometrics')
                             console.log(e);
                             scope.error = true;
                             scope.scanning = false;
-                            messagingService.showMessage("error", "FP_SCAN_FAIL");
+                            messagingService.showMessage("error", e.toString());
                         });
                 };
 

@@ -210,7 +210,7 @@ angular.module('bahmni.common.biometrics')
                             messagingService.showMessage("error", "BIOMETRIC_DEVICE_NOT_FOUND");
                         }
                         else {
-                            messagingService.showMessage("error", "FETCH_SCAN_SESSION_ERROR");
+                            messagingService.showMessage("error", e.toString());
                         }
                     });
                 };
