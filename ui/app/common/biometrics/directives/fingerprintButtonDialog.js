@@ -42,9 +42,9 @@ angular.module('bahmni.common.biometrics')
                             var fetchedFingerprints = (response && response.fingerprints) ? response.fingerprints : [];
 
                             var allFingerprints = [
-                                { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 },
-                                { type: 5 }, { type: 6 }, { type: 7 }, { type: 8 },
-                                { type: 9 }, { type: 10 }].map(function (e) {
+                                { type: "1" }, { type: "2" }, { type: "3" }, { type: "4" },
+                                { type: "5" }, { type: "6" }, { type: "7" }, { type: "8" },
+                                { type: "9" }, { type: "10" }].map(function (e) {
                                     if (fetchedFingerprints.length == 0) {
                                         return e;
                                     }
@@ -216,25 +216,27 @@ angular.module('bahmni.common.biometrics')
                 };
 
                 scope.handleSaveFromScanner = function (scannedFingerprints) {
-                    if (scope.onSave) {
-                        scope.onSave({ fingerprints: scannedFingerprints });
-                    }
                     // update the fingerprint list with the newly scanned fingerprints
                     var scannedFinger = scannedFingerprints[0];
-                    scope.leftFingerprints = scope.leftFingerprints.map(function(fp){
-                        if(fp.type === scannedFinger.type) {
+                    scope.leftFingerprints = scope.leftFingerprints.map(function (fp) {
+                        if (fp.type === scannedFinger.type) {
                             return scannedFinger;
                         }
                         return fp;
                     });
-                    scope.rightFingerprints = scope.rightFingerprints.map(function(fp){
-                        if(fp.type === scannedFinger.type) {
+                    scope.rightFingerprints = scope.rightFingerprints.map(function (fp) {
+                        if (fp.type === scannedFinger.type) {
                             return scannedFinger;
                         }
                         return fp;
                     });
                     fingerprintScannerDialogElement.dialog('close');
-                    fingerprintListDialogElement.dialog('close');
+                    if (scope.scanType !== 'registration') {
+                        fingerprintListDialogElement.dialog('close');
+                    }
+                    if (scope.onSave) {
+                        scope.onSave({ fingerprints: scannedFingerprints });
+                    }
                 };
 
                 scope.handleCancelFromScanner = function () {

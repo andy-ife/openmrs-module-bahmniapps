@@ -10,7 +10,7 @@
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_LEFT_HAND' | translate}}</strong></span>
     </legend>
     <ul class="row-clear flex">
-        <li ng-repeat="fingerprint in leftFingerprints">
+        <li ng-repeat="fingerprint in leftFingerprints track by fingerprint.type">
             <div class="fp-list-item-container">
                 <span class="fp-list-item-label-container">
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
@@ -25,7 +25,7 @@
             <span class="mylegend"><strong>{{::'REGISTRATION_LABEL_RIGHT_HAND' | translate}}</strong></span>
     </legend>
     <ul class="row-clear flex">
-        <li ng-repeat="fingerprint in rightFingerprints">
+        <li ng-repeat="fingerprint in rightFingerprints track by fingerprint.type">
             <div class="fp-list-item-container">
                 <span class="fp-list-item-label-container">
                     <h3 class="fp-list-item-text">{{:: getFingerprintTitle(fingerprint.type) | translate}}</h3>
