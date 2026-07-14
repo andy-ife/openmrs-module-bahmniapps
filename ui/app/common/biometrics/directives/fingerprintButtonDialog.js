@@ -263,7 +263,7 @@ angular.module('bahmni.common.biometrics')
                 scope: {
                     patientId: "=",
                     scanType: "=",
-                    onSave: "&",
+                    onSave: "&"
                 },
                 link: link
             };
