@@ -19,10 +19,11 @@ angular.module('bahmni.common.uiHelper')
         });
 
         this.showMessage = function (level, message, errorEvent) {
-            // Fix error due to ERR_CONNECTION_REFUSED in Edge
+            // Fixes error due to ERR_CONNECTION_REFUSED in Edge
             if (message === "[object Object]") {
                 return;
             }
+            
             var messageObject = {'value': '', 'isServerError': false};
             messageObject.value = message ? message.replace(/\[|\]|null/g, '') : " ";
             if (errorEvent) {
