@@ -294,15 +294,15 @@ angular.module('bahmni.common.uicontrols.programmanagment')
                 return state.endDate == null;
             };
 
-            $scope.openPatientObservations = function () {
+            $scope.openPatientObservations = function (patientProgram) {
                 const redirectionPoint = programRedirectionConfig ? programRedirectionConfig.redirectionPoint : "patient.dashboard.show";
                 const url = $state.href(redirectionPoint, {
                     patientUuid: $scope.patient.uuid,
-                    programUuid: $scope.patientProgram && $scope.patientProgram.program && $scope.patientProgram.program.uuid,
+                    programUuid: patientProgram && patientProgram.program && patientProgram.program.uuid,
                     conceptSetGroupName: 'observations',
-                    dateEnrolled: $scope.patientProgram && $scope.patientProgram.fromDate,
-                    dateCompleted: $scope.patientProgram && $scope.patientProgram.toDate,
-                    enrollment: $scope.patientProgram && $scope.patientProgram.uuid
+                    dateEnrolled: patientProgram && patientProgram.fromDate,
+                    dateCompleted: patientProgram && patientProgram.toDate,
+                    enrollment: patientProgram && patientProgram.uuid
                 });
                 programRedirectionConfig && programRedirectionConfig.newTab ? $window.open(url, '_blank') : $window.open(url, '_self');
             };
