@@ -27,6 +27,7 @@ angular.module('bahmni.clinical')
             var fields = ['uuid', 'name:(name,display)', 'names:(uuid,conceptNameType,name)'];
             var customRepresentation = Bahmni.ConceptSet.CustomRepresentationBuilder.build(fields, 'setMembers', numberOfLevels);
             var allConceptSections = [];
+            var programUuid = $stateParams.programUuid;
 
             var init = function () {
                 if (!($scope.allTemplates !== undefined && $scope.allTemplates.length > 0)) {
@@ -44,7 +45,8 @@ angular.module('bahmni.clinical')
                         if (!($scope.consultation.observationForms !== undefined && $scope.consultation.observationForms.length > 0)) {
                             spinner.forPromise(formService.getFormList($scope.consultation.encounterUuid)
                                 .then(function (response) {
-                                    $scope.consultation.observationForms = getObservationForms(response.data);
+                                    var filteredResponse = filterFormsForProgram(response.data);
+                                    $scope.consultation.observationForms = getObservationForms(filteredResponse);
                                     concatObservationForms();
                                 })
                             );
@@ -139,6 +141,31 @@ angular.module('bahmni.clinical')
                 }
                 return $scope.uniqueTemplates;
             };
+
+            var filterFormsForProgram = function (forms) {
+                if (!programUuid) return forms;
+
+                var filteredForms = [];
+                // Filter Forms by Program
+                if (programUuid === "0b91e74a-0cce-43bd-93bc-21ad1d3aeb2a") {
+                    // TB Program
+                }
+                else if (programUuid === "3cce6af6-53b6-4973-87b5-f50e2a8d8cb9") {
+                    // HIV Program
+                    filteredForms = forms.filter(function (form) {
+                        return form.uuid === "c2bf89dc-8fa7-4eba-95cb-6fe14c4a8d62";
+                    }).map(function (form) {
+                        form.alwaysShow = true;
+                        form.options = { default: true };
+                        return form;
+                    });
+
+                }
+                else if (programUuid === " 2fc179fe-8627-44a6-a307-2f0e972513e9") {
+                    // KP Program
+                }
+                return filteredForms;
+            }
 
             var showOnlyTemplatesFilledInProgram = function () {
                 spinner.forPromise(conceptSetService.getObsTemplatesForProgram($stateParams.programUuid).success(function (data) {
@@ -256,6 +283,7 @@ angular.module('bahmni.clinical')
                         var newForm = new Bahmni.ObservationForm(formUuid, $rootScope.currentUser,
                             formName, formVersion, observations, label, extension);
                         newForm.privileges = privileges;
+                        if (programUuid) newForm.alwaysShow = true;
                         forms.push(newForm);
                     }
                 });

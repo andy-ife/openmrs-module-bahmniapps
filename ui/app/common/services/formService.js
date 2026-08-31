@@ -12,15 +12,15 @@
 angular.module('bahmni.common.conceptSet')
     .factory('formService', ['$http', function ($http) {
         var getFormList = function (encounterUuid) {
-            return $http.get(Bahmni.Common.Constants.latestPublishedForms, {params: {encounterUuid: encounterUuid}});
+            return $http.get(Bahmni.Common.Constants.latestPublishedForms, { params: { encounterUuid: encounterUuid } }); // /bahmniie/form/latestPublishedForms
         };
 
         var getAllForms = function () {
-            return $http.get(Bahmni.Common.Constants.allFormsUrl, {params: {v: "custom:(version,name,uuid)"}});
+            return $http.get(Bahmni.Common.Constants.allFormsUrl, { params: { v: "custom:(version,name,uuid)" } });
         };
 
         var getFormDetail = function (formUuid, params) {
-            return $http.get(Bahmni.Common.Constants.formUrl + '/' + formUuid, {params: params});
+            return $http.get(Bahmni.Common.Constants.formUrl + '/' + formUuid, { params: params });
         };
 
         const getUrlWithUuid = function (url, patientUuid) {
@@ -34,19 +34,23 @@ angular.module('bahmni.common.conceptSet')
                 formType: 'v2',
                 patientProgramUuid: patientProgramUuid
             };
-            return $http.get(patientFormsUrl, {params: params});
+            return $http.get(patientFormsUrl, { params: params });
         };
 
         var getFormTranslations = function (url, form) {
             if (url && url !== Bahmni.Common.Constants.formTranslationsUrl) {
                 return $http.get(url);
             }
-            return $http.get(Bahmni.Common.Constants.formTranslationsUrl, { params: form});
+            return $http.get(Bahmni.Common.Constants.formTranslationsUrl, { params: form });
         };
 
         var getFormTranslate = function (formName, formVersion, locale, formUuid) {
-            return $http.get(Bahmni.Common.Constants.formBuilderTranslationApi, { params: {formName: formName,
-                formVersion: formVersion, locale: locale, formUuid: formUuid}});
+            return $http.get(Bahmni.Common.Constants.formBuilderTranslationApi, {
+                params: {
+                    formName: formName,
+                    formVersion: formVersion, locale: locale, formUuid: formUuid
+                }
+            });
         };
 
         return {
