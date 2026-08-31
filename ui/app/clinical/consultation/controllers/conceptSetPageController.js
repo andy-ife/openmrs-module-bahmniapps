@@ -12,10 +12,10 @@
 angular.module('bahmni.clinical')
     .controller('ConceptSetPageController', ['$scope', '$rootScope', '$stateParams', 'conceptSetService',
         'clinicalAppConfigService', 'messagingService', 'configurations', '$state', 'spinner',
-        'contextChangeHandler', '$q', '$translate', 'formService',
+        'contextChangeHandler', '$q', '$translate', 'formService', 'WV',
         function ($scope, $rootScope, $stateParams, conceptSetService,
             clinicalAppConfigService, messagingService, configurations, $state, spinner,
-            contextChangeHandler, $q, $translate, formService) {
+            contextChangeHandler, $q, $translate, formService, WV) {
             $scope.consultation.selectedObsTemplate = $scope.consultation.selectedObsTemplate || [];
             $scope.allTemplates = $scope.allTemplates || [];
             $scope.scrollingEnabled = false;
@@ -147,23 +147,84 @@ angular.module('bahmni.clinical')
 
                 var filteredForms = [];
                 // Filter Forms by Program
-                if (programUuid === "0b91e74a-0cce-43bd-93bc-21ad1d3aeb2a") {
-                    // TB Program
-                }
-                else if (programUuid === "3cce6af6-53b6-4973-87b5-f50e2a8d8cb9") {
+                if (programUuid === WV.hivProgram) {
                     // HIV Program
                     filteredForms = forms.filter(function (form) {
-                        return form.uuid === "c2bf89dc-8fa7-4eba-95cb-6fe14c4a8d62";
-                    }).map(function (form) {
-                        form.alwaysShow = true;
-                        form.options = { default: true };
-                        return form;
+                        return form.uuid === WV.artClientCareCardFollowupVisitForm 
+                        || form.uuid === WV.artCommencementForm
+                        || form.uuid === WV.artDiscontinuationForm
+                        || form.uuid === WV.artInitialVisitForm
+                        || form.uuid === WV.artSubstitutionsForm
+                        || form.uuid === WV.artERegisterForm
+                        || form.uuid === WV.careAndSupportForm
+                        || form.uuid === WV.missedAppointmentFollowupForm
+                        || form.uuid === WV.nationalDsdArtDistributionForm
+                        || form.uuid === WV.nsepServiceDeliveryForm
+                        || form.uuid === WV.referralAndLinkageERegisterForm
+                        || form.uuid === WV.viralLoadMonitoringForm
+                        || form.uuid === WV.secondVitalsForm;
                     });
-
                 }
-                else if (programUuid === " 2fc179fe-8627-44a6-a307-2f0e972513e9") {
+                else if (programUuid === WV.kpProgram) {
                     // KP Program
+                    filteredForms = forms.filter(function (form) {
+                        return form.uuid === WV.careAndSupportForm
+                        || form.uuid === WV.kpPreventionForm
+                        || form.uuid === WV.missedAppointmentFollowupForm
+                        || form.uuid === WV.nsepServiceDeliveryForm
+                        || form.uuid === WV.referralAndLinkageERegisterForm
+                        || form.uuid === WV.swaaslEncounterForm
+                        || form.uuid === WV.swaaslFaceToFaceMeetingForm
+                        || form.uuid === WV.swaaslSlvdclEncounterForm
+                        || form.uuid === WV.secondVitalsForm;
+                    });
                 }
+                else if (programUuid === WV.prepProgram) {
+                    // PREP Program
+                    filteredForms = forms.filter(function(form) {
+                        return form.uuid === WV.careAndSupportForm
+                        || form.uuid === WV.missedAppointmentFollowupForm
+                        || form.uuid === WV.hctConsentForm
+                        || form.uuid === WV.hivSelfTestingERegisterForm
+                        || form.uuid === WV.hivSelfTestingERegisterForm
+                        || form.uuid === WV.nsepServiceDeliveryForm
+                        || form.uuid === WV.prepClientERegisterForm
+                        || form.uuid === WV.prepRASTForm
+                        || form.uuid === WV.referralAndLinkageERegisterForm
+                        || form.uuid === WV.swaaslSlvdclEncounterForm
+                        || form.uuid === WV.secondVitalsForm;
+                    })
+                }else if (programUuid === WV.pepProgram){
+                    // PEP Program
+                    filteredForms = forms.filter(function (form) {
+                        return form.uuid === WV.careAndSupportForm
+                        || form.uuid === WV.hctConsentForm
+                        || form.uuid === WV.hivSelfTestingERegisterForm
+                        || form.uuid === WV.htsERegisterForm
+                        || form.uuid === WV.missedAppointmentFollowupForm
+                        || form.uuid === WV.nsepServiceDeliveryForm
+                        || form.uuid === WV.referralAndLinkageERegisterForm
+                        || form.uuid === WV.swaaslSlvdclEncounterForm
+                        || form.uuid === WV.secondVitalsForm;
+                    });
+                }else if (programUuid === WV.eidProgram){
+                    // EID Program
+                    filteredForms = forms.filter(function (form) {
+                        return form.uuid === WV.childFollowupForm
+                        || form.uuid === WV.eidRequestForm
+                        || form.uuid === WV.infantHealthFacilityVisitForm
+                        || form.uuid === WV.infantOutcomeAt18MonthsForm
+                        || form.uuid === WV.infantPcrTestingForm
+                        || form.uuid === WV.missedAppointmentFollowupForm
+                        || form.uuid === WV.motherBabyPairForm
+                        || form.uuid === WV.careAndSupportForm
+                        || form.uuid === WV.referralAndLinkageERegisterForm
+                        || form.uuid === WV.nsepServiceDeliveryForm
+                        || form.uuid === WV.swaaslSlvdclEncounterForm
+                        || form.uuid === WV.secondVitalsForm;
+                    });
+                }          
+                
                 return filteredForms;
             }
 
