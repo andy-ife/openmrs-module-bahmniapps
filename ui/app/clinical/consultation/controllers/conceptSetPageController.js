@@ -150,83 +150,82 @@ angular.module('bahmni.clinical')
                 if (programUuid === WV.hivProgram) {
                     // HIV Program
                     filteredForms = forms.filter(function (form) {
-                        return form.uuid === WV.artClientCareCardFollowupVisitForm 
-                        || form.uuid === WV.artCommencementForm
-                        || form.uuid === WV.artDiscontinuationForm
-                        || form.uuid === WV.artInitialVisitForm
-                        || form.uuid === WV.artSubstitutionsForm
-                        || form.uuid === WV.artERegisterForm
-                        || form.uuid === WV.careAndSupportForm
-                        || form.uuid === WV.missedAppointmentFollowupForm
-                        || form.uuid === WV.nationalDsdArtDistributionForm
-                        || form.uuid === WV.nsepServiceDeliveryForm
-                        || form.uuid === WV.referralAndLinkageERegisterForm
-                        || form.uuid === WV.viralLoadMonitoringForm
-                        || form.uuid === WV.secondVitalsForm;
+                        return form.uuid === WV.artClientCareCardFollowupVisitForm
+                            || form.uuid === WV.artCommencementForm
+                            || form.uuid === WV.artDiscontinuationForm
+                            || form.uuid === WV.artInitialVisitForm
+                            || form.uuid === WV.artSubstitutionsForm
+                            || form.uuid === WV.artERegisterForm
+                            || form.uuid === WV.careAndSupportForm
+                            || form.uuid === WV.missedAppointmentFollowupForm
+                            || form.uuid === WV.nationalDsdArtDistributionForm
+                            || form.uuid === WV.nsepServiceDeliveryForm
+                            || form.uuid === WV.referralAndLinkageERegisterForm
+                            || form.uuid === WV.viralLoadMonitoringForm
+                            || form.uuid === WV.secondVitalsForm;
                     });
                 }
                 else if (programUuid === WV.kpProgram) {
                     // KP Program
                     filteredForms = forms.filter(function (form) {
                         return form.uuid === WV.careAndSupportForm
-                        || form.uuid === WV.kpPreventionForm
-                        || form.uuid === WV.missedAppointmentFollowupForm
-                        || form.uuid === WV.nsepServiceDeliveryForm
-                        || form.uuid === WV.referralAndLinkageERegisterForm
-                        || form.uuid === WV.swaaslEncounterForm
-                        || form.uuid === WV.swaaslFaceToFaceMeetingForm
-                        || form.uuid === WV.swaaslSlvdclEncounterForm
-                        || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.kpPreventionForm
+                            || form.uuid === WV.missedAppointmentFollowupForm
+                            || form.uuid === WV.nsepServiceDeliveryForm
+                            || form.uuid === WV.referralAndLinkageERegisterForm
+                            || form.uuid === WV.swaaslEncounterForm
+                            || form.uuid === WV.swaaslFaceToFaceMeetingForm
+                            || form.uuid === WV.swaaslSlvdclEncounterForm
+                            || form.uuid === WV.secondVitalsForm;
                     });
                 }
                 else if (programUuid === WV.prepProgram) {
                     // PREP Program
-                    filteredForms = forms.filter(function(form) {
+                    filteredForms = forms.filter(function (form) {
                         return form.uuid === WV.careAndSupportForm
-                        || form.uuid === WV.missedAppointmentFollowupForm
-                        || form.uuid === WV.hctConsentForm
-                        || form.uuid === WV.hivSelfTestingERegisterForm
-                        || form.uuid === WV.hivSelfTestingERegisterForm
-                        || form.uuid === WV.nsepServiceDeliveryForm
-                        || form.uuid === WV.prepClientERegisterForm
-                        || form.uuid === WV.prepRASTForm
-                        || form.uuid === WV.referralAndLinkageERegisterForm
-                        || form.uuid === WV.swaaslSlvdclEncounterForm
-                        || form.uuid === WV.secondVitalsForm;
-                    })
-                }else if (programUuid === WV.pepProgram){
+                            || form.uuid === WV.missedAppointmentFollowupForm
+                            || form.uuid === WV.hctConsentForm
+                            || form.uuid === WV.hivSelfTestingERegisterForm
+                            || form.uuid === WV.hivSelfTestingERegisterForm
+                            || form.uuid === WV.nsepServiceDeliveryForm
+                            || form.uuid === WV.prepClientERegisterForm
+                            || form.uuid === WV.prepRASTForm
+                            || form.uuid === WV.referralAndLinkageERegisterForm
+                            || form.uuid === WV.swaaslSlvdclEncounterForm
+                            || form.uuid === WV.secondVitalsForm;
+                    });
+                } else if (programUuid === WV.pepProgram) {
                     // PEP Program
                     filteredForms = forms.filter(function (form) {
                         return form.uuid === WV.careAndSupportForm
-                        || form.uuid === WV.hctConsentForm
-                        || form.uuid === WV.hivSelfTestingERegisterForm
-                        || form.uuid === WV.htsERegisterForm
-                        || form.uuid === WV.missedAppointmentFollowupForm
-                        || form.uuid === WV.nsepServiceDeliveryForm
-                        || form.uuid === WV.referralAndLinkageERegisterForm
-                        || form.uuid === WV.swaaslSlvdclEncounterForm
-                        || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.hctConsentForm
+                            || form.uuid === WV.hivSelfTestingERegisterForm
+                            || form.uuid === WV.htsERegisterForm
+                            || form.uuid === WV.missedAppointmentFollowupForm
+                            || form.uuid === WV.nsepServiceDeliveryForm
+                            || form.uuid === WV.referralAndLinkageERegisterForm
+                            || form.uuid === WV.swaaslSlvdclEncounterForm
+                            || form.uuid === WV.secondVitalsForm;
                     });
-                }else if (programUuid === WV.eidProgram){
+                } else if (programUuid === WV.eidProgram) {
                     // EID Program
                     filteredForms = forms.filter(function (form) {
                         return form.uuid === WV.childFollowupForm
-                        || form.uuid === WV.eidRequestForm
-                        || form.uuid === WV.infantHealthFacilityVisitForm
-                        || form.uuid === WV.infantOutcomeAt18MonthsForm
-                        || form.uuid === WV.infantPcrTestingForm
-                        || form.uuid === WV.missedAppointmentFollowupForm
-                        || form.uuid === WV.motherBabyPairForm
-                        || form.uuid === WV.careAndSupportForm
-                        || form.uuid === WV.referralAndLinkageERegisterForm
-                        || form.uuid === WV.nsepServiceDeliveryForm
-                        || form.uuid === WV.swaaslSlvdclEncounterForm
-                        || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.eidRequestForm
+                            || form.uuid === WV.infantHealthFacilityVisitForm
+                            || form.uuid === WV.infantOutcomeAt18MonthsForm
+                            || form.uuid === WV.infantPcrTestingForm
+                            || form.uuid === WV.missedAppointmentFollowupForm
+                            || form.uuid === WV.motherBabyPairForm
+                            || form.uuid === WV.careAndSupportForm
+                            || form.uuid === WV.referralAndLinkageERegisterForm
+                            || form.uuid === WV.nsepServiceDeliveryForm
+                            || form.uuid === WV.swaaslSlvdclEncounterForm
+                            || form.uuid === WV.secondVitalsForm;
                     });
-                }          
-                
+                }
                 return filteredForms;
-            }
+            };
 
             var showOnlyTemplatesFilledInProgram = function () {
                 spinner.forPromise(conceptSetService.getObsTemplatesForProgram($stateParams.programUuid).success(function (data) {

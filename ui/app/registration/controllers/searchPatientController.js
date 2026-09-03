@@ -197,8 +197,8 @@ angular.module('bahmni.registration')
             };
 
             $scope.handleSearchFingerprints = function (fingerprints) {
-                if(!fingerprints || fingerprints.length === 0){ return;}
-                biometricService.match({ fingerprints: fingerprints}).then(function (result) {
+                if (!fingerprints || fingerprints.length === 0) { return; }
+                biometricService.match({ fingerprints: fingerprints }).then(function (result) {
                     if (result && result.length > 0) {
                         result.sort(function (a, b) {
                             return b.matchScore - a.matchScore;

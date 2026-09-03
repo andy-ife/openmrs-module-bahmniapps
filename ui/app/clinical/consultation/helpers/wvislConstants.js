@@ -36,5 +36,5 @@ angular.module('bahmni.clinical').constant('WV', {
     referralAndLinkageERegisterForm: "125b9ba0-cd85-4a3a-a299-ec51a80d3881",
     infantOutcomeAt18MonthsForm: "62e066d7-896e-4b9b-bc49-7e37d2918bff",
     infantHealthFacilityVisitForm: "10a6bd8a-87a2-4084-9217-2a7facf7c213",
-    infantPcrTestingForm: "5a5f89fa-6105-43d7-b15b-74caef3fcaae",
+    infantPcrTestingForm: "5a5f89fa-6105-43d7-b15b-74caef3fcaae"
 });

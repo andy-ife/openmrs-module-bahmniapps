@@ -23,7 +23,6 @@ angular.module('bahmni.common.uiHelper')
             if (message === "[object Object]") {
                 return;
             }
-            
             var messageObject = {'value': '', 'isServerError': false};
             messageObject.value = message ? message.replace(/\[|\]|null/g, '') : " ";
             if (errorEvent) {

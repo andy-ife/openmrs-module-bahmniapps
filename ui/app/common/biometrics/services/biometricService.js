@@ -23,8 +23,8 @@ angular.module('bahmni.common.biometrics')
                 if (!config.enabled) return $q.when(null);
                 return $http.get(config.serverUrl + '/status').then(function (response) {
                     return biometricStatus.fromJSON(response.data);
-                }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
+                }).catch(function (e) {
+                    if (e && e.data && e.data.message) {
                         throw new Error(e.data.message);
                     }
                     throw e;
@@ -40,12 +40,12 @@ angular.module('bahmni.common.biometrics')
                             return response.data.map(biometricScanner.fromJSON);
                         }
                         return [];
-                    }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
-                        throw new Error(e.data.message);
-                    }
-                    throw e;
-                });
+                    }).catch(function (e) {
+                        if (e && e.data && e.data.message) {
+                            throw new Error(e.data.message);
+                        }
+                        throw e;
+                    });
             };
 
             var getScanSession = function (uuid, scanType) {
@@ -55,12 +55,12 @@ angular.module('bahmni.common.biometrics')
                 return $http.get(config.serverUrl + '/fingerprint/session', { params: { uuid: uuid, scanType: scanType } })
                     .then(function (response) {
                         return biometricScanSession.fromJSON(response.data);
-                    }).catch(function(e) {
-                        if(e && e.data && e.data.message) {
+                    }).catch(function (e) {
+                        if (e && e.data && e.data.message) {
                             throw new Error(e.data.message);
                         }
                         throw e;
-                });
+                    });
             };
 
             var destroyScanSession = function (uuid) {
@@ -78,8 +78,8 @@ angular.module('bahmni.common.biometrics')
                             }
                         }
                     })
-                    .catch(function(e) {
-                        if(e && e.data && e.data.message) {
+                    .catch(function (e) {
+                        if (e && e.data && e.data.message) {
                             throw new Error(e.data.message);
                         }
                         throw e;
@@ -123,8 +123,8 @@ angular.module('bahmni.common.biometrics')
                     params: params
                 }).then(function (response) {
                     return fingerprint.fromJSON(response.data);
-                }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
+                }).catch(function (e) {
+                    if (e && e.data && e.data.message) {
                         throw new Error(e.data.message);
                     }
                     throw e;
@@ -138,12 +138,12 @@ angular.module('bahmni.common.biometrics')
                 return $http.post(config.serverUrl + '/subject', subject)
                     .then(function (response) {
                         return biometricSubject.fromJSON(response.data);
-                    }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
-                        throw new Error(e.data.message);
-                    }
-                    throw e;
-                });
+                    }).catch(function (e) {
+                        if (e && e.data && e.data.message) {
+                            throw new Error(e.data.message);
+                        }
+                        throw e;
+                    });
             };
 
             var update = function (subject) {
@@ -153,12 +153,12 @@ angular.module('bahmni.common.biometrics')
                 return $http.put(config.serverUrl + '/subject', subject)
                     .then(function (response) {
                         return biometricSubject.fromJSON(response.data);
-                    }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
-                        throw new Error(e.data.message);
-                    }
-                    throw e;
-                });
+                    }).catch(function (e) {
+                        if (e && e.data && e.data.message) {
+                            throw new Error(e.data.message);
+                        }
+                        throw e;
+                    });
             };
 
             var match = function (subject) {
@@ -171,12 +171,12 @@ angular.module('bahmni.common.biometrics')
                             return response.data.map(biometricMatch.fromJSON);
                         }
                         return [];
-                    }).catch(function(e) {
-                    if(e && e.data && e.data.message) {
-                        throw new Error(e.data.message);
-                    }
-                    throw e;
-                });
+                    }).catch(function (e) {
+                        if (e && e.data && e.data.message) {
+                            throw new Error(e.data.message);
+                        }
+                        throw e;
+                    });
             };
 
             var getSubject = function (subjectId) {
@@ -187,7 +187,7 @@ angular.module('bahmni.common.biometrics')
                     .then(function (response) {
                         return biometricSubject.fromJSON(response.data);
                     }).catch(function (e) {
-                        if(e && e.data && e.data.message) {
+                        if (e && e.data && e.data.message) {
                             throw new Error(e.data.message);
                         }
                         throw e;
