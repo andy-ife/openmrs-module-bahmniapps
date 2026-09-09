@@ -20,10 +20,12 @@ angular.module('bahmni.registration').factory('initialization',
                     $rootScope.regEncounterConfiguration = angular.extend(new Bahmni.Registration.RegistrationEncounterConfig(), configurations.encounterConfig());
                     $rootScope.encounterConfig = angular.extend(new EncounterConfig(), configurations.encounterConfig());
                     $rootScope.patientConfiguration = new Bahmni.Registration.PatientConfig(patientAttributeTypes.attributeTypes,
-                    configurations.identifierTypesConfig(), appService.getAppDescriptor().getConfigValue("patientInformation"));
+                        configurations.identifierTypesConfig(), appService.getAppDescriptor().getConfigValue("patientInformation"));
                     $rootScope.regEncounterConfiguration.loginLocationToVisitTypeMap = configurations.loginLocationToVisitTypeMapping();
 
-                    $rootScope.addressLevels = configurations.addressLevels();
+                    $rootScope.addressLevels = configurations.addressLevels().filter(function (level) {
+                        return level.addressField !== 'postalCode';
+                    });
                     $rootScope.fieldValidation = appService.getAppDescriptor().getConfigValue("fieldValidation");
                     $rootScope.genderMap = configurations.genderMap();
                     $rootScope.helpDeskNumber = configurations.helpDeskNumber();
@@ -41,7 +43,7 @@ angular.module('bahmni.registration').factory('initialization',
             };
 
             var initApp = function () {
-                return appService.initApp('registration', {'app': true, 'extension': true });
+                return appService.initApp('registration', { 'app': true, 'extension': true });
             };
 
             var getIdentifierPrefix = function () {
@@ -92,16 +94,16 @@ angular.module('bahmni.registration').factory('initialization',
 
             return function () {
                 return spinner.forPromise(authenticator.authenticateUser()
-                .then(initApp)
-                .then(checkPrivilege)
-                .then(getConfigs)
-                .then(initAppConfigs)
-                .then(mapRelationsTypeWithSearch)
-                .then(loggedInLocation)
-                .then(facilityVisitLocation)
-                .then(loadValidators(appService.configBaseUrl(), "registration"))
-                .then(mergeFormConditions)
-            );
+                    .then(initApp)
+                    .then(checkPrivilege)
+                    .then(getConfigs)
+                    .then(initAppConfigs)
+                    .then(mapRelationsTypeWithSearch)
+                    .then(loggedInLocation)
+                    .then(facilityVisitLocation)
+                    .then(loadValidators(appService.configBaseUrl(), "registration"))
+                    .then(mergeFormConditions)
+                );
             };
         }]
 );
