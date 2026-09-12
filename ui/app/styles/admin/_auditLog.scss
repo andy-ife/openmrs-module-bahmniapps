@@ -7,14 +7,16 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
-.audit-log-filter, .audit-log-table {
+.audit-log-filter,
+.audit-log-table {
   border: 1px solid $lightGray;
   background: $white;
   border-radius: 3px;
   overflow: hidden;
   margin: 5px 0 10px;
+
   header {
-    font-family: OpenSans, Arial, sans-serif;
+    font-family: Nunito, Arial, sans-serif;
     padding: 10px;
     margin-top: 0;
     margin-bottom: 0;
@@ -25,6 +27,7 @@
     position: relative;
     border-radius: 2px 2px 0 0;
   }
+
   .button {
     border-radius: 3px;
     background: linear-gradient(to bottom, #A1D030, #88af28);
@@ -41,6 +44,7 @@
     font-size: 12px;
     border-color: #7b9f24;
     float: right;
+
     &:hover {
       background: #8eb82a;
       border-color: #779b23;
@@ -53,32 +57,41 @@
     padding: 10px;
     border-bottom: 1px solid $lightGray;
     vertical-align: middle;
+
     &:last-child {
       border: none;
     }
+
     label {
       display: inline-block;
       font-weight: bold;
     }
+
     p {
       display: inline-block;
       margin-left: 1%;
+
       input {
         padding: 0;
       }
     }
+
     form {
       display: flex;
       align-items: center;
+
       button[type="submit"] {
         margin-left: auto;
       }
-      > div {
+
+      >div {
         display: flex;
         align-items: center;
+
         label {
           margin-top: 4px !important;
         }
+
         input {
           margin-top: 8px;
         }
@@ -90,6 +103,7 @@
 .audit-log-table-buttons {
   text-align: center;
   margin: 10px 0;
+
   .button {
     float: none;
   }
@@ -103,14 +117,18 @@
   tr {
     border-left: 0;
     border-right: 0;
-    th, td {
+
+    th,
+    td {
       &:first-child {
         border-left: 0;
       }
+
       &:last-child {
         border-right: 0;
       }
     }
+
     th {
       border-color: #9c9a9a;
       text-align: center;

@@ -80,7 +80,7 @@
         gap: 5px;
         width: calc(100% - 20px);
         font-size: 14px;
-        font-family: $OpenSansFont;
+        font-family: $NunitoFont;
         padding-left: 10px;
         line-height: 1.1;
         flex-wrap: wrap;
@@ -103,6 +103,7 @@
         color: #fff;
         box-sizing: border-box;
         width: fit-content;
+
         @media screen and (min-width: 1200px) {
             min-width: 300px;
             text-align: center;
@@ -112,7 +113,7 @@
     div.start-date span {
         line-height: 1em;
         padding-top: 7px;
-        font-family: OpenSansSemiBold;
+        font-family: NunitoSemiBold;
         font-size: 12px;
         color: $mediumGray;
         display: block;
@@ -180,7 +181,7 @@
 
         button.ipd-btn,
         button.dispense-btn {
-            font-family: OpenSansBold;
+            font-family: NunitoBold;
             color: $bahmniTertiaryColor;
             padding: 0 7px;
             width: auto;
@@ -223,6 +224,7 @@
 
             .tab {
                 order: 1;
+
                 &.selected-tab {
                     order: 0;
                 }
@@ -243,6 +245,7 @@
                 @media screen and (max-width: 768px) {
                     width: 100%;
                 }
+
                 .control-label {
                     width: auto;
                 }
@@ -449,8 +452,9 @@
                 }
             }
 
-            h3.orderSet-additional-info, h3.cdss-alerts {
-                font-family: OpenSansBold;
+            h3.orderSet-additional-info,
+            h3.cdss-alerts {
+                font-family: NunitoBold;
                 color: $darkGray;
                 font-size: 13px;
                 border-bottom: 1px solid $lightGray;
@@ -469,10 +473,11 @@
                 line-height: 1.5em;
                 display: flex;
 
-                > i {
+                >i {
                     flex-shrink: 0;
                 }
-                > div {
+
+                >div {
                     margin-left: 0.75rem;
                     margin-right: 0.75rem;
                 }
@@ -481,27 +486,35 @@
                     display: inline-block;
                     vertical-align: middle;
                 }
+
                 &.alert-danger {
                     background: #FFD6D8;
+
                     i {
                         color: #FF0000;
                     }
                 }
+
                 &.alert-warning {
                     background: #FEEAD6;
+
                     i {
                         color: #FFA500;
                     }
                 }
+
                 &.alert-info {
                     background: #D5F5FF;
+
                     i {
                         color: #00A3E0;
                     }
                 }
+
                 .cdss-alert-summary {
                     cursor: pointer;
                     position: relative;
+
                     i {
                         position: absolute;
                         right: -15px;
@@ -514,6 +527,7 @@
 
                 .cdss-alert-details {
                     margin-top: 10px;
+
                     .fa {
                         cursor: pointer;
                         display: inline-block;
@@ -573,7 +587,7 @@
                 width: 20px;
                 transform: scale(1);
                 height: 20px;
-           }
+            }
         }
 
         form .form-field,
@@ -668,7 +682,7 @@
         }
 
         h3.orderSet-additional-info {
-            font-family: OpenSansBold;
+            font-family: NunitoBold;
             color: $darkGray;
             font-size: 13px;
             border-bottom: 1px solid $lightGray;
@@ -726,22 +740,27 @@
         cursor: pointer;
         display: grid;
         grid-template-columns: 2rem auto 4rem;
-        > div {
+
+        >div {
             display: flex;
+
             &:first-child {
                 align-items: flex-start !important;
             }
+
             &:not(:last-child) {
                 flex-direction: column;
                 justify-content: flex-start !important;
                 margin-top: 5px !important;
             }
-            
+
         }
+
         a {
             text-decoration: none;
             color: #000;
         }
+
         .cdss-alert-close {
             background: none;
             border: none;
@@ -751,8 +770,10 @@
             font-size: 12px;
             z-index: 1;
         }
+
         .summary {
             position: relative;
+
             .expand-details {
                 position: absolute;
                 right: 0;
@@ -773,9 +794,12 @@
                 transition: opacity .15s ease-in-out;
             }
         }
+
         .cdss-alert-details {
             margin-top: 10px;
-            .operations, .field-value {
+
+            .operations,
+            .field-value {
                 margin-top: 10px;
             }
 
@@ -789,7 +813,9 @@
         .alert-controls {
             justify-content: space-between;
             align-items: flex-start;
-            button, i {
+
+            button,
+            i {
                 padding: 5px !important;
                 position: relative !important;
                 font-size: 16px;
@@ -801,11 +827,14 @@
     .cdss-alert-audit-form {
         display: flex;
         align-items: center;
-        > div {
+
+        >div {
+
             // width: calc(100% - 20px);
             select {
                 width: 100%;
             }
+
             &:first-child {
                 margin-right: 10px;
             }
@@ -848,6 +877,7 @@
     i.info {
         color: #00a3e0;
     }
+
     i.inactive {
         color: #8e8e8e !important;
     }

@@ -12,6 +12,7 @@
   height: calc(100vh - 157px);
   background: #fff;
   position: relative;
+
   .calendar-overflow-hiding {
     width: 80px;
     height: 36px;
@@ -21,6 +22,7 @@
     background: #FFF;
     z-index: 999;
   }
+
   .calendar-location {
     padding-left: 80px;
     overflow: hidden;
@@ -29,6 +31,7 @@
     float: left;
     position: absolute;
     z-index: 20;
+
     .heading-cell {
       width: 300px;
       box-sizing: border-box;
@@ -37,48 +40,58 @@
       padding: 12px 0;
       border-bottom: 1px solid #ddd;
       border-top: 1px solid #ddd;
-      font-family: OpenSansSemiBold, serif;
+      font-family: NunitoSemiBold, serif;
     }
-    hr{
+
+    hr {
       margin-bottom: 0;
     }
   }
-  .day-heading{
+
+  .day-heading {
     position: absolute;
     top: 55px;
   }
-  .error{
+
+  .error {
     color: #da1e28;
     padding-top: 5px;
     height: 15px;
   }
-  .heading-ot-date{
+
+  .heading-ot-date {
     font-size: 24px;
   }
-  .heading-ot{
+
+  .heading-ot {
     padding-bottom: 10px;
   }
-  .heading-ot-block{
+
+  .heading-ot-block {
     display: inline-block;
     position: absolute;
     left: 24px;
   }
-  .notesTab{
+
+  .notesTab {
     width: calc(100% - 10px);
     height: 30px;
     color: #161616;
-    &:hover{
+
+    &:hover {
       background-color: #EDF5FF;
     }
   }
-  .provider-location-name{
+
+  .provider-location-name {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     margin-top: 15px;
     overflow-x: scroll;
   }
-  .notes-text{
+
+  .notes-text {
     background-color: #FCF4D6;
     width: calc(100% - 10px);
     color: #161616;
@@ -86,17 +99,20 @@
     border: 1px solid #F1C21B;
     border-left: 4px solid #F1C21B;
     display: flex;
-    div{
+
+    div {
       display: inline-block;
       width: calc(100% - 54px);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    > * {
+
+    >* {
       padding: 8px;
     }
   }
+
   .calendar-time-container {
     clear: left;
     position: absolute;
@@ -111,12 +127,14 @@
       border-right: .5px solid lightgrey;
       padding-right: 5px;
       text-align: right;
-      font-family: OpenSansSemiBold;
+      font-family: NunitoSemiBold;
     }
   }
+
   .table-block {
     .ot-block-container {
       display: block;
+
       .ot-block-wrapper {
         position: absolute;
         display: flex;
@@ -128,6 +146,7 @@
         width: calc(100% - 90px);
         right: 0;
       }
+
       .calendar-cell {
         border-bottom: 0.5px solid lightgrey;
         border-right: 0.5px solid lightgrey;
@@ -136,22 +155,26 @@
         height: 120px;
         box-sizing: border-box;
       }
+
       .ot-block {
         width: 300px;
         float: left;
         position: relative;
         padding-bottom: 20px;
         border-right: 0.5px solid lightgrey;
+
         .surgical-block {
           width: calc(100% - 10px);
           position: absolute;
           margin: 0 5px;
           border: 0.5px solid #1976D2;
+
           &:focus {
             border-color: #1976D2 !important;
           }
         }
       }
+
       .current-day-line {
         color: #f00;
         background: #f00;
@@ -176,29 +199,36 @@
   border-right: 1px solid #ddd;
   box-sizing: border-box;
   overflow: auto;
+
   h4 {
     font-weight: bold;
     color: #000;
     margin: 0 0 10px 0;
   }
+
   .ot-filter-items {
     margin-bottom: 5px;
     padding: 0 20px 10px;
+
     &.location-block {
       h4 {
         margin: 0 0 20px 0;
       }
+
       border-bottom: 1px solid #ddd;
     }
+
     &.patient-block {
       p {
         position: relative;
+
         input[type=text] {
           width: 100%;
           padding: 5px;
           box-sizing: border-box;
           font-size: 14px;
         }
+
         i {
           position: absolute;
           right: 5px;
@@ -209,12 +239,15 @@
         }
       }
     }
-    &.surgeon-block, &.status-block {
+
+    &.surgeon-block,
+    &.status-block {
       p {
         span {
           padding: 0 5px;
           border-radius: 3px;
         }
+
         input[type=checkbox] {
           visibility: hidden;
           width: 0;
@@ -222,27 +255,34 @@
         }
       }
     }
+
     p {
       font-size: 15px;
       margin-bottom: 10px;
+
       label {
         float: right;
       }
     }
+
     .selected-values-wrapper {
       margin-top: 10px;
     }
   }
+
   .provider-tag-selector {
     margin-bottom: 10px;
+
     .tags {
       box-shadow: none;
       border: 1px solid #ddd;
       border-radius: 5px;
+
       input {
         width: 100% !important;
         box-sizing: border-box;
       }
+
       .tag-list {
         li {
           display: none;
@@ -261,6 +301,7 @@
   padding-top: 10px;
   background: #fff;
   border-top: 1px solid lightgrey;
+
   button {
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
@@ -276,6 +317,7 @@
   position: absolute;
   margin: 0 5px;
   border-radius: 3px;
+
   .surgical-block-appointment {
     border: 1px solid #1976D2;
     padding: 5px;
@@ -283,15 +325,19 @@
     position: relative;
     overflow: hidden;
     border-radius: 3px;
+
     &:focus {
       border-color: #1976D2 !important;
     }
+
     &.hide-surgical-appointment {
       visibility: hidden;
     }
+
     &.expanded {
       z-index: 1;
     }
+
     i {
       position: absolute;
       right: 5px;
@@ -300,13 +346,16 @@
       border: none;
       outline: none;
       padding: 0;
+
       &:hover {
         opacity: 1;
       }
     }
+
     p {
       font-size: 12px;
     }
+
     .surgicalblock-patientname {
       font-weight: 600;
       color: #5394fc;
@@ -314,7 +363,8 @@
       padding: 0 10px 3px 1px;
       cursor: pointer;
     }
-    .ot-day-text{
+
+    .ot-day-text {
       p {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -322,6 +372,7 @@
       }
     }
   }
+
   .surgicalblock-surgeon-name {
     position: absolute;
     bottom: 3px;
@@ -331,6 +382,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   &.exceed .surgicalblock-surgeon-name {
     position: relative;
     top: 6px;
@@ -341,26 +393,33 @@
   h4 {
     padding: 20px 15px 25px 8px;
   }
+
   p {
     margin: 22px 0;
+
     label {
       width: 120px;
       text-align: right;
       display: inline-block;
     }
-    input, select {
+
+    input,
+    select {
       width: calc(100% - 200px);
       height: 30px;
       border-radius: 5px;
     }
+
     input {
       border: 1px solid #ddd;
       padding-left: 10px;
     }
   }
+
   .center {
     text-align: center;
   }
+
   button {
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
@@ -369,16 +428,18 @@
     margin: 50px 15px;
   }
 }
-.ui-tooltip{
-    width: auto;
-    height: auto;
-    line-height: 1.5;
-    padding: 0.3%;
-    border-radius: 4px;
-    position: absolute;
-    z-index: 20;
+
+.ui-tooltip {
+  width: auto;
+  height: auto;
+  line-height: 1.5;
+  padding: 0.3%;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 20;
 }
-hr{
+
+hr {
   border: 0;
   border-bottom: 1px solid #ddd;
   margin-top: 15px;

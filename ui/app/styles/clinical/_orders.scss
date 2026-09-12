@@ -129,7 +129,7 @@
 
     h2.order-title {
         cursor: pointer;
-        font-family: OpenSans, Arial, sans-serif;
+        font-family: Nunito, Arial, sans-serif;
         padding: 10px;
         margin-top: 0;
         margin-bottom: 0;
@@ -234,18 +234,20 @@
                 .toggle-complete-list {
                     display: none;
                 }
+
                 @media screen and (max-width: 768px) {
                     .show-fewer-tests {
                         li:not(.toggle-complete-list) {
                             display: none;
                         }
+
                         li.active {
                             display: block;
 
-                            & + li {
+                            &+li {
                                 display: block;
 
-                                & + li {
+                                &+li {
                                     display: block;
                                 }
                             }
@@ -279,11 +281,11 @@
             box-sizing: border-box;
             width: 100%;
 
-            @media screen and  (min-width: 769px) {
+            @media screen and (min-width: 769px) {
                 width: calc(70% - 30px);
             }
 
-            @media screen and  (min-width: 1024px) {
+            @media screen and (min-width: 1024px) {
                 width: calc(75% - 30px);
             }
 
@@ -306,7 +308,7 @@
                     top: -15px;
                     left: 20px;
                     padding: 5px 10px;
-                    font-family: "OpenSansBold";
+                    font-family: "NunitoBold";
                     font-size: 12px;
                     color: $mediumGray;
                     border: 1px solid #999999;
@@ -612,7 +614,7 @@
     }
 }
 
-.user-dropdown-menu{
+.user-dropdown-menu {
     height: 52px;
     position: absolute;
     right: 0;

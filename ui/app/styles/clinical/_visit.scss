@@ -23,15 +23,15 @@
     }
 
     .hierarchy ul li ul li.has-child {
-        font-family: OpenSansSemiBold;
+        font-family: NunitoSemiBold;
         background: $lightestGray;
 
         ul li {
-            font-family: OpenSans;
+            font-family: Nunito;
             background: #fff;
 
             &.has-child {
-                font-family: OpenSans;
+                font-family: Nunito;
                 background: #fff;
             }
 
@@ -93,7 +93,7 @@
             color: #274b59;
             float: left;
             padding: 0px 10px;
-            font-family: $OpenSansBoldFont;
+            font-family: $NunitoBoldFont;
         }
     }
 }
@@ -233,7 +233,7 @@
 
 .observation-section {
     h3 {
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
         margin-top: 10px;
     }
 
@@ -321,7 +321,7 @@
     overflow: auto;
 
     h5 {
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
         float: left;
         margin-right: 10px;
     }
@@ -423,7 +423,7 @@ table.ipd-investigation {
 .laborder-section,
 .observation {
     .temp-class {
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
     }
 
     table {
@@ -452,7 +452,7 @@ table.ipd-investigation {
 
     &.headerRow {
         background: $bahmniTableHeaderBg;
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
         padding: 5px 5px 5px 10px;
         color: $mediumGray;
     }
@@ -504,7 +504,7 @@ span.range {
 
 span.labPanel {
     font-weight: bold;
-    font-family: Helvetica,sans-serif !important;
+    font-family: Helvetica, sans-serif !important;
 }
 
 .laborder-section {
@@ -516,17 +516,17 @@ span.labPanel {
         }
 
         th.notes.inline-notes {
-            font-family: "OpenSans", Arial, sans-serif;
+            font-family: "Nunito", Arial, sans-serif;
         }
 
         tr.header td {
             background: $bahmniTableHeaderBg;
-            font-family: $OpenSansBoldFont;
+            font-family: $NunitoBoldFont;
             color: $mediumGray;
         }
 
         tr.header.pending-result td {
-            font-family: "OpenSans", Arial, sans-serif;
+            font-family: "Nunito", Arial, sans-serif;
             color: $darkGray;
         }
 
@@ -656,7 +656,7 @@ legend.mylegend {
 }
 
 .provider-info {
-    table td{
+    table td {
         vertical-align: top;
         padding-bottom: 15px;
         line-height: 1.5;
@@ -703,7 +703,7 @@ legend.mylegend {
 
         .visit-date {
             color: $darkGray;
-            font-family: $OpenSansBoldFont;
+            font-family: $NunitoBoldFont;
         }
     }
 
@@ -787,16 +787,19 @@ a.visit:before {
                         top: auto;
                     }
                 }
-                .ipd-indication:first-child{
+
+                .ipd-indication:first-child {
                     border-radius: 0 4px 0 0;
                     margin-bottom: 2px;
                 }
-                .icons-container{
+
+                .icons-container {
                     display: inline-grid;
                     position: absolute;
                     top: 0;
                     right: 0;
                 }
+
                 .custom-icon-style {
                     padding: 4px 15.289px;
                 }
@@ -834,10 +837,10 @@ a.visit:before {
                 }
 
                 .patient-gender-age {
-                    font-family: openSansBold;
+                    font-family: nunitoBold;
 
                     span {
-                        font-family: openSans;
+                        font-family: nunito;
                     }
                 }
 

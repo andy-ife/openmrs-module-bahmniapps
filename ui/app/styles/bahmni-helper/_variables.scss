@@ -177,10 +177,10 @@ Below listed fonts are used in the whole Bahmni application.
 
 ```html_example
   <div>
-   <span style="font-family: OpenSansBold;">font-family: $OpenSansBoldFont;</span><br/>
-   <span>font-family: $OpenSansFont;</span><br/>
-   <span style="font-family: OpenSansLight;">font-family: $primaryLightFont;</span><br/>
-   <span style="font-family: OpenSansItalic;"> font-family: $primaryItalicFont;</span><br/>
+   <span style="font-family: NunitoBold;">font-family: $NunitoBoldFont;</span><br/>
+   <span>font-family: $NunitoFont;</span><br/>
+   <span style="font-family: NunitoLight;">font-family: $primaryLightFont;</span><br/>
+   <span style="font-family: NunitoItalic;"> font-family: $primaryItalicFont;</span><br/>
   </div>
 ```
 
@@ -273,15 +273,15 @@ $largeSpacing: 20px;
 
 /* _fonts */
 
-$OpenSansBoldFont: OpenSansBold, Arial, sans-serif;
-$OpenSansFont: OpenSans, Arial, sans-serif;
+$NunitoBoldFont: NunitoBold, Arial, sans-serif;
+$NunitoFont: Nunito, Arial, sans-serif;
 
-$OpenSansSemiBoldFont: 'OpenSansSemiBold';
+$NunitoSemiBoldFont: 'NunitoSemiBold';
 
-$primaryFont: "OpenSans";
-$primaryBoldFont: "OpenSansBold";
-$primaryLightFont: "OpenSansLight";
-$primaryItalicFont: "OpenSansItalic";
+$primaryFont: "Nunito";
+$primaryBoldFont: "NunitoBold";
+$primaryLightFont: "NunitoLight";
+$primaryItalicFont: "NunitoItalic";
 
 
 /* _mixins */

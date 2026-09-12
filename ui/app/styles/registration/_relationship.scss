@@ -150,6 +150,7 @@
 
         .row {
             position: relative;
+
             &:nth-child(odd) {
                 background-color: #EFEFEF;
 
@@ -233,7 +234,7 @@
             font-size: 14px;
             white-space: nowrap;
             color: $mediumGray;
-            font-family: $OpenSansBoldFont;
+            font-family: $NunitoBoldFont;
             font-weight: normal;
         }
     }

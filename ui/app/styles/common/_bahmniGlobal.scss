@@ -17,6 +17,7 @@ p.caution {
 .clearfix {
   @include clearfix();
 }
+
 .asterick {
   color: red;
   display: inline-block;
@@ -40,17 +41,21 @@ input[file-upload] {
       float: left;
       width: 200px;
       margin-left: 20px;
+
       @media screen and (max-width: 1024px) {
         width: 170px;
       }
+
       @media screen and (max-width: 850px) {
         width: 156px;
       }
     }
+
     &.hasLegend {
       label {
         margin-left: 10px;
       }
+
       .offset-label {
         padding-left: 0px;
       }
@@ -61,8 +66,9 @@ input[file-upload] {
 .is-abnormal {
   color: red !important;
 }
+
 .is-abnormal-bold {
-  font-family: $OpenSansBoldFont !important;
+  font-family: $NunitoBoldFont !important;
   color: red !important;
 }
 
@@ -74,6 +80,7 @@ input[file-upload] {
   display: none;
   float: left;
 }
+
 .referred-out {
   .referred {
     display: inline-block;
@@ -93,6 +100,7 @@ input[file-upload] {
   padding: 5px 10px;
   margin-top: 7px;
   margin-right: 6px;
+
   span {
     font-size: 20px;
     color: $clinicalRemoveBtn;
@@ -104,6 +112,7 @@ input[file-upload] {
   cursor: pointer;
   margin-bottom: 0;
 }
+
 .section-toggle {
   background: none;
   border: none;
@@ -113,12 +122,14 @@ input[file-upload] {
     background: none;
     border: none;
   }
+
   i {
     padding: 0;
     font-size: 26px;
     color: green;
   }
 }
+
 .notes p.left {
   width: 80%;
   float: left;
@@ -135,27 +146,34 @@ input[file-upload] {
     margin: 0 5px;
   }
 }
+
 .quick-links {
   float: right;
 }
+
 button.save-consultation {
   float: right;
   margin: 8px 10px 0;
   padding: 10px 15px 9px;
 }
+
 button.save-consultation {
   &.hideSaveText {
     .fa-save {
       display: none;
     }
+
     .text {
       display: block;
     }
+
     @media screen and (max-width: 1024px) {
       padding: 19px 10px 13px;
+
       .text {
         display: none;
       }
+
       .fa-save {
         display: block;
       }
@@ -188,6 +206,7 @@ pre.chief-notes {
 .accept-btn.active {
   color: $bahmniTertiaryColor;
   padding-top: 7px;
+
   span:before {
     font-family: FontAwesome;
     content: '\f00c';
@@ -201,13 +220,16 @@ pre.chief-notes {
 
 .has-notes {
   color: orange;
+
   i {
     color: orange !important;
   }
 }
+
 /*home*/
 .bahmni-home {
   margin-bottom: 5px !important;
+
   .fa-home {
     color: $lightestGray;
     margin-right: 5px;
@@ -218,11 +240,12 @@ pre.chief-notes {
 .highlight {
   border-left: 5px solid orange;
 }
+
 u,
 .add-drug-btninput[value]:first-letter {
   text-decoration: none;
   border-bottom: 1px solid;
-  font-family: $OpenSansBoldFont;
+  font-family: $NunitoBoldFont;
 }
 
 .drug-dispensed {
@@ -242,6 +265,7 @@ u,
 .overflowAuto {
   overflow: auto;
 }
+
 .is-abnormal .select2-chosen {
   color: red !important;
 }
@@ -250,6 +274,7 @@ u,
   background: #fff;
   padding: 5px;
   color: #444 !important;
+
   p {
     margin-bottom: 0;
     color: #444 !important;
@@ -259,9 +284,11 @@ u,
 .fa-pencil,
 .fa-eye {
   cursor: pointer;
+
   &:hover {
     color: #5c8a93;
   }
+
   @media screen and (max-width: 1024px) {
     font-size: 20px;
   }
@@ -274,9 +301,11 @@ u,
 .clear-both {
   clear: both;
 }
+
 .select2-drop {
   z-index: 99999 !important;
 }
+
 .ng-dialog-all-details-page {
   .select2-container .select2-choice {
     height: 26px !important;
@@ -290,6 +319,7 @@ u,
   padding: 3px 0;
   border-radius: 3px;
   border: 1px solid $lightGray;
+
   span {
     display: inline-block;
     padding: 2px 10px;
@@ -301,10 +331,12 @@ u,
   margin: 15px 0 15px 25px;
   width: auto;
   position: relative;
+
   @media (max-width: 768px) {
     margin: 20px 0;
     width: 100%;
   }
+
   &:before {
     content: '';
     border-top: 1px $lightGray solid;
@@ -312,6 +344,7 @@ u,
     top: 14px;
     width: 96%;
   }
+
   span.mylegend {
     display: inline-block;
     width: auto;
@@ -320,17 +353,21 @@ u,
     margin-left: 25px;
     position: relative;
   }
+
   &.first-registraion_legend {
     margin-left: 0;
     margin-right: 0;
+
     &:before {
       width: 100%;
     }
   }
+
   &.removeLegend {
     &:before {
       display: none;
     }
+
     span.mylegend {
       display: none;
     }
@@ -342,10 +379,12 @@ u,
     .fa-caret-right {
       display: none;
     }
+
     .fa-caret-down {
       display: inline;
     }
   }
+
   .fa-caret-down {
     display: none;
   }
@@ -361,6 +400,7 @@ u,
   height: 190px;
   display: table;
   margin: 0 auto;
+
   &.disable {
     opacity: 0.1;
     pointer-events: none;
@@ -374,8 +414,7 @@ u,
   width: 100%;
   height: 100%;
   z-index: 10000;
-  background: rgba(223, 223, 223, 0.4) url('../images/spinner-small.gif')
-    no-repeat center center;
+  background: rgba(223, 223, 223, 0.4) url('../images/spinner-small.gif') no-repeat center center;
 }
 
 .print {
@@ -383,10 +422,12 @@ u,
     display: none;
   }
 }
+
 .spinnable {
   position: relative;
   min-height: 2em;
 }
+
 .ngdialog.ngdialog-theme-default .ngdialog-close {
   z-index: 999;
 }
@@ -396,6 +437,7 @@ u,
   width: fit-content;
   padding: 3px;
   height: 24px;
+
   i {
     color: #8e8e8e;
     width: auto !important;

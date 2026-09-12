@@ -7,43 +7,53 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
-.bacteriology-container{
+.bacteriology-container {
   font-size: 14px;
-  .illegalValue{
+
+  .illegalValue {
     border: 2px solid darken($clinicalFormInvalid, 30%) !important;
     background: $clinicalFormInvalid !important;
     outline: 0 !important;
   }
-  .sample-container{
+
+  .sample-container {
     margin-bottom: 20px;
   }
-  form{
+
+  form {
     overflow: hidden;
-    .field-value{
-      #sample-date{
-        margin-bottom:5px;
+
+    .field-value {
+      #sample-date {
+        margin-bottom: 5px;
       }
     }
   }
-  .add-sample-btn{
+
+  .add-sample-btn {
     padding: 6px 15px !important;
     margin: 5px 0 5px 5px;
   }
-  .box{
+
+  .box {
     margin: 10px 0;
     border: none;
     border-radius: 0;
-    .additionalAttributes{
-      .vitals .form-field{
+
+    .additionalAttributes {
+      .vitals .form-field {
         padding-top: 0 !important;
       }
-      .vitals.form-horizontal{
+
+      .vitals.form-horizontal {
         padding: 0;
-        .leaf-observation-node{
-          .multi-select-button-group{
+
+        .leaf-observation-node {
+          .multi-select-button-group {
             margin-top: 5px;
           }
-          .control-label{
+
+          .control-label {
             font-size: 14px;
           }
         }
@@ -51,26 +61,34 @@
     }
 
   }
-  .savedSpecimens-container{
+
+  .savedSpecimens-container {
     border: 2px #5B8989 solid;
     padding: 10px;
     border-radius: 3px;
     margin-bottom: 10px;
-    .savedSpecimens-action{
+
+    .savedSpecimens-action {
       font-size: 20px;
     }
-    .savedSpecimens-text{
+
+    .savedSpecimens-text {
       line-height: 1.5em;
     }
-    .fa{
+
+    .fa {
       margin-right: 10px;
     }
   }
-  .disableBacteriologyInRetroMode{
-    label{
+
+  .disableBacteriologyInRetroMode {
+    label {
       pointer-events: none;
     }
-    button, input, textarea {
+
+    button,
+    input,
+    textarea {
       pointer-events: none;
       background: $lightestGray;
       border: $lightGray 1px solid;
@@ -79,53 +97,62 @@
   }
 }
 
-.bacteriology-dashboard{
-  .specimen-info{
-    span{
+.bacteriology-dashboard {
+  .specimen-info {
+    span {
       display: inline-block;
       cursor: pointer;
-      &.specimenSource{
+
+      &.specimenSource {
         width: 55%;
       }
-      &.specimenId{
-        font-family: OpenSansSemiBold;
+
+      &.specimenId {
+        font-family: NunitoSemiBold;
       }
-      &.specimenCollectionDate{
+
+      &.specimenCollectionDate {
         width: 125px;
         text-align: right;
         padding-right: 10px;
       }
     }
   }
+
   /*.hierarchy ul li ul li .tree-list-item{
     padding-left: 40px;
   }*/
 }
-.dashboard-tabular-obs-section{
-  .tabular-obs{
+
+.dashboard-tabular-obs-section {
+  .tabular-obs {
     overflow: auto;
   }
-  table{
-    tr{
-      th{
+
+  table {
+    tr {
+      th {
         text-align: left;
-        font-family: OpenSansSemiBold;
+        font-family: NunitoSemiBold;
       }
     }
   }
 }
+
 .ngdialog-content {
-  .dashboard-tabular-obs-section{
-    .tabular-obs{
+  .dashboard-tabular-obs-section {
+    .tabular-obs {
       overflow: auto;
     }
-    table{
-      tr{
-        th{
-          width:155px;
+
+    table {
+      tr {
+        th {
+          width: 155px;
           border: 1px solid $lighterGray;
         }
-        td{
+
+        td {
           border: 1px solid $lighterGray;
         }
       }
@@ -133,20 +160,25 @@
   }
 }
 
-.edit-bacteriology-sample{
+.edit-bacteriology-sample {
   margin-top: 10px;
 }
 
-.bacteriology-results-wrapper{
-  .hierarchy ul li ul li, .hierarchy ul li ul li.has-child, .hierarchy ul li ul li.has-child ul li {
-    font-family: openSansBold;
+.bacteriology-results-wrapper {
+
+  .hierarchy ul li ul li,
+  .hierarchy ul li ul li.has-child,
+  .hierarchy ul li ul li.has-child ul li {
+    font-family: nunitoBold;
   }
+
   .hierarchy ul li ul li ul li .tree-list-item {
     background: $lighterGray;
-    font-family: openSansSemiBold !important;
+    font-family: nunitoSemiBold !important;
   }
+
   .hierarchy ul li ul li ul li ul li .tree-list-item {
     background: #fff;
-    font-family: openSans !important;
+    font-family: nunito !important;
   }
 }

@@ -289,7 +289,7 @@ category:  Layout - sections
         }
 
         .disease-date {
-            font-family: OpenSansSemiBold;
+            font-family: NunitoSemiBold;
             text-decoration: underline;
         }
 
@@ -371,7 +371,7 @@ category:  Layout - sections
 
     section {
         label.date {
-            font-family: $OpenSansBoldFont;
+            font-family: $NunitoBoldFont;
             background: $lightestGray;
             padding: 10px;
             display: block;
@@ -1035,7 +1035,7 @@ table.pivot-table {
         min-height: 40px;
         vertical-align: middle;
         font-weight: bold;
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
 
         &:first-letter {
             text-transform: capitalize;
@@ -1043,7 +1043,7 @@ table.pivot-table {
     }
 
     thead th {
-        font-family: OpenSans, Arial, sans-serif;
+        font-family: Nunito, Arial, sans-serif;
         font-weight: normal;
         border-right: 0;
     }
@@ -1085,7 +1085,7 @@ table.pivot-table {
                     display: inline-block;
                     margin-top: 3px;
                     font-weight: normal;
-                    font-family: OpenSans, Arial, sans-serif;
+                    font-family: Nunito, Arial, sans-serif;
                 }
             }
 
@@ -1271,7 +1271,7 @@ table.pivot-table {
 
     .tabular-obs table.tableAsColumn tr:first-child td {
         background: $lightestGray !important;
-        font-family: OpenSansSemiBold;
+        font-family: NunitoSemiBold;
         color: $darkGray;
     }
 
@@ -1395,7 +1395,7 @@ table.treatments-details-table {
         width: 100%;
         padding: 0px 0px;
         box-sizing: border-box;
-        font-family: openSansSemiBold;
+        font-family: nunitoSemiBold;
         height: 37px;
         overflow: hidden;
 
@@ -1483,7 +1483,7 @@ table.treatments-details-table {
 
             .gender-age {
                 font-weight: 300;
-                font-family: 'OpenSans';
+                font-family: 'Nunito';
             }
         }
     }

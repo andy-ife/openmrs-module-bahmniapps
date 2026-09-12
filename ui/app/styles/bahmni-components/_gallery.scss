@@ -123,7 +123,7 @@
             display: block;
             float: right;
             margin: 0px 0 10px;
-            font-family: openSansSemiBold;
+            font-family: nunitoSemiBold;
 
             &:hover {
                 text-decoration: underline;
@@ -221,7 +221,7 @@
 .image-title,
 .image-bottom-bar {
     font-size: 16px;
-    font-family: $OpenSansBoldFont;
+    font-family: $NunitoBoldFont;
 }
 
 .image-bottom-bar,
@@ -247,7 +247,7 @@
     background: $lightestGray;
 
     strong {
-        font-family: $OpenSansBoldFont;
+        font-family: $NunitoBoldFont;
     }
 }
 
@@ -284,7 +284,7 @@
 
     @media screen and (min-width: 992px) {
         float: left;
-        width: 70%;   
+        width: 70%;
     }
 }
 
@@ -407,7 +407,7 @@
 
             .image-bottom-bar {
                 text-align: left;
-                font-family: Opensans, Arial, sans-serif;
+                font-family: Nunito, Arial, sans-serif;
 
                 .image-preview-notes {
                     display: block;

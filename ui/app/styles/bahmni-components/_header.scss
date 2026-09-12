@@ -7,13 +7,15 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
-.header-wrapper{
+.header-wrapper {
     background: $bahmniSecondaryColor;
-    header{
-        height:52px;
-        max-width:$max-page-width;
+
+    header {
+        height: 52px;
+        max-width: $max-page-width;
         margin: 0 auto;
         position: relative;
+
         @media screen and (max-width: $max-page-width) {
             padding: 0 10px;
         }
@@ -27,9 +29,10 @@
     right: 5px;
     z-index: 1;
 }
+
 .patient-details a {
     font-size: 16px;
-    font-family: $OpenSansBoldFont;
+    font-family: $NunitoBoldFont;
     text-transform: capitalize;
     width: 22%;
     white-space: nowrap;
@@ -41,14 +44,16 @@
     border-radius: 5px;
     box-shadow: 0px 4px 5px -2px $lightGray;
     border: 1px solid $lightGray;
+
     &:hover {
         text-decoration: none;
     }
+
     @media screen and (max-width: 768px) {
         display: none;
     }
 }
 
-.reg-header-right{
-    width:auto;
+.reg-header-right {
+    width: auto;
 }

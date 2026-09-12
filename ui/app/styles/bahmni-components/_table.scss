@@ -114,116 +114,191 @@ category: Layout - Table
 */
 
 /*old styles - visit - diagnosis, diagnosis tab*/
-.table{
+.table {
   border: 0;
   @include font-size(0.9);
-  .row{
+
+  .row {
     @include clearfix();
-    border-bottom:1px solid $lightGray;
+    border-bottom: 1px solid $lightGray;
   }
-  .col{
-    padding:10px 0px;
+
+  .col {
+    padding: 10px 0px;
     @include font-size(0.9);
     @include column(11);
   }
 
-  .table-header{
+  .table-header {
     background: $lightestGray;
     border-bottom: 1px solid $lightGray;
+
     .col {
       @include font-size(1);
       font-weight: bold;
     }
   }
-  .table-body{
-    .row{
-      &:hover{
+
+  .table-body {
+    .row {
+      &:hover {
         background: $white;
       }
+
       &:nth-child(even) {
-          background: $lightestGray;
-        }
+        background: $lightestGray;
+      }
     }
   }
 }
 
 /*basic table*/
 table {
-	thead tr th{
-		background: $lighterGray;
+  thead tr th {
+    background: $lighterGray;
     padding: 7px;
     font-weight: bold;
-    font-family: $OpenSansFont;
-	}
-	tbody tr:nth-child(odd), tr:nth-child(even) {
-		background: $white;
-	}
+    font-family: $NunitoFont;
+  }
+
+  tbody tr:nth-child(odd),
+  tr:nth-child(even) {
+    background: $white;
+  }
+
   tr {
-    border: 0; /* this overrites the external settings */
+    border: 0;
+    /* this overrites the external settings */
     border-bottom: 1px solid $lighterGray;
   }
 }
 
 /*table with no border*/
 table.no-borders {
-	thead tr th {
-		background: $white;
-	}
-	th, tr, td {
-		border: 0;
-	}
+  thead tr th {
+    background: $white;
+  }
+
+  th,
+  tr,
+  td {
+    border: 0;
+  }
 }
 
 table.alt-row {
   tbody tr:nth-child(even) {
-     td, th {
+
+    td,
+    th {
       background-color: lighten($lightestGray, 2%);
     }
   }
 }
+
 /*table with horzontal borders*/
 table.horizontal-only {
-	th, td {
-		border: 0;
-	}
+
+  th,
+  td {
+    border: 0;
+  }
 }
 
 /*list mimic table*/
 ul.table-mimic {
-	li {
-		width: 100%;
-		border-bottom: 1px solid darken($lightestGray, 5%);
-		box-sizing: border-box;
-		@include clearfix();
-		&:last-child {
-          border-bottom: none;
-		}
-	}
+  li {
+    width: 100%;
+    border-bottom: 1px solid darken($lightestGray, 5%);
+    box-sizing: border-box;
+    @include clearfix();
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
 /*inline scroll table*/
 table.h-scroll {
-    width: 100%; border-collapse: collapse; border-spacing: 0;
-    display: block; position: relative;
-    font-size: 14px;
-    margin-top: 0;
-    overflow: auto;
-    tr { border: 1px solid $lighterGray; }
-    th, td { margin: 0; vertical-align: top; padding: 5px 10px; min-height: 26px;}
-    th { text-align: left; background: $lightestGray;}
-    th.drug {font-family: "OpenSans", Arial, sans-serif;}
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  position: relative;
+  font-size: 14px;
+  margin-top: 0;
+  overflow: auto;
 
-    thead { display: block; float: left; }
-    tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; font: inherit; overflow-y: hidden;}
-    thead tr { display: block; border: 0;}
-    th { display: block;}
-    tbody tr { display: table-cell; vertical-align: top; border-top: 0;}
-    td { display: block; text-align: center; }
+  tr {
+    border: 1px solid $lighterGray;
+  }
 
-      /* sort out borders */
-    th { border-bottom: 0; border-left: 0; }
-    td { border-left: 0; border-right: 0; border-bottom: 0; }
+  th,
+  td {
+    margin: 0;
+    vertical-align: top;
+    padding: 5px 10px;
+    min-height: 26px;
+  }
+
+  th {
+    text-align: left;
+    background: $lightestGray;
+  }
+
+  th.drug {
+    font-family: "Nunito", Arial, sans-serif;
+  }
+
+  thead {
+    display: block;
+    float: left;
+  }
+
+  tbody {
+    display: block;
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+    font: inherit;
+    overflow-y: hidden;
+  }
+
+  thead tr {
+    display: block;
+    border: 0;
+  }
+
+  th {
+    display: block;
+  }
+
+  tbody tr {
+    display: table-cell;
+    vertical-align: top;
+    border-top: 0;
+  }
+
+  td {
+    display: block;
+    text-align: center;
+  }
+
+  /* sort out borders */
+  th {
+    border-bottom: 0;
+    border-left: 0;
+  }
+
+  td {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
 }
+
 // add horizontal scroll to whole table.
 .table-scroll-x {
   overflow-x: scroll;

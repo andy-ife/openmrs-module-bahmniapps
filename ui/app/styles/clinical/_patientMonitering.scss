@@ -35,7 +35,7 @@
     width:auto;
     float: right;
     border: 1px solid $darkerGrey;
-    font-family: $OpenSansFont;
+    font-family: $NunitoFont;
     span{
       padding:0 5px;
       font-size: 12px;
@@ -109,7 +109,7 @@
           }
         }
         th {
-          font-family: $OpenSansFont;
+          font-family: $NunitoFont;
           background: #d6d6d6;
           &.current-month {
             background: #9a9a9a;
