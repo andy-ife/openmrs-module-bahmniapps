@@ -15,7 +15,7 @@
   color: #ffffff;
   font-size: 16px;
   clear: both;
-  background: #669999;
+  background: #3772AC;
   position: relative;
   border-radius: 2px 2px 0 0;
 }
@@ -29,10 +29,12 @@
     width: 42%;
     margin-right: 2%;
   }
+
   .form-date-time {
     width: 28%;
     margin-right: 2%;
   }
+
   .provider-name {
     width: 27%;
   }
@@ -55,6 +57,7 @@
   border-bottom-color: #d9d7d7;
   border-bottom-width: thin;
   padding-bottom: 5px;
+
   &:last-child {
     border-bottom: none;
   }
@@ -63,10 +66,12 @@
 .form-non-accordion-text {
   font-family: OpenSans, Arial, sans-serif;
   font-size: 14px;
+
   &:last-child {
     text-align: right;
   }
 }
+
 .form-date-align {
   text-align: left;
 }
@@ -106,5 +111,5 @@
 }
 
 .fa-pencil:hover {
-  color: #669999;
+  color: #3772AC;
 }
