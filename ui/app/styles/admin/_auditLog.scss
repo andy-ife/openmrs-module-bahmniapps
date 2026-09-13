@@ -23,16 +23,16 @@
     color: #FFFFFF;
     font-size: 16px;
     clear: both;
-    background: #669999;
+    background: #3772AC;
     position: relative;
     border-radius: 2px 2px 0 0;
   }
 
   .button {
     border-radius: 3px;
-    background: linear-gradient(to bottom, #A1D030, #88af28);
-    background-color: #88af28;
-    border: #88af28 1px solid;
+    background: linear-gradient(to bottom, #22DDD0, #1BB1A6);
+    background-color: #1BB1A6;
+    border: #1BB1A6 1px solid;
     padding: 5px 14px;
     display: inline-block;
     line-height: 1.2em;
@@ -42,12 +42,12 @@
     max-width: 300px;
     text-decoration: none;
     font-size: 12px;
-    border-color: #7b9f24;
+    border-color: #14847C;
     float: right;
 
     &:hover {
-      background: #8eb82a;
-      border-color: #779b23;
+      background: #1BB1A6;
+      border-color: #14847C;
     }
   }
 }
