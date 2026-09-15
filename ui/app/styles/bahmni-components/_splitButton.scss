@@ -8,43 +8,51 @@
  */
 
 .split-button {
-    overflow:hidden;
+    overflow: hidden;
     margin: 2px;
     border-radius: 3px;
+
     ul {
         border-radius: 3px 0 0 3px;
-        border-right:none;
-        float:left;
+        border-right: none;
+        float: left;
         margin-bottom: 5px;
-        &.hidden-options{
+
+        &.hidden-options {
             width: 250px;
             margin-top: 1px;
-            box-shadow:1px 2px 2px #6B6969;
+            box-shadow: 1px 2px 2px #6B6969;
             float: none;
             z-index: 9999;
-            background: #8eb82a;
+            background: #1BB1A6;
             border-bottom: none;
             color: #fff;
             clear: both;
             border-right: 0;
             position: absolute;
         }
+
         li {
-            font-size:.9em;
-            &.primaryOption{
+            font-size: .9em;
+
+            &.primaryOption {
                 width: 250px;
-                button{
+
+                button {
                     text-align: left;
                 }
             }
+
             &.secondaryOption {
                 display: none;
                 border-bottom: 1px solid #699007;
                 background: none;
+
                 &:last-child {
                     border-bottom: 1px solid $lightGray;
                     border-radius: 0 0 3px 3px;
                 }
+
                 button {
                     border-radius: 0;
                     text-align: left;
@@ -52,36 +60,44 @@
                     margin: 2px 0;
                     background: none;
                     color: #fff;
+
                     &:hover {
                         background: $bahmniPrimaryBtnColor;
                     }
                 }
+
                 &:hover {
                     background: $bahmniPrimaryBtnColor;
                 }
             }
-            button{
+
+            button {
                 margin: 0;
                 font-size: 14px;
                 width: 100%;
                 margin-right: 0 !important;
+
                 &:focus {
                     outline: 2px solid $clinicalFormFocus;
                 }
             }
         }
     }
+
     .toggle-button {
         margin-top: 0;
         margin-right: 0 !important;
-        &:focus{
+
+        &:focus {
             outline: 2px solid $clinicalFormFocus;
         }
     }
 }
 
 .split-button {
-    .primaryOption button, .toggle-button {
+
+    .primaryOption button,
+    .toggle-button {
         @extend .confirm;
     }
 }
