@@ -7,6 +7,8 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
+ @import "../../../styles/variables";
+
 .edit-observation-form-modal {
   .bx--modal-container {
     background: #f0f0f0;
@@ -17,12 +19,12 @@
   }
 
   .content-body {
-    border: 1px solid #3772AC;
+    border: 1px solid $bahmniSecondaryColor;
     box-shadow: 0px 4px 4px 0px #0000004f;
   }
 
   .section-title-wrapper {
-    background: #3772AC;
+    background: $bahmniSecondaryColor;
     padding-right: 10px;
     display: flex;
     justify-content: space-between;
@@ -39,7 +41,7 @@
     color: #ffffff;
     font-size: 16px;
     clear: both;
-    background: #3772AC;
+    background: $bahmniSecondaryColor;
     position: sticky;
     border-radius: 0;
     top: 0;
@@ -47,9 +49,9 @@
 
   .confirm {
     border-radius: 3px;
-    background: linear-gradient(to bottom, #22DDD0, #1BB1A6);
-    background-color: #1BB1A6;
-    border: #1BB1A6 1px solid;
+    background: linear-gradient(to bottom, $success, $successLow);
+    background-color: $successLow;
+    border: $successLow 1px solid;
     padding: 6px 20px 7px;
     display: inline-block;
     line-height: 1.2em;

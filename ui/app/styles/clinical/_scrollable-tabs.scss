@@ -27,7 +27,7 @@
     white-space: nowrap;
   }
 
-  [class^="arrow"]  {
+  [class^="arrow"] {
     position: absolute;
     outline: none;
     border: 0;
@@ -37,7 +37,7 @@
     bottom: 1px;
     font-size: 20px;
     color: white;
-    background: #527a7a;
+    background: $successLowest;
     z-index: 1;
 
     &:hover,
@@ -57,8 +57,8 @@
   .arrow-left {
     left: 0;
 
-    &:before{
-      background: linear-gradient(to right, #527a7a 0%, rgba(255,255,255,0) 95%);
+    &:before {
+      background: linear-gradient(to right, $successLowest 0%, rgba(255, 255, 255, 0) 95%);
       left: 25px;
     }
   }
@@ -66,8 +66,8 @@
   .arrow-right {
     right: 0;
 
-    &:before{
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, #527a7a 95%);
+    &:before {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, $successLowest 95%);
       right: 25px;
     }
   }

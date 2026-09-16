@@ -118,7 +118,7 @@
     .order-grid {
         border: 1px solid $bahmniSecondaryColor;
         border-radius: 5px 5px 0 0;
-        background: #FFFFFF;
+        background: $white;
         margin-bottom: 10px;
     }
 
@@ -133,7 +133,7 @@
         padding: 10px;
         margin-top: 0;
         margin-bottom: 0;
-        color: #FFFFFF;
+        color: $white;
         font-size: 16px;
         clear: both;
         overflow: auto;
@@ -215,7 +215,7 @@
 
                 ul li {
                     &.active a {
-                        background: #70B8FF;
+                        background: $bahmniTertiaryColor;
                     }
                 }
 
@@ -227,7 +227,7 @@
                     border-bottom: 1px $white solid;
 
                     &:hover {
-                        background: #70B8FF;
+                        background: $bahmniTertiaryColor;
                     }
                 }
 
@@ -268,7 +268,7 @@
                         display: block;
                         padding: 4px 0;
                         text-align: center;
-                        background-color: #3772AC;
+                        background-color: $bahmniSecondaryColor;
                     }
 
                 }
@@ -375,7 +375,7 @@
             border-top: 0;
 
             h2.section-title {
-                background: #70B8FF;
+                background: $bahmniTertiaryColor;
                 border-radius: 5px 5px 0 0;
             }
         }
@@ -404,7 +404,7 @@
     text-align: right;
     margin-left: 2px;
     margin-top: -10px;
-    background-color: #1BB1A6;
+    background-color: $successLow;
     padding: 2px 6px;
     font-size: 13px;
 }

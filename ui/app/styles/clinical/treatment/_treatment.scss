@@ -99,8 +99,8 @@
     .dosage-frequency {
         padding: 5px 8px;
         border-radius: 20px;
-        background-color: #70B8FF;
-        color: #fff;
+        background-color: $bahmniTertiaryColor;
+        color: $white;
         box-sizing: border-box;
         width: fit-content;
 
@@ -389,7 +389,7 @@
 
         .treatment-data-container,
         .order-set-container {
-            background: #fff;
+            background: $white;
             border-radius: 3px;
             box-sizing: border-box;
             z-index: 999;
@@ -521,7 +521,7 @@
                         bottom: 0px;
                         line-height: 1;
                         color: $darkGray;
-                        text-shadow: 0 1px 0 #fff;
+                        text-shadow: 0 1px 0 $white;
                     }
                 }
 
@@ -537,9 +537,9 @@
                         text-align: center;
                         border-radius: 100%;
                         font-size: 20px;
-                        color: #3772AC;
+                        color: $bahmniSecondaryColor;
                         box-shadow: 1px 1px 1px #ccc;
-                        background: #FFFFFF;
+                        background: $white;
                         padding: 0;
                         margin-left: 5px;
                     }
@@ -553,7 +553,7 @@
                     font-weight: bold;
                     line-height: 1;
                     color: #000;
-                    text-shadow: 0 1px 0 #fff;
+                    text-shadow: 0 1px 0 $white;
                     background: transparent;
                     width: 1.5rem;
                     height: 1.5rem;
@@ -782,7 +782,7 @@
                 font-weight: bold;
                 line-height: 1;
                 color: #000;
-                text-shadow: 0 1px 0 #fff;
+                text-shadow: 0 1px 0 $white;
                 background: transparent;
                 width: 1.5rem;
                 height: 1.5rem;

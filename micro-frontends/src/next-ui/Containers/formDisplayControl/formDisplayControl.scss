@@ -7,6 +7,8 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 
+ @import "../../../styles/variables";
+
 .forms-display-control-section-title {
   font-family: Nunito, Arial, sans-serif;
   padding: 10px;
@@ -15,7 +17,7 @@
   color: #ffffff;
   font-size: 16px;
   clear: both;
-  background: #3772AC;
+  background: $bahmniSecondaryColor;
   position: relative;
   border-radius: 2px 2px 0 0;
 }
@@ -111,5 +113,5 @@
 }
 
 .fa-pencil:hover {
-  color: #3772AC;
+  color: $bahmniSecondaryColor;
 }
