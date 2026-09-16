@@ -11,12 +11,12 @@
   color: $black;
 
   strong {
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
   }
 
   .typeOfPrograms {
     background: $lightGray;
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
     font-size: 15px;
     padding: 10px;
   }
@@ -76,7 +76,7 @@
         th {
           background: #fff !important;
           border: none !important;
-          font-family: nunitoSemiBold;
+          font-family: $primarySemiBoldFont;
           border-bottom: 2px $lightGray solid !important;
           padding-left: 0;
         }

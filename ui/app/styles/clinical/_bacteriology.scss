@@ -108,7 +108,7 @@
       }
 
       &.specimenId {
-        font-family: NunitoSemiBold;
+        font-family: $primarySemiBoldFont;
       }
 
       &.specimenCollectionDate {
@@ -133,7 +133,7 @@
     tr {
       th {
         text-align: left;
-        font-family: NunitoSemiBold;
+        font-family: $primarySemiBoldFont;
       }
     }
   }
@@ -169,16 +169,16 @@
   .hierarchy ul li ul li,
   .hierarchy ul li ul li.has-child,
   .hierarchy ul li ul li.has-child ul li {
-    font-family: nunitoBold;
+    font-family: $primaryBoldFont;
   }
 
   .hierarchy ul li ul li ul li .tree-list-item {
     background: $lighterGray;
-    font-family: nunitoSemiBold !important;
+    font-family: $primarySemiBoldFont!important;
   }
 
   .hierarchy ul li ul li ul li ul li .tree-list-item {
     background: #fff;
-    font-family: nunito !important;
+    font-family: $primaryFont!important;
   }
 }

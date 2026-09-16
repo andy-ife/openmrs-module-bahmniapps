@@ -23,7 +23,7 @@
   }
 
   .program-title {
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
     color: #000;
     font-size: 20px;
     margin-top: 40px;
@@ -43,7 +43,7 @@
       border: none;
       box-shadow: none;
       padding: 0;
-      font-family: nunitoSemiBold;
+      font-family: $primarySemiBoldFont;
 
       &:hover,
       &:active,
@@ -57,7 +57,7 @@
 
   .programName {
     font-size: 16px;
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
     margin-bottom: 5px;
   }
 
@@ -117,7 +117,7 @@
       padding-right: 0 !important;
 
       span {
-        font-family: nunitoSemiBold;
+        font-family: $primarySemiBoldFont;
         font-size: 12px;
       }
     }
@@ -146,7 +146,7 @@
   box-sizing: border-box;
 
   .section-title {
-    font-family: Nunito, Arial, sans-serif;
+    font-family: $primaryFont;
     padding: 10px;
     margin-top: 0;
     margin-bottom: 0;
@@ -162,7 +162,7 @@
     color: $white;
     font-size: 16px;
     display: block;
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
   }
 
   .select-program-option {
@@ -258,7 +258,7 @@
     background: #E4E4E4;
     border-radius: 5px;
     font-size: 11px;
-    font-family: nunitoSemiBold;
+    font-family: $primarySemiBoldFont;
   }
 
   .timeline-view {

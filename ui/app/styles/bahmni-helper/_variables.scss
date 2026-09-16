@@ -274,16 +274,11 @@ $largeSpacing: 20px;
 
 
 /* _fonts */
-
-$NunitoBoldFont: NunitoBold, Arial, sans-serif;
-$NunitoFont: Nunito, Arial, sans-serif;
-
-$NunitoSemiBoldFont: 'NunitoSemiBold';
-
-$primaryFont: "Nunito";
-$primaryBoldFont: "NunitoBold";
-$primaryLightFont: "NunitoLight";
-$primaryItalicFont: "NunitoItalic";
+$primaryFont: "Nunito", Arial, sans-serif;
+$primaryBoldFont: "NunitoBold", Arial, sans-serif;
+$primaryLightFont: "NunitoLight", Arial, sans-serif;
+$primaryItalicFont: "NunitoItalic", Arial, sans-serif;
+$primarySemiBoldFont: "NunitoSemiBold", Arial, sans-serif;
 
 
 /* _mixins */

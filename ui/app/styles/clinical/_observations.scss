@@ -50,7 +50,7 @@
       top: 7px;
       left: 20px;
       padding: 5px 10px;
-      font-family: $NunitoBoldFont;
+      font-family: $primaryBoldFont;
       font-size: 14px;
       color: $mediumGray;
       border: 1px solid lighten($mediumGray, 20%);
@@ -262,7 +262,7 @@ concept-set {
 
       button {
         font-size: 12px;
-        font-family: Nunito, Arial, sans-serif;
+        font-family: $primaryFont;
       }
     }
 
@@ -835,7 +835,7 @@ concept-set {
           a {
             background: darken($bahmniSecondaryColor, 10%);
             color: $white;
-            font-family: $NunitoSemiBoldFont;
+            font-family: $primarySemiBoldFont;
           }
 
           .fa-plus {

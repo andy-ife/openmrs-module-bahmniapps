@@ -52,7 +52,7 @@ use either a `<div>` or an `<section>` element:
 
 
 h2.section-title {
-	font-family: $NunitoFont;
+	font-family: $primaryFont;
 	padding: $defaultSpacing;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -141,7 +141,7 @@ table {
 	.title {
 		float: left;
 		margin-right: $smallestSpacing;
-		font-family: $NunitoBoldFont;
+		font-family: $primaryBoldFont;
 		display: inline;
 	}
 

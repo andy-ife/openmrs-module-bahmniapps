@@ -80,7 +80,7 @@
         gap: 5px;
         width: calc(100% - 20px);
         font-size: 14px;
-        font-family: $NunitoFont;
+        font-family: $primaryFont;
         padding-left: 10px;
         line-height: 1.1;
         flex-wrap: wrap;
@@ -113,7 +113,7 @@
     div.start-date span {
         line-height: 1em;
         padding-top: 7px;
-        font-family: NunitoSemiBold;
+        font-family: $primarySemiBoldFont;
         font-size: 12px;
         color: $mediumGray;
         display: block;
@@ -181,7 +181,7 @@
 
         button.ipd-btn,
         button.dispense-btn {
-            font-family: NunitoBold;
+            font-family: $primaryBoldFont;
             color: $bahmniTertiaryColor;
             padding: 0 7px;
             width: auto;
@@ -454,7 +454,7 @@
 
             h3.orderSet-additional-info,
             h3.cdss-alerts {
-                font-family: NunitoBold;
+                font-family: $primaryBoldFont;
                 color: $darkGray;
                 font-size: 13px;
                 border-bottom: 1px solid $lightGray;
@@ -682,7 +682,7 @@
         }
 
         h3.orderSet-additional-info {
-            font-family: NunitoBold;
+            font-family: $primaryBoldFont;
             color: $darkGray;
             font-size: 13px;
             border-bottom: 1px solid $lightGray;

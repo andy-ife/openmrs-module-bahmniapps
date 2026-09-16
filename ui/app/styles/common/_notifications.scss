@@ -76,7 +76,7 @@ category: Components - Alerts
 		border-radius: 2px;
 		font-size: 14px;
 		color: #FFF;
-		font-family: NunitoSemiBold;
+		font-family: $primarySemiBoldFont;
 		text-align: center;
 		position: fixed;
 		top: 50px;
@@ -126,7 +126,7 @@ category: Components - Alerts
 			.review-btn,
 			.discard-btn {
 				padding: 5px;
-				font-family: NunitoSemiBold;
+				font-family: $primarySemiBoldFont;
 				font-size: 12px;
 				width: 74px;
 			}

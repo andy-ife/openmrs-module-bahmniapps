@@ -54,7 +54,7 @@
           background: #fff;
           border: none;
           color: #363463;
-          font-family: nunito;
+          font-family: $primaryFont;
           font-size: 15px;
         }
       }
@@ -73,7 +73,7 @@
             width: 16%;
             border: none;
             text-align: right;
-            font-family: nunito;
+            font-family: $primaryFont;
             font-size: 15px;
             padding-right: 10px;
           }

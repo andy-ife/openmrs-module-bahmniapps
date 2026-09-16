@@ -14,7 +14,7 @@
 
   &.active {
     background: rgba(0, 0, 0, 0.5);
-    font-family: Nunito;
+    font-family: $primaryFont;
   }
 }
 
@@ -43,7 +43,7 @@
   background: #fff;
 
   .service-title {
-    font-family: Nunito, Arial, sans-serif;
+    font-family: $primaryFont;
     padding: 10px;
     margin: 0 0 10px;
     font-size: 16px;

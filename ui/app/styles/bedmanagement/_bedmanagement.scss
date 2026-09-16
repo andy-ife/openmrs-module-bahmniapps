@@ -581,7 +581,7 @@ div[ng-app="adt"] {
     }
 
     .no-data-info {
-      font-family: nunitoBold;
+      font-family: $primaryBoldFont;
       padding: 10px 0;
       display: inline-block;
       text-align: center;

@@ -36,7 +36,7 @@ html {
 }
 
 body {
-  font-family: $NunitoFont, Arial, sans-serif;
+  font-family: $primaryFont;
   -webkit-font-smoothing: subpixel-antialiased;
   background: $bahmniPageBg;
   color: $text;
@@ -48,7 +48,7 @@ body {
     background: none;
     margin: 0;
     padding: 0;
-    font-family: $NunitoFont, Arial, sans-serif;
+    font-family: $primaryFont;
     font-size: 14px;
   }
 }

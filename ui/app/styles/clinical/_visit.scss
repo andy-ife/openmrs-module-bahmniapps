@@ -23,15 +23,15 @@
     }
 
     .hierarchy ul li ul li.has-child {
-        font-family: NunitoSemiBold;
+        font-family: $primarySemiBoldFont;
         background: $lightestGray;
 
         ul li {
-            font-family: Nunito;
+            font-family: $primaryFont;
             background: #fff;
 
             &.has-child {
-                font-family: Nunito;
+                font-family: $primaryFont;
                 background: #fff;
             }
 
@@ -93,7 +93,7 @@
             color: #274b59;
             float: left;
             padding: 0px 10px;
-            font-family: $NunitoBoldFont;
+            font-family: $primaryBoldFont;
         }
     }
 }
@@ -233,7 +233,7 @@
 
 .observation-section {
     h3 {
-        font-family: $NunitoBoldFont;
+        font-family: $primaryBoldFont;
         margin-top: 10px;
     }
 
@@ -321,7 +321,7 @@
     overflow: auto;
 
     h5 {
-        font-family: $NunitoBoldFont;
+        font-family: $primaryBoldFont;
         float: left;
         margin-right: 10px;
     }
@@ -423,7 +423,7 @@ table.ipd-investigation {
 .laborder-section,
 .observation {
     .temp-class {
-        font-family: $NunitoBoldFont;
+        font-family: $primaryBoldFont;
     }
 
     table {
@@ -452,7 +452,7 @@ table.ipd-investigation {
 
     &.headerRow {
         background: $bahmniTableHeaderBg;
-        font-family: $NunitoBoldFont;
+        font-family: $primaryBoldFont;
         padding: 5px 5px 5px 10px;
         color: $mediumGray;
     }
@@ -516,17 +516,17 @@ span.labPanel {
         }
 
         th.notes.inline-notes {
-            font-family: "Nunito", Arial, sans-serif;
+            font-family: $primaryFont;
         }
 
         tr.header td {
             background: $bahmniTableHeaderBg;
-            font-family: $NunitoBoldFont;
+            font-family: $primaryBoldFont;
             color: $mediumGray;
         }
 
         tr.header.pending-result td {
-            font-family: "Nunito", Arial, sans-serif;
+            font-family: $primaryFont;
             color: $darkGray;
         }
 
@@ -703,7 +703,7 @@ legend.mylegend {
 
         .visit-date {
             color: $darkGray;
-            font-family: $NunitoBoldFont;
+            font-family: $primaryBoldFont;
         }
     }
 
@@ -837,10 +837,10 @@ a.visit:before {
                 }
 
                 .patient-gender-age {
-                    font-family: nunitoBold;
+                    font-family: $primaryBoldFont;
 
                     span {
-                        font-family: nunito;
+                        font-family: $primaryFont;
                     }
                 }
 

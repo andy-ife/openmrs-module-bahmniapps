@@ -123,7 +123,7 @@
             display: block;
             float: right;
             margin: 0px 0 10px;
-            font-family: nunitoSemiBold;
+            font-family: $primarySemiBoldFont;
 
             &:hover {
                 text-decoration: underline;
@@ -221,7 +221,7 @@
 .image-title,
 .image-bottom-bar {
     font-size: 16px;
-    font-family: $NunitoBoldFont;
+    font-family: $primaryBoldFont;
 }
 
 .image-bottom-bar,
@@ -247,7 +247,7 @@
     background: $lightestGray;
 
     strong {
-        font-family: $NunitoBoldFont;
+        font-family: $primaryBoldFont;
     }
 }
 
@@ -407,7 +407,7 @@
 
             .image-bottom-bar {
                 text-align: left;
-                font-family: Nunito, Arial, sans-serif;
+                font-family: $primaryFont;
 
                 .image-preview-notes {
                     display: block;
