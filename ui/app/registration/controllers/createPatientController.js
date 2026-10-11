@@ -170,6 +170,17 @@ angular.module('bahmni.registration')
             };
 
             var createPatient = function (jumpAccepted) {
+                if ($scope.patient.primaryIdentifier.selectedIdentifierSource.name === "UIC") {
+                    // create UIC id in specified format
+                    var lastTwoFirstName = $scope.patient.givenName.slice(-2).toUpperCase();
+                    var lastTwoMotherName = $scope.patient.motherName.slice(-2).toUpperCase();
+                    var lastTwoBirthDate = ('' + $scope.patient.birthdate.getFullYear()).slice(-2);
+                    var lastThreeDistrict = $scope.patient.address.cityVillage.slice(-3).toUpperCase();
+                    var birthOrder = ("0" + $scope.patient.birthOrder).slice(-2);
+                    var genderCode = $scope.patient.gender === "F" ? 1 : $scope.patient.gender === "M" ? 2 : 3;
+
+                    $scope.patient.primaryIdentifier.identifier = lastTwoFirstName + lastTwoMotherName + lastTwoBirthDate + lastThreeDistrict + birthOrder + genderCode;
+                }
                 return patientService.create($scope.patient, jumpAccepted).then(function (response) {
                     enrolFingerprints(response).then(function (_) {
                         copyPatientProfileDataToScope(response);
@@ -227,6 +238,16 @@ angular.module('bahmni.registration')
             $scope.create = function () {
                 addNewRelationships();
                 var errorMessages = Bahmni.Common.Util.ValidationUtil.validate($scope.patient, $scope.patientConfiguration.attributeTypes);
+                // Check our custom patient attributes. fieldValidation.js didn't work
+                if (!$scope.patient.address.cityVillage || !/^[\w\s]+$/.test($scope.patient.address.cityVillage)) {
+                    errorMessages.push("REGISTRATION_ADDRESS_TEXT_ERROR_KEY");
+                }
+                if (!$scope.patient.motherName || !/^[\w\s]+$/.test($scope.patient.motherName)) {
+                    errorMessages.push("REGISTRATION_MOTHER_NAME_TEXT_ERROR_KEY");
+                }
+                if (!$scope.patient.birthOrder || !/^\d+$/.test(String($scope.patient.birthOrder))) {
+                    errorMessages.push("REGISTRATION_BIRTH_ORDER_ERROR_KEY");
+                }
                 if (errorMessages.length > 0) {
                     errorMessages.forEach(function (errorMessage) {
                         messagingService.showMessage('error', errorMessage);
