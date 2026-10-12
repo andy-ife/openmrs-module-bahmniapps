@@ -162,7 +162,12 @@ angular.module('bahmni.clinical')
                             || form.uuid === WV.nsepServiceDeliveryForm
                             || form.uuid === WV.referralAndLinkageERegisterForm
                             || form.uuid === WV.viralLoadMonitoringForm
-                            || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.secondVitalsForm
+                            || form.uuid === WV.nationalStiManagementeRegisterForm
+                            || form.uuid === WV.outcomeOfFamilyTestingForBiologicalChildrenForm
+                            || form.uuid === WV.indexClientUptakeForm
+                            || form.uuid === WV.gbvScreeningForIndexClientForm
+                            || form.uuid === WV.gbvOutcomeOfContactTestingForm;
                     });
                 }
                 else if (programUuid === WV.kpProgram) {
@@ -176,7 +181,10 @@ angular.module('bahmni.clinical')
                             || form.uuid === WV.swaaslEncounterForm
                             || form.uuid === WV.swaaslFaceToFaceMeetingForm
                             || form.uuid === WV.swaaslSlvdclEncounterForm
-                            || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.secondVitalsForm
+                            || form.uuid === WV.nationalStiManagementeRegisterForm
+                            || form.uuid === WV.gbvScreeningForIndexClientForm
+                            || form.uuid === WV.gbvOutcomeOfContactTestingForm;
                     });
                 }
                 else if (programUuid === WV.prepProgram) {
@@ -186,13 +194,17 @@ angular.module('bahmni.clinical')
                             || form.uuid === WV.missedAppointmentFollowupForm
                             || form.uuid === WV.hctConsentForm
                             || form.uuid === WV.hivSelfTestingERegisterForm
-                            || form.uuid === WV.hivSelfTestingERegisterForm
+                            || form.uuid === WV.htsERegisterForm
                             || form.uuid === WV.nsepServiceDeliveryForm
                             || form.uuid === WV.prepClientERegisterForm
                             || form.uuid === WV.prepRASTForm
                             || form.uuid === WV.referralAndLinkageERegisterForm
                             || form.uuid === WV.swaaslSlvdclEncounterForm
-                            || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.secondVitalsForm
+                            || form.uuid === WV.nationalStiManagementeRegisterForm
+                            || form.uuid === WV.preExposureProphylaxisClientERegisterForm
+                            || form.uuid === WV.gbvScreeningForIndexClientForm
+                            || form.uuid === WV.gbvOutcomeOfContactTestingForm;
                     });
                 } else if (programUuid === WV.pepProgram) {
                     // PEP Program
@@ -205,7 +217,10 @@ angular.module('bahmni.clinical')
                             || form.uuid === WV.nsepServiceDeliveryForm
                             || form.uuid === WV.referralAndLinkageERegisterForm
                             || form.uuid === WV.swaaslSlvdclEncounterForm
-                            || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.secondVitalsForm
+                            || form.uuid === WV.nationalStiManagementeRegisterForm
+                            || form.uuid === WV.gbvScreeningForIndexClientForm
+                            || form.uuid === WV.gbvOutcomeOfContactTestingForm;
                     });
                 } else if (programUuid === WV.eidProgram) {
                     // EID Program
@@ -221,7 +236,10 @@ angular.module('bahmni.clinical')
                             || form.uuid === WV.referralAndLinkageERegisterForm
                             || form.uuid === WV.nsepServiceDeliveryForm
                             || form.uuid === WV.swaaslSlvdclEncounterForm
-                            || form.uuid === WV.secondVitalsForm;
+                            || form.uuid === WV.secondVitalsForm
+                            || form.uuid === WV.nationalStiManagementeRegisterForm
+                            || form.uuid === WV.gbvScreeningForIndexClientForm
+                            || form.uuid === WV.gbvOutcomeOfContactTestingForm;
                     });
                 }
                 return filteredForms;

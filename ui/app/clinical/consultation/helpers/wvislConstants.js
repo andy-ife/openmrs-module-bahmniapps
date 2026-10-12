@@ -36,5 +36,11 @@ angular.module('bahmni.clinical').constant('WV', {
     referralAndLinkageERegisterForm: "125b9ba0-cd85-4a3a-a299-ec51a80d3881",
     infantOutcomeAt18MonthsForm: "62e066d7-896e-4b9b-bc49-7e37d2918bff",
     infantHealthFacilityVisitForm: "10a6bd8a-87a2-4084-9217-2a7facf7c213",
-    infantPcrTestingForm: "5a5f89fa-6105-43d7-b15b-74caef3fcaae"
+    infantPcrTestingForm: "5a5f89fa-6105-43d7-b15b-74caef3fcaae",
+    nationalStiManagementeRegisterForm: "7d611887-0ac9-4435-ab1d-6d519670408d",
+    preExposureProphylaxisClientERegisterForm: "683b587e-d428-4364-8677-936d7c05cfb4",
+    outcomeOfFamilyTestingForBiologicalChildrenForm: "ad33424e-3a06-4232-a3a0-181a5bda164d",
+    indexClientUptakeForm: "a910c19d-59c9-4bff-bae9-a19afc3b66a2",
+    gbvScreeningForIndexClientForm: "93731bc1-2f95-4283-a6d4-f5206ebed773",
+    gbvOutcomeOfContactTesting: "3fa0d2c9-4c1c-431e-93e7-fe58f65f82ba"
 });
