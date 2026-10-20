@@ -165,7 +165,7 @@
     "REGISTRATION_SCAN_LABEL": "Scan",
     "REGISTRATION_LABEL_SEARCH_FINGERPRINT": "Fingerprint Search",
     "REGISTRATION_NO_MATCH_FOUND": "No biometric match found",
-    "REGISTRATION_MOTHER_NAME_TEXT_ERROR_KEY": "Please provide Mother's Maiden Name",
+    "REGISTRATION_MOTHER_NAME_TEXT_ERROR_KEY": "Please provide Mother's Name",
     "REGISTRATION_BIRTH_ORDER_ERROR_KEY": "Please provide Birth Order",
     "REGISTRATION_ADDRESS_TEXT_ERROR_KEY": "Please provide Address Information"
 }

@@ -1,7 +1,7 @@
 <div class="field-attribute">
     <label for="{{::attribute.name}}">{{::getTranslatedAttributeTypes(attribute.description)}} <span ng-show="isForm">:</span>
 
-        <span class="asterick" ng-show="{{::attribute.required}}">*</span></label>
+        <span class="asterick" ng-show="{{::attribute.required}} || isRequired">*</span></label>
 </div>
 <div class="field-value" data-ng-switch on="::attribute.format">
     <div data-ng-switch-when="java.lang.String">

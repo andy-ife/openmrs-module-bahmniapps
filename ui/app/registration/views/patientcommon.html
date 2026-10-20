@@ -133,6 +133,17 @@
                 <ng-include src="'views/age.html'"></ng-include>
             </div>
         </section>
+        <!-- Show only motherName and birthOrder here -->
+        <section class="form-field"
+                 ng-repeat="attributeRow in ::patientConfiguration.customAttributeRows()">
+            <article class="form-field" ng-repeat="attribute in ::attributeRow"
+                     ng-class="::{'right-form-field' : $index%2 != 0}">
+                <attribute-types ng-if="attribute.name === 'motherName' || attribute.name === 'birthOrder'" target-model="patient" attribute="::attribute" field-validation="::fieldValidation"
+                                 is-auto-complete="isAutoComplete" get-auto-complete-list="getAutoCompleteList"
+                                 get-data-results="getDataResults" is-read-only="isReadOnly" handle-update="handleUpdate" is-required="true"
+                ></attribute-types>
+            </article>
+        </section>
         <legend class="registraion_legend" ng-if="::addressLevels.length>0">
             <span class="mylegend"> {{ ::'REGISTRATION_LABEL_ADDRESS_INFO' | translate}}</span>
         </legend>
@@ -158,12 +169,12 @@
         <legend class="registraion_legend" ng-if="patientConfiguration.customAttributeRows().length > 0">
             <span class="mylegend">{{ ::'REGISTRATION_LABEL_OTHER_INFO' | translate}}</span>
         </legend>
-
+        <!-- Show all except motherName and birthOrder here -->
         <section class="form-field-inline clearfix"
                  ng-repeat="attributeRow in ::patientConfiguration.customAttributeRows()">
             <article class="form-field" ng-repeat="attribute in ::attributeRow"
                      ng-class="::{'right-form-field' : $index%2 != 0}">
-                <attribute-types target-model="patient" attribute="::attribute" field-validation="::fieldValidation"
+                <attribute-types ng-if="attribute.name !== 'motherName' && attribute.name !== 'birthOrder'" target-model="patient" attribute="::attribute" field-validation="::fieldValidation"
                                  is-auto-complete="isAutoComplete" get-auto-complete-list="getAutoCompleteList"
                                  get-data-results="getDataResults" is-read-only="isReadOnly" handle-update="handleUpdate"
                 ></attribute-types>

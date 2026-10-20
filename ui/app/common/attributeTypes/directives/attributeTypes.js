@@ -20,7 +20,8 @@ angular.module('bahmni.common.attributeTypes', []).directive('attributeTypes', [
             getDataResults: '&',
             handleUpdate: '&',
             isReadOnly: '&',
-            isForm: '=?'
+            isForm: '=?',
+            isRequired: '=?'
         },
         templateUrl: '../common/attributeTypes/views/attributeInformation.html',
         restrict: 'E',
